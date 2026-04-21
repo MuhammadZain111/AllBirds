@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
+import styles from  "./hero.module.css"
 
 export default function HeroSection() {
 
@@ -70,6 +70,18 @@ export default function HeroSection() {
   return (
     <div className="w-full overflow-x-hidden">
 
+     <div className={`h-[20vh] pt-1 pb-2 font-serif  text-white rounded-md md:mb-3 flex flex-col items-center justify-center ${styles.custom_color}`} >
+     
+      <h2 className="text-2xl leading-tight select-none sm:text-3xl md:pt-2 md:pb-4 lg:text-2xl xl:text-[2.5rem] ">
+       <strong>
+        30% Off Your Order When You Spend $140+
+       </strong>
+       </h2>
+
+       <h2>Discount Automatically Applied at Checkout.</h2>
+
+ </div>
+
   
       <div className="relative w-full h-[70vh] md:h-[90vh]">
 
@@ -95,10 +107,9 @@ export default function HeroSection() {
 
   
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Navigation, Autoplay]}
           slidesPerView={1}
           navigation
-          pagination={{ clickable: true }}
           autoplay={{
             delay: DURATION,
             disableOnInteraction: false,
@@ -114,8 +125,6 @@ export default function HeroSection() {
             <SwiperSlide key={slide.id}>
               <div className="relative w-full h-full">
 
-      
-
                 <Image
                   src={slide.img}
                   alt="Hero"
@@ -124,17 +133,17 @@ export default function HeroSection() {
                   className="object-cover"
                 />
 
-                {/* 🔥 CONTENT */}
+            
                 <div className="absolute inset-0 flex flex-col justify-end items-start md:items-end p-6 md:p-16">
                   <h1 className="text-white text-xl md:text-3xl mb-4">
                     The New Canvas Cruiser Collection
                   </h1>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <button className="bg-white text-black px-5 py-2 hover:bg-gray-200">
+                    <button className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer    ">
                       Shop Men
                     </button>
-                    <button className="bg-white text-black px-5 py-2 hover:bg-gray-200">
+                    <button className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer">
                       Shop Women
                     </button>
                   </div>
