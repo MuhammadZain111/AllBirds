@@ -11,7 +11,7 @@ const SliderCard = ({ image, title, buttons, bg }) => {
     >
      
      <div className="relative w-[400px] h-[100px]">
-     <Image src="/images/image_37.jpg" alt={title} width={400} height={100}
+     <Image src="/images/image _37.jpg" alt={title} width={400} height={100}
        className="object-contain z-0"
         />
      </div>
@@ -32,13 +32,6 @@ const SliderCard = ({ image, title, buttons, bg }) => {
           </button>
         ))}
       </div>
-
-
-
-      
-
-
-
     </div>
   );
 };
@@ -49,28 +42,28 @@ export default function Slider() {
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
 
       <SliderCard
-        image="/shoe1.png"
+        image="/images/shoes1.png"
         title="NEW ARRIVALS"
         bg="bg-[#5b7280]"
         buttons={["Explore", "Shop Now"]}
       />
 
       <SliderCard
-        image="/shoe2.png"
+        image="/images/shoes2.png"
         title="MENS"
         bg="bg-[#4a4343]"
         buttons={["Shop Men", "View Collection"]}
       />
 
       <SliderCard
-        image="/shoe3.png"
+        image="/images/shoes3.png"
         title="WOMENS"
         bg="bg-[#8b6b6b]"
         buttons={["Shop Women", "New Styles"]}
       />
 
       <SliderCard
-        image="/shoe4.png"
+        image="/images/shoes4.png"
         title="BEST SELLERS"
         bg="bg-[#7c867c]"
         buttons={["Shop Men", "Shop Women"]}

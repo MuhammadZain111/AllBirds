@@ -1,139 +1,151 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 import Image from "next/image";
-import SideDrawer from "./SideDrawer"
-import BottomDrawer from "./BottomDrawer"
+import { useState } from "react";
+import SideDrawer from './SideDrawer'
+import BottomDrawer from './BottomDrawer'
 
 
-function Navbar() {
 
-  const [open, setOpen] = useState(false);     
-   
-  const [drawer, setDrawer] = useState(false);  
+
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
   
-  const [isHovered, setIsHovered] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+
+  
+
+  const [bottomOpen, setBottomOpen] = useState(false);
 
   return (
     <>
-      <nav className="bg-white shadow-md rounded-sm flex justify-between  flex justify-between  ">
-
-        <div className="md:w-full   px-4  ">
-
-         
-          <div className="flex items-center h-16">
-
-            <div className="md:hidden">
-              <button
-                onClick={() => setOpen(!open)}
-                className="text-2xl"
-              >
-                {open ? "✖" : "☰"}
-              </button>
-            </div>
-
-            <div className="flex justify-start  text-center md:text-left">
-              <Link href="/" className="text-xl font-bold text-blue-600">
-             <Image src="/icons/allbird.svg" width={90} height={50} alt="img" />
-              </Link>
-            </div>
-
-           <div className="flex flex-1 md:gap-8  justify-center items-center text-black   ">
-            <Link onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                style={{
-                backgroundColor: isHovered ? "blue" : "gray",
-                padding: "20px",
-               }} href="/men">Men</Link>
-              <Link href="/women">Women</Link>
-              <Link href="/sale">Sale</Link>
-            </div>
-
-{/* Here is Lower navars Options  */}
-
-{isHovered && (
-<>
-<div className="fixed inset-0 bg-black/50 z-40" onChange={() => setIsHovered(false)} />
-<BottomDrawer> </BottomDrawer>  
-</>
-)}
-
-
-
-
-          
-          <div className="hidden md:flex justify-between py-3">
-
-            <ul className="space-x-6 flex text-black">
-              
-              <li><Link href="/">About</Link></li>
-
-              <li><Link href="/about">Rerun</Link></li>
-              
-              <Link className="cursor-pointer" href="/contact">
-              <Image src="/icons/search.svg" width={30} height={30} alt="seaarchIcon" />
-              </Link>
+     
+      <nav className="fixed top-2 mt-3 left-0 w-full md:w-[99vw] z-[60] bg-white shadow-md rounded-2xl ">
         
-              <Link className="cursor-pointer"  href="/contact">
-              <Image src="/icons/login.svg" width={30} height={30} alt="login" />
-              </Link>
+        <div className="flex items-center justify-between h-16 px-4">
 
-             <Link className="cursor-pointer"   href="/contact">help
+          {/* ===== LEFT (Hamburger + Logo) ===== */}
+          <div className="flex items-center gap-4">
 
-              </Link>
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden text-2xl text-black"
+            >
+              {open ? "✖" : "☰"}
+            </button>
 
-              <button
-                onClick={() => setDrawer(true)}
-                className="px-3 py-1 text-white rounded cursor-pointer" 
-              >
-               <Image src="/icons/cart.svg" width={30} height={30} alt="img" />     
-              </button>
-
-            </ul>
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/icons/allbird.svg"
+                width={90}
+                height={50}
+                alt="logo"
+              />
+            </Link>
           </div>
 
-         
-          {open && (
-            <div className="md:hidden px-4 pb-4 space-y-2 bg-white shadow">
-              <Link href="/" className="block py-2">About</Link>
-              <Link href="/about" className="block py-2">ReRun</Link>
-              <Link href="/services" className="block py-2">Services</Link>
-              <Link href="/contact" className="block py-2">Contact</Link>
-              <Link href="/men" className="block py-2">Men</Link>
-              <Link href="/women" className="block py-2">Women</Link>
-              <Link href="/sale" className="block py-2">Sale</Link>
-            </div>
-          )}
-        </div>
+          {/* ===== CENTER (Desktop Links) ===== */}
+          <div className="hidden md:flex gap-8 text-black font-medium">
+          
+          <button className="cursor-pointer" onClick={() => setBottomOpen(!bottomOpen)} href="/men">Men</button>
 
-        {/* ================= DRAWER ================= */}
+            <Link href="/women">Women</Link>
+            <Link href="/sale">Sale</Link>
+          </div>
 
+          {/* ===== RIGHT (Desktop Actions) ===== */}
+          <div className="hidden md:flex items-center gap-6 text-black">
 
-     
-        {drawer && ( 
-         <>
-         <div
-          className="fixed inset-0 bg-black/50 z-40"
-               onClick={() => setDrawer(false)}
-               />
+            <Link href="/">About</Link>
+            <Link href="/about">Rerun</Link>
 
-         <SideDrawer open={drawer}  onClose={() => setDrawer(false)}> </SideDrawer>  
-    
-         </>
-     
-   )}
+            <Image
+              src="/icons/search.svg"
+              width={24}
+              height={24}
+              alt="search"
+            />
 
+            <Image
+              src="/icons/login.svg"
+              width={24}
+              height={24}
+              alt="login"
+            />
 
-     {/* <SideDrawer isOpen={isSideOpen} position="left-0 top-0 h-full w-64">
-      Side Content
-      </SideDrawer> */} 
-        
+            <Link href="/contact">Help</Link>
 
+            <button onClick={() => setDrawer(true)}>
+              <Image
+                src="/icons/cart.svg"
+                width={24}
+                height={24}
+                alt="cart"
+              />
+            </button>
+
+          </div>
         </div>
       </nav>
 
+      {/* ================= MOBILE MENU ================= */}
+      <div
+        className={`fixed left-0 top-16 w-full h-[calc(100vh-4rem)] bg-[#f5f5f3] z-50
+        transition-transform duration-300 ease-in-out overflow-hidden
+        ${open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+        onClick={() => setOpen(false)}
+      >
+        <div className="text-black">
+
+          {["Men", "Women", "Sale"].map((item, i) => (
+            <div
+              key={i}
+              className="flex justify-between items-center px-4 py-4 border-b text-lg font-semibold"
+            >
+              <span>{item.toUpperCase()}</span>
+              <span>›</span>
+            </div>
+          ))}
+
+          <div className="mt-6 bg-white px-4 py-4 space-y-4">
+            <Link href="/">My Account</Link>
+            <Link href="/about">About</Link>
+            <Link href="/services">ReRun</Link>
+            <Link href="/contact">Help</Link>
+          </div>
+
+        </div>
+      </div>
+
+    
+      {bottomOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setBottomOpen(false)}
+          />
+          
+          <BottomDrawer open={bottomOpen}
+          onClose={() => setBottomOpen(false)} />
+        </>
+      )}
+
+    
+      {drawer && (
+        <>
+          
+          <div
+            className="fixed inset-0 bg-black/50 z-40"
+            onClick={() => setDrawer(false)}
+          />
+        
+         <SideDrawer open={drawer}  onClose={() => setDrawer(false)}> </SideDrawer>  
+
+        </>
+      )}
     </>
   );
 }
-
-export default Navbar;

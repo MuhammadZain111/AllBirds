@@ -13,7 +13,7 @@ function Footer() {
     return (
     <div>
       
-  <footer className="bg-[#1c1c1c] text-gray-300 px-6 md:px-16 py-12">
+  <footer className="bg-[#1c1c1c] text-gray-300 px-6 md:px-16 py-12 mt-3  ">
 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 

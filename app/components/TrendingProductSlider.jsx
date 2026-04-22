@@ -1,74 +1,127 @@
 "use client";
-
-import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { useRef } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-export default function TopRightArrowSwiper() {
-  
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import PantoneCard from "./PantoneCard";
 
-    
+
+
+
+export default function TopRightArrowSwiper() {
+      
     const prevRef = useRef(null);
     const nextRef = useRef(null);
 
+  
+      const products = [
+   {
+    image: "/images/shoes1.png",
+    title: "MEN'S CANVAS CRUISER",
+    subtitle: "Cultured Blue",
+    price: 75,
+    color: "#7a8fa3",
+  },
+  {
+    image: "/images/shoes2.png",
+    title: "MEN'S CANVAS CRUISER",
+    subtitle: "Adventurous Auburn",
+    price: 75,
+    color: "#a0523d",
+  },
+  {
+    image: "/images/shoes3.png",
+    title: "MEN'S CANVAS CRUISER",
+    subtitle: "Adventurous Auburn",
+    price: 75,
+    color: "#a0523d",
+  },
+ {
+    image: "/images/shoes2.png",
+    title: "MEN'S CANVAS CRUISER",
+    subtitle: "Adventurous Auburn",
+    price: 75,
+    color: "#a0523d",
+  },
+];
+
   const slides = [
-    "/images/image1.jpg",
-    "/images/image2.jpg",
-    "/images/image3.jpg",
-    "/images/image4.jpg",
+    "/images/shoes1.png",
+    "/images/shoes2.png",
+    "/images/shoes3.png",
+    "/images/shoes3.png",
+    "/images/shoes3.png",
   ];
 
   return (
-    <div className="relative w-full h-[500px]">
+    <div className="relative w-full h-[700px] mt-4">
 
-     
-      <div className="absolute top-4 right-4 z-20 flex gap-2">
-        <button
+      <div className="  flex items-center justify-between ">
+       
+      <div className="">
+      <button className="transition-border-color pointer-events-auto cursor-pointer border-b-2 border-transparent font-mono text-sm tracking-wider whitespace-nowrap uppercase duration-300 select-none hover:border-black! md:text-base font-medium text-black   " > New Arrivals</button>
+      </div>
+
+
+       <div className="flex absolute top-4 right-4 z-20  "  >
+         <button
           ref={prevRef}
-          className="bg-black/60 text-white p-2 rounded-full hover:bg-black"
+          className="bg-black/60 text-white p-2 rounded-full hover:bg-black cursor-pointer   "
         >
           <ChevronLeft size={18} />
-        </button>
-
-        <button
+          </button>
+          
+           <button
           ref={nextRef}
-          className="bg-black/60 text-white p-2 rounded-full hover:bg-black"
+          className="bg-black/60 text-white p-2 rounded-full hover:bg-black cursor-pointer   "
         >
           <ChevronRight size={18} />
+        
         </button>
+       </div>       
       </div>
 
    
-      <Swiper
+     <Swiper
         modules={[Navigation]}
         spaceBetween={20}
-        slidesPerView={1}
         loop={true}
-        onBeforeInit={(swiper) => {
-          swiper.params.navigation.prevEl = prevRef.current;
-          swiper.params.navigation.nextEl = nextRef.current;
-        }}
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
-        className="h-full"
+       onBeforeInit={(swiper) => {
+       swiper.params.navigation.prevEl = prevRef.current;
+      swiper.params.navigation.nextEl = nextRef.current;
+  }}
+  navigation={{
+    prevEl: prevRef.current,
+    nextEl: nextRef.current,
+  }}
+  breakpoints={{
+     320: {
+       slidesPerView: 1,
+    },
+    640: {
+      slidesPerView: 1.2,
+    },
+    768: {
+      slidesPerView: 1.5,
+    },
+    1024: {
+      slidesPerView: 2.2,
+    },
+    1280: {
+      slidesPerView: 4,
+    },
+     }}
+     className="h-full mt-10 "
       >
-        {slides.map((img, i) => (
-          <SwiperSlide key={i}>
-            
-            <div className="relative w-full h-[500px]">
-              <Image
-                src={img}
-                alt={`slide-${i}`}
-                fill
-                className="object-cover"
-              />
-            </div>
 
+        {products.map((item,index) => (
+        <SwiperSlide >
+            
+          <PantoneCard key={index} {...item} />
+            
           </SwiperSlide>
         ))}
       </Swiper>

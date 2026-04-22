@@ -1,26 +1,27 @@
 "use client"
-import Image from "next/image";
+import Footer from "./components/Footer";
+import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection"
-import Footer from "./components/Footer"
-import ProductSlider from "./components/ProductSlider"
-import Card from "./components/Card"
-import StorySlider from "./components/StorySlider"
+import ProductSlider from "./components/ProductSlider";
+import StorySlider from "./components/StorySlider";
+import TrendyProductSlider from "./components/TrendingProductSlider";
+import VarietySlider from "./components/VarietySlider";
+
 
 
 
 export default function Home() {
   return (
     <div className="flex flex-col bg-zinc-50 font-sans px-4 ">
-   <Navbar />
+    <Navbar />
     <HeroSection />
-   
-     <Card />
+    <ProductSlider />
+    <VarietySlider />
+    <StorySlider />
+   <TrendyProductSlider />
 
 
-    
 
-   <ProductSlider />
    <Footer />
     </div>
   );

@@ -6,16 +6,10 @@ import React from 'react'
 
 function SideDrawer({onClose,open}) {
 
-
-
-
-
-
-
   return (
      
 <div
-          className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+          className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg z-60 transform transition-transform duration-300 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
