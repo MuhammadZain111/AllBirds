@@ -1,45 +1,39 @@
-import React from 'react'
-import button from "./Button"
-import Image from "./next/image"
+import React from "react";
+import Image from "next/image";
 
-const NewProductsCard = ({ image, title }) => {
+
+
+
+const NewProductsCard = ({ product }) => {
+  
   return (
-    <div className="w-[320px] h-[420px] rounded-xl overflow-hidden cursor-pointer group">
-      
-    
-      <div
-        className="w-full h-full bg-cover bg-center relative transform scale-110 transition-transform duration-500 group-hover:scale-100"
-        style={{ backgroundImage: `url(${image})` }}
-      >
+    <div className="w-[500px] h-[800px] rounded-xl overflow-hidden cursor-pointer group relative">
 
-     <Image
-        src="/product.jpg"
-        alt="product"
+      <Image
+        src={product.image}
+        alt={product.title}
         fill
-        className="object-cover"
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
+      <div className="absolute inset-0 bg-black/10"></div>
 
+      <div className="absolute bottom-5 w-full px-4 text-white">
+        <h2 className="text-lg font-semibold mb-3">
+          {product.title}
+        </h2>
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="flex gap-3 mb-2">
+          <button className="flex-1 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition">
+            Buy Now
+          </button>
 
-        {/* Content */}
-        <div className="absolute bottom-5 w-full px-4 text-white">
-          <h2 className="text-lg font-semibold mb-3">{title}</h2>
-
-          {/* Buttons */}
-          <div className="flex gap-3">
-            <button className="flex-1 py-1 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition">
-              Buy Now
-            </button>
-
-            <button className="flex-1 py-1 border border-white text-white rounded-xl hover:bg-white hover:text-black transition">
-              Details
-            </button>
-          </div>
+          <button className="flex-1 border border-white text-white rounded-xl hover:bg-white hover:text-black transition">
+            Details
+          </button>
         </div>
       </div>
+
     </div>
   );
 };

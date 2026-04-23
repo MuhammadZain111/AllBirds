@@ -1,23 +1,21 @@
 import React from 'react'
-import HeroSection from './components/HeroSection '
+import AboutHero from "@/app/components/AboutHero"
+import Mission from "@/app/components/Mission"
 
 
 
 
-
-function  Home() {
- 
- 
- 
- 
+function  About() {
  
   return (
     <div>
-    <HeroSection />
+    <AboutHero />
+    <Mission />  
+
 
 
     </div>
   )
 }
 
-export default Home
+export default About

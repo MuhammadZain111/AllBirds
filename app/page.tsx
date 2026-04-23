@@ -6,7 +6,10 @@ import ProductSlider from "./components/ProductSlider";
 import StorySlider from "./components/StorySlider";
 import TrendyProductSlider from "./components/TrendingProductSlider";
 import VarietySlider from "./components/VarietySlider";
-import NewProductsCard from "./components/NewProductsCard"
+import NewProductsSection from "./components/NewProductsSection"
+import AboutHero from "./components/AboutHero"
+
+
 
 
 
@@ -19,10 +22,8 @@ export default function Home() {
     <VarietySlider />
     <StorySlider />
    <TrendyProductSlider />
-    <NewProductsCard />
-
-
-
+    <NewProductsSection />
+    <AboutHero />
 
    <Footer />
     </div>

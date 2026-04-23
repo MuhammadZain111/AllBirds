@@ -1,61 +1,40 @@
-import React from 'react'
-import NewProductsCard from "./NewProductsCard"
-
-
+import React from "react";
+import NewProductsCard from "./NewProductsCard";
 
 function NewProductsSection() {
+  const products = [
+    {
+      id: 1,
+      image: "/images/shoes1.png",
+      title: "MEN'S CANVAS CRUISER",
+    },
+    {
+      id: 2,
+      image: "/images/shoes2.png",
+      title: "MEN'S CANVAS CRUISER",
+    },
+    {
+      id: 3,
+      image: "/images/shoes3.png",
+      title: "MEN'S CANVAS CRUISER",
+    },
+    {
+      id: 4,
+      image: "/images/shoes2.png",
+      title: "MEN'S CANVAS CRUISER",
+    },
+  ];
 
-
-
-      const products = [
-   {
-    image: "/images/shoes1.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Cultured Blue",
-    price: 75,
-    color: "#7a8fa3",
-  },
-  {
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
-  {
-    image: "/images/shoes3.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
- {
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
-];
-
-
-
- return (
-    <div>
-{
-products.slice(0, 6).map(product => (
-  <NewProductsCard key={product.id} product={product} />
-))
-}
-
-
-
-
-
-
-
+  return (
+    <div className="flex items-center justify-between        ">
+      {products.slice(0, 3).map((product) => (
+        <NewProductsCard
+          key={product.id}
+          product={product}
+        />
+      ))}
     </div>
-  )
+  );
 }
 
-export default NewProductsSection
+export default NewProductsSection;
