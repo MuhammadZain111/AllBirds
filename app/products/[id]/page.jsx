@@ -1,11 +1,14 @@
 "use client";
-
+import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import { products } from "@/data/products";
+
+
 
 
 
@@ -16,20 +19,25 @@ const images = [
   "/shoe4.png",
 ];
 
-
 const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
-export default function ProductPage() {
-  con
-  st [selectedSize, setSelectedSize] = useState(null);
+export default function productsPage({ params}) {
+
+ [selectedSize, setSelectedSize] = useState(null);
+
+
+  const product = products.find(p => p.id === params.id);
+
+    if (!product) {
+       return <div>Product not found</div>;
+        }
+
 
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
-      
-      {/* GRID */}
-      <div className="grid md:grid-cols-2 gap-10 items-start">
         
-        {/* LEFT SIDE (SLIDER) */}
+      <div className="grid md:grid-cols-2 gap-10 items-start">
+    
         <div className="w-full">
           <Swiper
             modules={[Navigation]}
@@ -57,7 +65,7 @@ export default function ProductPage() {
                 key={i}
                 className="relative w-20 h-16 border rounded-md overflow-hidden cursor-pointer"
               >
-                <Image src={img} alt="thumb" fill className="object-cover" />
+                <Image src={product.image} alt="thumb" fill className="object-cover" />
               </div>
             ))}
           </div>
@@ -67,7 +75,7 @@ export default function ProductPage() {
         <div className="bg-white p-6 rounded-xl shadow-md sticky top-6">
           
           <h1 className="text-2xl font-semibold">
-            Men's Canvas Cruiser
+            {product.title}
           </h1>
 
           <p className="text-sm text-gray-500 mt-1">
@@ -78,7 +86,7 @@ export default function ProductPage() {
           </p>
 
           <div className="mt-4 flex items-center gap-3">
-            <span className="text-xl font-bold">$75</span>
+            <span className="text-xl font-bold">Price ${product.price}</span>
             <span className="bg-gray-200 text-xs px-2 py-1 rounded-full">
               FREE SHIPPING
             </span>
@@ -138,3 +146,4 @@ export default function ProductPage() {
     </div>
   );
 }
+

@@ -1,12 +1,11 @@
 "use client";
-
+import React from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
-
 
 
 const images = [
@@ -17,19 +16,21 @@ const images = [
 ];
 
 
+
 const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
-export default function ProductPage() {
-  con
-  st [selectedSize, setSelectedSize] = useState(null);
+export default function productsPage() {
+
+ [selectedSize, setSelectedSize] = useState(null);
+
 
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
       
-      {/* GRID */}
+
       <div className="grid md:grid-cols-2 gap-10 items-start">
         
-        {/* LEFT SIDE (SLIDER) */}
+
         <div className="w-full">
           <Swiper
             modules={[Navigation]}
@@ -135,6 +136,24 @@ export default function ProductPage() {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+import { products } from "@/data/products";
+
+export default function ProductDetail({ params }) {
+  const product = products.find(p => p.id === params.id);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  return (
+    <div>
+      <h1>{product.title}</h1>
+      <img src={product.image} alt={product.title} />
+      <p>Price: ${product.price}</p>
     </div>
   );
 }
