@@ -6,9 +6,6 @@ import SideDrawer from './SideDrawer'
 import BottomDrawer from './BottomDrawer'
 
 
-
-
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   

@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-function Productspage() {
+function ProductSection() {
   return (
     <div>
       
@@ -10,4 +10,4 @@ function Productspage() {
   )
 }
 
-export default Productspage
+export default ProductSection
