@@ -22,7 +22,7 @@ export default function Home() {
     <VarietySlider />
     <StorySlider />
    <TrendyProductSlider />
-    <NewProductsSection />
+   <NewProductsSection />
    <Footer />
     </div>
   );

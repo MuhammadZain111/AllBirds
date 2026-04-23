@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PantoneCard from "./PantoneCard";
+import {products} from "@/app/components/products"
 
 
 
@@ -15,38 +16,6 @@ export default function TopRightArrowSwiper() {
       
     const prevRef = useRef(null);
     const nextRef = useRef(null);
-
-  
-      const products = [
-   {
-    image: "/images/shoes1.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Cultured Blue",
-    price: 75,
-    color: "#7a8fa3",
-  },
-  {
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
-  {
-    image: "/images/shoes3.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
- {
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-    color: "#a0523d",
-  },
-];
 
   const slides = [
     "/images/shoes1.png",

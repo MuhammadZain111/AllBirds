@@ -1,8 +1,8 @@
 "use client"
 import React from "react";
 import Image from "next/image";
-import { products } from "@/app/data/products";
-import ProductCard from './ProductCard'
+import { productsCategories } from "@/app/data/products";
+import {ProductCard} from './ProductCard'
 
 
 
@@ -11,9 +11,10 @@ export default function ProductSlider() {
   return (
 
 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
-  {products.map((item, index) => (
+  {productsCategories.map((item, index) => (
     <ProductCard
-      key={index}
+      key={item.id}
+      id={item.id}
       image={item.image}
       title={item.title}
       bg={item.bg}
@@ -21,8 +22,5 @@ export default function ProductSlider() {
     />
   ))}
 </div>
-
-
-    
   );
 }

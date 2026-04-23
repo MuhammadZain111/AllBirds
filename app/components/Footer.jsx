@@ -2,12 +2,7 @@ import React from 'react'
 
 
 
-
-
 function Footer() {
-
-    
-
 
   
     return (
@@ -125,7 +120,7 @@ function Footer() {
 
     <p>© 2025 Allbirds, Inc. All Rights Reserved</p>
 
-    <div class="flex flex-wrap gap-6">
+    <div className="flex flex-wrap gap-6">
       <span>Refund policy</span>
       <span>Privacy policy</span>
       <span>Terms of service</span>

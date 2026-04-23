@@ -1,26 +1,66 @@
-const products = [
+ export  const products = [
   {
+    id:"1",
     image: "/images/shoes1.png",
     title: "NEW ARRIVALS",
-    bg: "bg-[#5b7280]",
-    buttons: ["Explore", "Shop Now"],
+    color: "#a0523d",
+    price: 75,
+     buttons: ["Shop Men", "View Collection"],
   },
-  {
+  { 
+    id:"2",
     image: "/images/shoes2.png",
     title: "MENS",
-    bg: "bg-[#4a4343]",
+    color: "##4a4343",
+    price: 77,
     buttons: ["Shop Men", "View Collection"],
   },
-  {
+  { id:"3",
     image: "/images/shoes3.png",
     title: "WOMENS",
-    bg: "bg-[#8b6b6b]",
+    color: "##4a4343",
+    price: 77,
     buttons: ["Shop Women", "New Styles"],
   },
   {
+    id:"4",
     image: "/images/shoes4.png",
     title: "BEST SELLERS",
-    bg: "bg-[#7c867c]",
+    color: "##4a4343",
+    price: 77,
     buttons: ["Shop Men", "Shop Women"],
+  },
+];
+
+
+export const  productsCategories= [
+   {
+    id:"1",
+    image: "/images/shoes1.png",
+    title: "MEN'S CANVAS CRUISER",
+    bg:"bg-[#7a8fa3]",
+    price: 75,
+    button:["Men", "Women"]
+  },
+  {
+    image: "/images/shoes2.png",
+    title: "MEN'S CANVAS CRUISER",
+    bg:"bg-[#a0523d]",
+    price: 75,
+    button:["Men", "Women"]
+  },
+  {
+    image: "/images/shoes3.png",
+    title: "MEN'S CANVAS CRUISER",
+    bg:"bg-[#a0523d]",
+    price: 75,
+    button:["Men", "Women"]
+  },
+ {
+    image: "/images/shoes2.png",
+    title: "MEN'S CANVAS CRUISER",
+    subtitle: "Adventurous Auburn",
+    price: 75,
+    color: "#a0523d",
   },
 ];
