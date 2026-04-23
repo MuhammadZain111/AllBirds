@@ -63,7 +63,7 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
         </div>
 
         {/* RIGHT SIDE (FIXED DETAILS) */}
-        <div className="bg-white p-6 rounded-xl shadow-md sticky top-6">
+        <div className="bg-white p-6 rounded-xl shadow-md sticky top-6text-black  ">
           
           <h1 className="text-2xl font-semibold">
             {product.title}
