@@ -23,8 +23,6 @@ export default function Home() {
     <StorySlider />
    <TrendyProductSlider />
     <NewProductsSection />
-    <AboutHero />
-
    <Footer />
     </div>
   );

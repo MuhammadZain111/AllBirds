@@ -1,5 +1,9 @@
 'use client'
 import { motion } from "framer-motion";
+import Image from "next/image";
+
+
+
 
 
 
@@ -25,11 +29,17 @@ export default function HeroSection() {
         className="w-[700px] h-[300px] rounded-full border-4 border-gray-300 flex items-center justify-center overflow-hidden"
       >
         {/* Background Image */}
-        <img
-          src="/images/shoe1"
-          alt="bg"
-          className="absolute w-full h-full object-cover"
+        <Image
+           width={600}
+           height={600} 
+           src="/images/"
+           alt="bg"
+           className="absolute w-full h-full  object-cover"
         />
+
+
+    {/* bottom-2  md:bottom-4 */}
+
 
         {/* Content */}
         <motion.div
@@ -47,12 +57,12 @@ export default function HeroSection() {
 
 
       <motion.img
-        src="/shoes1.png"
+        src="/images/aboutshoe1.png"
         alt="shoe"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-[120px] w-[400px]"
+        className="absolute bottom-[120px] w-[500px]"
       />
     </div>
   );

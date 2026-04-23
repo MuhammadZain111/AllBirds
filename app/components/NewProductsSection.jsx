@@ -5,17 +5,17 @@ function NewProductsSection() {
   const products = [
     {
       id: 1,
-      image: "/images/shoes1.png",
+      image: "/images/NewArrival1.webp",
       title: "MEN'S CANVAS CRUISER",
     },
     {
       id: 2,
-      image: "/images/shoes2.png",
+      image: "/images/NewArrival2.webp",
       title: "MEN'S CANVAS CRUISER",
     },
     {
       id: 3,
-      image: "/images/shoes3.png",
+      image: "/images/NewArrival3.webp",
       title: "MEN'S CANVAS CRUISER",
     },
     {

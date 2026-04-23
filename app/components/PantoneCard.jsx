@@ -11,7 +11,8 @@ export default function PantoneCard({
   return (
     <div className="w-full max-w-md mx-auto rounded-3xl bg-[#f5f3ef] p-6 flex flex-col justify-between h-[500px]">
 
-      {/* TOP BADGE */}
+
+
       <div>
         <span className="inline-block bg-[#e5e1d8] text-black text-sm font-semibold px-4 py-2 rounded-full tracking-wide">
           PANTONE COLOR {color}
