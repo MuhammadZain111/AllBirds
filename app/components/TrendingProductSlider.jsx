@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PantoneCard from "./PantoneCard";
-import {products} from "@/app/components/products"
+import {products} from "@/app/data/products"
 
 
 

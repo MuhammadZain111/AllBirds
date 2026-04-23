@@ -6,14 +6,13 @@ import {ProductCard} from './ProductCard'
 
 
 
-
 export default function ProductSlider() {
   return (
 
 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
   {productsCategories.map((item, index) => (
     <ProductCard
-      key={item.id}
+      key={index}
       id={item.id}
       image={item.image}
       title={item.title}

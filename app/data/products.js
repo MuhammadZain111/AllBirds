@@ -1,4 +1,8 @@
- export  const products = [
+ 
+ 
+ 
+ 
+ export const products = [
   {
     id:"1",
     image: "/images/shoes1.png",
@@ -40,27 +44,27 @@ export const  productsCategories= [
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#7a8fa3]",
     price: 75,
-    button:["Men", "Women"]
+    buttons:["Men", "Women"]
   },
   {
     image: "/images/shoes2.png",
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#a0523d]",
     price: 75,
-    button:["Men", "Women"]
+    buttons:["Men", "Women"]
   },
   {
     image: "/images/shoes3.png",
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#a0523d]",
     price: 75,
-    button:["Men", "Women"]
+    buttons:["Men", "Women"]
   },
  {
     image: "/images/shoes2.png",
     title: "MEN'S CANVAS CRUISER",
     subtitle: "Adventurous Auburn",
     price: 75,
-    color: "#a0523d",
+    buttons:["Men", "Women"]
   },
 ];

@@ -37,8 +37,8 @@ export default function PantoneCard({
 
         {/* CONTENT */}
         <div className="space-y-3">
-          <h2 className="text-lg md:text-xl font-semibold tracking-wide">
-            {title}
+          <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
+            {title} product id  is fetched{id}
           </h2>
 
           <p className="text-black text-base md:text-lg">{subtitle}</p>
