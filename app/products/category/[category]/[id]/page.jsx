@@ -1,5 +1,5 @@
-import { products } from "@/app/data/products";
-import ProductDetail from "./components/ProductDetail";
+import { productsCategory } from "@/app/data/products";
+import ProductDetail from "./ProductDetail";
 
 export default async function Page({ params }) {
    const { id } = await params;
@@ -12,7 +12,7 @@ export default async function Page({ params }) {
     return <h1>No ID found</h1>;
   }
 
-  const product = products.find(
+  const product = productsCategory.find(
     (p) => String(p.id) === String(id)
   );
 

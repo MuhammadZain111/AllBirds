@@ -5,11 +5,11 @@ import Image from 'next/image'
 
 function ProductCard({product}) {
   
-
+const category = product[0]?.category;
 
     return (
     <div>
-        <Link href={`/product/category/${product.category}/${product.id}`} className="block">
+  <Link href={`/product/category/${product.category}/${product.id}`} className="block">
       <div className="w-full max-w-md mx-auto rounded-3xl bg-[#f5f3ef] p-6 flex flex-col justify-between h-[500px]">
 
         {/* COLOR TAG */}
@@ -37,7 +37,7 @@ function ProductCard({product}) {
             {product.title} product id  is fetched{product.id} 
           </h2>
           <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
-           {product.category}
+           {category}
           </h2>
 
 
