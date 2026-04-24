@@ -1,4 +1,6 @@
-// src/components/FilterPanel.jsx
+
+
+
 export default function FilterPanel({ isOpen, setIsOpen }) {
   if (!isOpen) return null;
 

@@ -1,3 +1,8 @@
+import {productsCategory} from '@/app/data/products'
+import ProductCategory  from './ProductCategory'
+
+
+
 
 
 
@@ -5,7 +10,8 @@ export default async function page({params})
 {
 
 const { category } = await params;
-   console.log(id);
+ 
+  console.log(category);
   console.log("PARAMS:", params);
   console.log("PARAMS:", params);
   console.log("ID:", params.category);
@@ -15,7 +21,7 @@ if (!category)
 return <h1>No ID found</h1>;
 }
 
-const product = products.find(
+const product = productsCategory.find(
     (p) => String(p.category) === String(category)
   );
 

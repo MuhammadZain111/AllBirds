@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
-import FilterPanel from "../components/FilterPanel";
-import ProductCard from "../components/ProductCard";
+import FilterPanel from "./components/FilterPanel";
+import ProductCard from "./components/ProductCard";
 import { products } from "@/app/data/products";
 
 

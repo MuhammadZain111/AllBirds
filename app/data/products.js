@@ -1,8 +1,6 @@
  
- 
- 
- 
- export const products = [
+
+export const products = [
   {
     id:1,
     image: "/images/shoes1.png",
@@ -39,7 +37,8 @@
 
 
 
-export const  productsCategories= [
+
+export const  productsCategory = [
    {
     id:"1",
     category:"men",
