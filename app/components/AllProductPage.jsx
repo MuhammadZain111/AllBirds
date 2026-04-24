@@ -1,9 +1,8 @@
-"use client"
+// src/pages/ProductsPage.jsx
 import { useState } from "react";
 import FilterPanel from "../components/FilterPanel";
 import ProductCard from "../components/ProductCard";
-import { products } from "@/app/data/products";
-import ProductDetail from "./ProductDetail";
+
 
 
 
@@ -16,8 +15,13 @@ const products = [
 ];
 
 
-export default function AllProducts({product}) {
-    
+
+
+
+
+
+
+export default function AllProducts() {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
