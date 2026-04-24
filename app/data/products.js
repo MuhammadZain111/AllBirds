@@ -9,7 +9,7 @@
     title: "NEW ARRIVALS",
     color: "#a0523d",
     price: 75,
-     buttons: ["Shop Men", "View Collection"],
+    buttons: ["Shop Men", "View Collection"],
   },
   { 
     id:2,
@@ -37,34 +37,37 @@
 ];
 
 
+
+
 export const  productsCategories= [
    {
     id:"1",
+    category:"men",
     image: "/images/shoes1.png",
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#7a8fa3]",
     price: 75,
-    buttons:["Men", "Women"]
   },
   {
+    id:"2",
     image: "/images/shoes2.png",
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#a0523d]",
     price: 75,
-    buttons:["Men", "Women"]
   },
   {
+    id:"3",
     image: "/images/shoes3.png",
     title: "MEN'S CANVAS CRUISER",
     bg:"bg-[#a0523d]",
     price: 75,
-    buttons:["Men", "Women"]
   },
+
  {
+  id:"4",
     image: "/images/shoes2.png",
     title: "MEN'S CANVAS CRUISER",
     subtitle: "Adventurous Auburn",
     price: 75,
-    buttons:["Men", "Women"]
   },
 ];

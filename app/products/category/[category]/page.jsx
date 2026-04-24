@@ -8,7 +8,7 @@ const { category } = await params;
    console.log(id);
   console.log("PARAMS:", params);
   console.log("PARAMS:", params);
-  console.log("ID:", params.id);
+  console.log("ID:", params.category);
 
 if (!category)
 {

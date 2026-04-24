@@ -8,7 +8,7 @@ import { productsCategories } from "@/app/data/products";
 
 
 
-export const ProductCard = ({ image, title, buttons, bg, id }) => {
+export const ProductCard = ({ image, title, bg, id,category}) => {
   return (
     <div
       className={`group relative w-full h-[350px] md:h-[500px] overflow-hidden rounded-2xl ${bg} rounded-md transition-all duration-400 ease-in-out hover:rounded-[300px] `}
@@ -24,15 +24,32 @@ export const ProductCard = ({ image, title, buttons, bg, id }) => {
 
       <div className="text-white text-sm px-3 py-1 rounded-full transition-all duration-300 hover:rounded-full ">{title}</div>
 
-        {buttons.map((btn, index) => (
+        
           <Link
-            href={`/category/products/${id}`}
+            href={`/products/category/${category}`}
             key={index}
             className="text-white border border-white/40 px-4 py-2 rounded-full text-sm hover:bg-white hover:text-black  hover:cursor-pointer opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0  mt-2"
           >
-            {btn}
+          Men
           </Link>
-        ))}
+
+           <Link
+            href={`/products/category/${category}`}
+            key={index}
+            className="text-white border border-white/40 px-4 py-2 rounded-full text-sm hover:bg-white hover:text-black  hover:cursor-pointer opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0  mt-2"
+          >
+          Women
+          </Link>
+
+
+
+
+
+
+
+
+
+     
       </div>
     </div>
   );
