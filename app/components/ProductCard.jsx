@@ -6,7 +6,7 @@ import { productsCategories } from "@/app/data/products";
 
 
 
-export const ProductCard = ({ image, title, bg, id,category}) => {
+export const ProductCard = ({ image, title, bg, id ,category}) => {
   return (
     <div
       className={`group relative w-full h-[350px] md:h-[500px] overflow-hidden rounded-2xl ${bg} rounded-md transition-all duration-400 ease-in-out hover:rounded-[300px] `}
@@ -20,7 +20,7 @@ export const ProductCard = ({ image, title, bg, id,category}) => {
    
       <div className=" relative z-10 flex flex-col items-center justify-center h-full ">
 
-      <div className="text-white text-sm px-3 py-1 rounded-full transition-all duration-300 hover:rounded-full ">{title}</div>
+      <div className="text-white text-sm px-3 py-1 rounded-full transition-all duration-300 hover:rounded-full ">{title} {category}</div>
 
         
           <Link

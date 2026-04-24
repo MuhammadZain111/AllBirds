@@ -17,6 +17,7 @@ export default function ProductSlider() {
       image={item.image}
       title={item.title}
       bg={item.bg}
+      category={item.category}
     />
   ))}
 </div>

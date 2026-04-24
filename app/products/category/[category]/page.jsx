@@ -3,9 +3,6 @@ import ProductCategory  from './ProductCategory'
 
 
 
-
-
-
 export default async function page({params})
 {
 
@@ -14,14 +11,14 @@ const { category } = await params;
   console.log(category);
   console.log("PARAMS:", params);
   console.log("PARAMS:", params);
-  console.log("ID:", params.category);
+  console.log("params:", params.category);
 
 if (!category)
 {
-return <h1>No ID found</h1>;
+return <h1>No Category found</h1>;
 }
 
-const product = productsCategory.find(
+const product = productsCategory.filter(
     (p) => String(p.category) === String(category)
   );
 
