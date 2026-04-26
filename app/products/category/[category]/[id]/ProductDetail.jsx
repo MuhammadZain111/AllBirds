@@ -10,9 +10,8 @@ import { useState } from "react";
 
 function ProductDetail({product}) {
 
-
     console.log(product);
-    
+
 
 ;  const   [selectedSize, setSelectedSize] = useState(null);
 
