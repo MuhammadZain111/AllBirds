@@ -6,12 +6,15 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import  Accordion from "./components/Accordion";
+import ProductFeatureSection from "./components/ProductFeatureSection"
+
+
 
 
 function ProductDetail({product}) {
 
-
-  const   [selectedSize, setSelectedSize] = useState(null);
+const   [selectedSize, setSelectedSize] = useState(null);
 
 const images = [
   "/shoe1.png",
@@ -22,6 +25,7 @@ const images = [
 
 
 const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
+
 
   return (
     
@@ -62,14 +66,14 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
           </div>
         </div>
 
-        {/* RIGHT SIDE (FIXED DETAILS) */}
-        <div className="bg-white p-6 rounded-xl shadow-md sticky top-6text-black  ">
+    
+        <div className="bg-white p-6 rounded-xl shadow-md sticky top-6 text-black w-full ">
           
           <h1 className="text-2xl font-semibold">
             {product.title}
           </h1>
 
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 mt-1 text-black ">
             ALSO AVAILABLE IN:{" "}
             <span className="underline cursor-pointer">
               WOMEN'S SIZES
@@ -77,7 +81,7 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
           </p>
 
           <div className="mt-4 flex items-center gap-3">
-            <span className="text-xl font-bold">Price ${product.price}</span>
+            <span className="text-xl font-bold text-black">Price ${product.price}</span>
             <span className="bg-gray-200 text-xs px-2 py-1 rounded-full">
               FREE SHIPPING
             </span>
@@ -133,6 +137,28 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
             Easy Returns
           </p>
         </div>
+
+
+  //Here  is the product Feature Section
+
+ <ProductFeatureSection >
+
+   </ProductFeatureSection>
+
+
+
+      <Accordion title="Materials & Sustainability" defaultOpen>
+       <div className="grid md:grid-cols-3 gap-6">
+        <Item title="Upper Tree Knit" text="TENCEL™ Lyocell + recycled polyester blend" />
+        <Item title="Midsole SweetFoam®" text="Sugarcane-based EVA foam" />
+      <Item title="Outsole Natural Rubber" text="Durable rubber for traction" />
+        </div>
+       </Accordion>
+
+
+
+
+
       </div>
     </div>
 
