@@ -1,106 +1,84 @@
- 'use client'
+// app/sign-up/page.tsx
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { useSession, signIn, signOut } from "next-auth/react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+export default function SignUpPage() {
+  const router = useRouter();
+  const [form, setForm] = useState({ username: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
-export default function Page() {
-
-  
-  const { data: session } = useSession()
-  const router = useRouter()
-
-  
-
-  const [form, setForm] = useState({
-    identifier: "",
-    password: "",
-  })
-
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
+    e.preventDefault();
 
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      identifier: form.identifier,
-      password: form.password,
-    })
-
-    console.log(res);
-
-    setLoading(false)
-
-    if (res?.error) {
-      setError("Invalid email or password")
-      return
-    }
-
-    router.push("/dashboard")
-  }
-
-//
-
-  if (session) {
-    return (
-      <>
-        <p>Signed in as {session.user?.email}</p>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
-
+    const  email  = form.email;
+        let hasError = false;
   
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+  if (!email || !emailRegex.test(email)) {
+    alert("Invalid email");
+    setErrors(prev => ({ ...prev, email: "Please enter a valid email" }));
+      hasError = true;
+    
+    if (hasError)  return; 
+  }
+
+
+    try {
+  const res = await fetch("/api/sign-up", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(form),
+  });
+  const data = await res.json();
+
+  console.log(data);
+
+  if (res.ok) {
+    router.push("/sign-in");
+  } else {
+    alert(data.error || data.message || "Something went wrong");
+  }
+} catch (err) {
+  alert("Network error. Please try again."); 
+} finally {
+  setLoading(false);
+}
+  }
   
   return (
-    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+    <form onSubmit={handleSubmit} className="flex flex-col text-black  w-full max-w-md mx-auto p-6 border rounded-lg shadow mt-4 " >
+       
+         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
+       
+        <label  className="text-black  "  > Username</label>
+      <input placeholder="Username"  className="bg-white w-75"
+      onChange={e => setForm({ ...form, username: e.target.value })} />
+      
+      <label  className="text-black   "  > email</label>
+      <input placeholder="Email"   className="bg-white text-black    w-75 mt-2"
+      onChange={e => setForm({ ...form, email: e.target.value })} />
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        
-         <input
-          type="text"         
-        name="identifier"    
-        placeholder="Email or Username"
-        value={form.identifier}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-        required
-        />
+       {errors.email && (
+        <p className="text-red-500 text-sm">{errors.email}</p>  
+          )}
 
 
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        />
 
-        {error && <p className="text-red-500">{error}</p>}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-black text-white p-2 rounded"
-        >
-          {loading ? "Signing in..." : "Sign In"}
-        </button>
-      </form>
-    </div>
-  )
+       <label  className="text-black"  > Password</label>
+      <input placeholder="Password" type="text" className="bg-white w-75" onChange={e => setForm({ ...form, password: e.target.value })} />
+
+      <button type="submit" 
+      disabled={loading}
+      className="w-full bg-black text-white p-2 rounded"  >
+         {loading ? "Signing Up..." : "Sign Up"}</button>
+    </form>
+  );
 }

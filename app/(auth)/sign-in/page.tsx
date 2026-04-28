@@ -67,29 +67,31 @@ export default function Page() {
   
   
   return (
-    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow bg-gray-400  ">
+      <h2 className="text-2xl font-bold mb-4 ">Sign In</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         
+
+        <label className="text-black   "  > email</label>
          <input
           type="text"         
         name="identifier"    
         placeholder="Email or Username"
         value={form.identifier}
         onChange={handleChange}
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border rounded bg-white text-black"
         required
         />
 
-
+       <label className="text-black ">Password</label>
         <input
           type="text"
           name="password"
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded bg-white text-black "
           required
         />
 
@@ -102,6 +104,15 @@ export default function Page() {
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
+
+
+        <button
+        onClick={() => signIn("facebook")}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Continue with Facebook
+      </button>
+      
       </form>
     </div>
   )

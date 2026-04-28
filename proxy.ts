@@ -12,18 +12,21 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
 
 
-  if (
-    token &&
-    (pathname.startsWith('/sign-in') ||
-      pathname.startsWith('/sign-out') ||
-      pathname.startsWith('/sign-up'))
-  ) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
-  }
-
-
+  // if (
+  //   token &&
+  //   (pathname.startsWith('/sign-in') ||
+  //     pathname.startsWith('/sign-out') ||
+  //     pathname.startsWith('/sign-up'))
+  // ) {
+  //   return NextResponse.redirect(new URL('/dashboard', request.url))
+  // }
+ 
   // If NOT logged in → block dashboard
-  if (!token && pathname.startsWith('/dashboard')) {
+
+
+  
+  if (!token && 
+    pathname.startsWith('/dashboard')) {
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }
 
