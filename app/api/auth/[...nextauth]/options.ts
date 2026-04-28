@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { DbConnect } from "@/app/lib/DbConnect";
-import UserModel from "@/app/models/UserModel";
+import { DbConnect } from "@/lib/DbConnect";
+import UserModel from "@/models/UserModel";
 
 
 
@@ -61,4 +61,36 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  callbacks: {
+    async jwt({ token, user }) {
+
+      if (user) {
+        token._id = user.id;
+        token.email = user.email;
+        token.username = user.username;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+
+      if (session.user) {
+        session.user._id = token._id as string;
+        session.user.email = token.email as string;
+        session.user.username = token.username as string;
+      }
+      return session;
+    },
+  },
+
+  pages: {
+    signIn: "/sign-in",
+  },
+
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };
+
