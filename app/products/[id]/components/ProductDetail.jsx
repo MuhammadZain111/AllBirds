@@ -6,9 +6,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import  Accordion from "./components/Accordion";
-import ProductFeature from "./components/ProductFeature"
-import Item from "./components/Item"
+import  Accordion from "./Accordion";
+import ProductFeature from "./ProductFeature"
+import Item from "./Item"
 
 
 
@@ -146,10 +146,6 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
 
   //Here  is the product Feature Section
-
-        <ProductFeature >
-
-        </ProductFeature>
 
 
 

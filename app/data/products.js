@@ -4,7 +4,7 @@ export const products = [
   {
     id:1,
     image: "/images/shoes1.png",
-    title: "NEW ARRIVALS",
+    title: "Classy Shoes",
     color: "#a0523d",
     price: 75,
     buttons: ["Shop Men", "View Collection"],

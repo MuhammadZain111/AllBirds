@@ -26,31 +26,19 @@ export default function HeroSection() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="w-[700px] h-[300px] rounded-full border-4 border-gray-300 flex items-center justify-center overflow-hidden"
+        className="w-[1000px] h-[500px] rounded-full border-4 border-gray-300 flex items-center justify-center overflow-hidden bg-[url('/images/about_hero1.png')] bg-cover bg-center"
       >
-        {/* Background Image */}
-        <Image
-           width={600}
-           height={600} 
-           src="/images/"
-           alt="bg"
-           className="absolute w-full h-full  object-cover"
-        />
+      
 
-
-    {/* bottom-2  md:bottom-4 */}
-
-
-        {/* Content */}
+      
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1 }}
           className="relative text-center text-white px-6"
         >
-          <p className="text-lg font-medium">
-            We set out to create an entirely new category of shoes inspired by
-            natural materials...
+          <p className="text-lg  text-white  font-black   ">
+          We set out to create an entirely new category of shoes inspired by natural materials, guided by an ethos to create better things in a better way. We’ve made a lot of progress, but we’re just getting started.
           </p>
         </motion.div>
       </motion.div>
@@ -62,7 +50,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-[120px] w-[500px]"
+        className="absolute bottom-[-50px] w-[700px]"
       />
     </div>
   );

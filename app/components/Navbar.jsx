@@ -13,6 +13,7 @@ export default function Navbar() {
 
   
 
+
   const [bottomOpen, setBottomOpen] = useState(false);
 
   return (
@@ -22,7 +23,7 @@ export default function Navbar() {
         
         <div className="flex items-center justify-between h-16 px-4">
 
-          {/* ===== LEFT (Hamburger + Logo) ===== */}
+
           <div className="flex items-center gap-4">
 
             {/* Mobile Hamburger */}
@@ -56,8 +57,8 @@ export default function Navbar() {
           {/* ===== RIGHT (Desktop Actions) ===== */}
           <div className="hidden md:flex items-center gap-6 text-black">
 
-            <Link href="/">About</Link>
-            <Link href="/about">Rerun</Link>
+            <Link href="/about">About</Link>
+            <Link href="/">Rerun</Link>
 
             <Image
               src="/icons/search.svg"

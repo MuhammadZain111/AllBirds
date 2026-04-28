@@ -1,5 +1,8 @@
 import { products } from "@/app/data/products";
-import ProductDetail from "./ProductDetail";
+import ProductDetailPage from "./ProductDetailPage";
+
+
+
 
 export default async function Page({ params }) {
    const { id } = await params;
@@ -22,6 +25,6 @@ export default async function Page({ params }) {
     return <h1>Product not found</h1>;
   }
 
-  return <ProductDetail product={product} />;
+  return <ProductDetailPage product={product} />;
 }
 

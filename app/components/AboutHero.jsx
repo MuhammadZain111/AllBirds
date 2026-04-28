@@ -3,6 +3,9 @@ import Image from 'next/image'
 
 
 
+
+
+
 function AboutHero() {
 
     return (
