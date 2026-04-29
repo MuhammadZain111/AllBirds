@@ -108,10 +108,26 @@ export default function Page() {
 
         <button
         onClick={() => signIn("facebook")}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-4 py-2 rounded w-full     "
       >
         Continue with Facebook
       </button>
+
+
+       <button
+        onClick={() => signIn("google")}
+        className=" w-full bg-white text-black px-4 py-2 rounded"
+      >
+        Continue with Facebook
+      </button>
+
+
+
+
+
+
+
+
       
       </form>
     </div>

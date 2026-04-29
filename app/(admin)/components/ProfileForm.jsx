@@ -19,7 +19,7 @@ export default function ProfileForm() {
   async function submit(e) {
     e.preventDefault();
     setMsg('');
-    await api.post('/lawyers/profile', form);
+    await api.post('/', form);
     setMsg('Submitted for approval.');
   }
 

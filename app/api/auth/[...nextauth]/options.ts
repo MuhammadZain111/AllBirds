@@ -4,6 +4,11 @@ import bcrypt from "bcryptjs";
 import { DbConnect } from "@/lib/DbConnect";
 import UserModel from "@/models/UserModel";
 import FacebookProvider from "next-auth/providers/facebook"
+import GoogleProvider from "next-auth/providers/google"
+
+
+
+
 
 
 
@@ -31,6 +36,8 @@ export const authOptions: NextAuthOptions = {
               { username: credentials.identifier },
             ],
           });
+
+
 
 
 
@@ -66,11 +73,22 @@ export const authOptions: NextAuthOptions = {
       },
     }),
 
-    FacebookProvider({
-    clientId: process.env.FACEBOOK_CLIENT_ID,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-     })
 
+    FacebookProvider({
+    clientId: process.env.FACEBOOK_CLIENT_ID!,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+    authorization: {
+        params: {
+          scope: "email,public_profile", 
+        },
+      },
+     }),
+  
+     GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  
   ],
 
   callbacks: {

@@ -3,7 +3,7 @@
 const tabs = [
   { id: "overview", label: "Overview" },
   { id: "users", label: "Users" },
-  { id: "lawyers", label: "Lawyers" },
+  { id: "subadmin", label: "SubAdmin" },
 ];
 
 export default function DashboardTabs({ activeTab, onChange }) {
