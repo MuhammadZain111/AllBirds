@@ -53,7 +53,6 @@ export default function Page() {
     router.push("/dashboard")
   }
 
-//
 
   if (session) {
     return (
@@ -67,7 +66,8 @@ export default function Page() {
   
   
   return (
-    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow bg-gray-400  ">
+    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow bg-gray-400 flex  flex-col  items-center justify-center ">
+
       <h2 className="text-2xl font-bold mb-4 ">Sign In</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -108,7 +108,7 @@ export default function Page() {
 
         <button
         onClick={() => signIn("facebook")}
-        className="bg-blue-600 text-white px-4 py-2 rounded w-full     "
+        className="bg-blue-600 text-white px-4 py-2 rounded w-full   cursor-pointer  "
       >
         Continue with Facebook
       </button>
@@ -116,9 +116,9 @@ export default function Page() {
 
        <button
         onClick={() => signIn("google")}
-        className=" w-full bg-white text-black px-4 py-2 rounded"
+        className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
       >
-        Continue with Facebook
+        Continue with Google..
       </button>
 
 
