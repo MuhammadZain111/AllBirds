@@ -1,14 +1,19 @@
- import AuthProvider from "@/app/Context/AuthProvider"
+import AuthProvider from "@/app/Context/AuthProvider"
+
+
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) 
+{
+
   return (
   <AuthProvider>
       <div className="min-h-screen flex">
         
+
         {/* Sidebar */}
         <aside className="w-64 bg-black text-white p-5">
           <h1 className="text-2xl font-bold mb-6">

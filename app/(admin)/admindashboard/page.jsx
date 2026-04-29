@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
+import AdminDashboard from "../components/AdminDashboard";
 
-
-function page() {
+function Page() {
   return (
     <div>
-        <h2 classsName="text-black       "  >Welcome to Admin Page</h2>
-      
+      <AdminDashboard />
     </div>
   )
 }
 
-export default page
+export default Page
