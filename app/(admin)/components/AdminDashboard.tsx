@@ -29,6 +29,29 @@ const mockOrders = [
 
 
 export default function AdminDashboard() {
+
+
+
+// useEffect(() => {
+//   if (session?.user.role === 1) {
+//     fetch("/api/admin/stats")
+//   }
+
+//   if (session?.user.role === 2) {
+//     fetch("/api/subadmin/tasks")
+//   }
+
+//   if (session?.user.role === 3) {
+//     fetch("/api/user/profile")
+//   }
+// }, [session])
+
+
+
+
+
+
+
   const [activeTab, setActiveTab] = useState("overview");
   const [search, setSearch] = useState("");
 

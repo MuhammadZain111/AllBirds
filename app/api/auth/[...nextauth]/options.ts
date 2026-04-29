@@ -66,6 +66,7 @@ export const authOptions: NextAuthOptions = {
             id: user._id.toString(),
             email: user.email,
             username: user.username,
+            role: user.role 
           };
         } catch (error) {
           throw new Error((error as Error).message);

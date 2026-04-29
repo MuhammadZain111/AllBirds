@@ -33,6 +33,7 @@ export async function POST(req: Request) {
       email,
       username,
       password: hashedPassword,
+      role: 3,
       isVerified: true,
     });
 
