@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/components/Button.jsx", "app/page.tsx", "app/layout.tsx", "tailwind.config.js"  ],
+, "app/components/Button.jsx", "app/page.tsx", "app/layout.tsx", "tailwind.config.js", "lib/DbConnect.js", "models/UserModel.js"  ],
   "exclude": ["node_modules"]
 }

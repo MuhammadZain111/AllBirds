@@ -6,9 +6,7 @@ import DashboardTabs from "./DashboardTabs";
 import DashboardStats from "./DashboardStats";
 import UsersTable from "./UsersTable";
 import OrdersTable from "./OrdersTable";
-
-
-
+import { useSession } from "next-auth/react"
 
 
 
@@ -20,6 +18,7 @@ const mockUsers = [
 
 
 
+
 const mockOrders = [
   { id: "l1", Name: "Ayesha Malik", email: "ayesha@law.com", specialization: "Corporate", yearsOfExperience: 7 },
   { id: "l2", Name: "Omar Riaz", email: "omar@law.com", specialization: "Family", yearsOfExperience: 5 },
@@ -28,8 +27,25 @@ const mockOrders = [
 
 
 
+
+
 export default function AdminDashboard() {
 
+
+const session=useSession();
+
+
+// const role = session?.user?.role
+
+
+
+// if (session.user.role === 1) {
+//   show Admin Dashboard
+// } else if (session.user.role === 2) {
+//   show Sub Admin Dashboard
+// } else {
+//   show User Dashboard
+// // }
 
 
 // useEffect(() => {

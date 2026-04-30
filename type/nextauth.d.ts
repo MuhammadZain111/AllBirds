@@ -13,7 +13,8 @@ interface User{
 
 
 interface Session{
-    user:{      
+    user:{  
+        role:number;    
         _id?:string;
         isverified?:boolean;
         isAcceptingMessages?:boolean;
@@ -28,7 +29,7 @@ declare module 'next-auth/jwt'
 { 
     interface JWT{
     user:{
-        
+        role: number;
         id_?:string;
         isverified?:boolean;
         isAcceptingMessages?:boolean;

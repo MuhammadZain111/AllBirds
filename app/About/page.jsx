@@ -5,8 +5,17 @@ import AboutSlider from "@/app/components/AboutSlider"
 import Footer from "@/app/components/Footer"
 
 
+
+
+
+
 function  About() {
  
+
+
+
+
+  
   return (
     <div>
      <AboutHero />
