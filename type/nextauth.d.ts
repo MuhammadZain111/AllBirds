@@ -5,6 +5,7 @@ import { DefaultSession } from "next-auth";
 declare module 'next-auth'
 {
 interface User{
+role?:number; 
  id?:string;
  isVerfied?:boolean;
  isAcceptingMessages?:boolean;

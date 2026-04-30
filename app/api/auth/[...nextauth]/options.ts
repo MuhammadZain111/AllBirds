@@ -39,18 +39,14 @@ export const authOptions: NextAuthOptions = {
 
 
 
-
-
-
-
           if (!user) {
-            throw new Error("No user found");
+             return null;
           }
 
           const isVerified = user.isVerified ?? user.verified;
 
           if (!isVerified) {
-            throw new Error("User is not verified");
+          return null;
           }
 
           const isPasswordCorrect = await bcrypt.compare(
@@ -59,7 +55,7 @@ export const authOptions: NextAuthOptions = {
           );
 
           if (!isPasswordCorrect) {
-            throw new Error("Invalid password");
+           return null
           }
 
           return {
@@ -68,8 +64,10 @@ export const authOptions: NextAuthOptions = {
             username: user.username,
             role: user.role 
           };
-        } catch (error) {
-          throw new Error((error as Error).message);
+        } 
+         catch (error) {
+         console.error("authorize error:", error); // ✅ log it
+          return null; 
         }
       },
     }),
@@ -99,6 +97,7 @@ export const authOptions: NextAuthOptions = {
         token._id = user.id;
         token.email = user.email;
         token.username = user.username;
+        token.role = user.role;
       }
       return token;
     },
@@ -109,6 +108,7 @@ export const authOptions: NextAuthOptions = {
         session.user._id = token._id as string;
         session.user.email = token.email as string;
         session.user.username = token.username as string;
+        session.user.role = token.role as number;
       }
       return session;
     },

@@ -34,12 +34,12 @@ export async function proxy(request: NextRequest) {
   }
 
   // 🔐 Super Admin only
-  if (pathname.startsWith("/admindashboard") && token.role !== 1) {
+  if (pathname.startsWith("/superadmin") && token.role !== 1) {
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
 
   // 🔐 Admin + Super Admin
-  if (pathname.startsWith("/workerdashboard") && ![1, 2].includes(Number(token.role))){
+  if (pathname.startsWith("/admindashboard") && ![1, 2].includes(Number(token.role))){
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
 

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 
 export default function Page() {
 
+
   
   const { data: session } = useSession()
   const router = useRouter()
@@ -25,43 +26,55 @@ export default function Page() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  if (error) {
+    setError("")
+  }
   }
 
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    setError("")
+   
 
+    if (loading) return
 
+     setLoading(true)
+      setError("")
+
+   try {
     const res = await signIn("credentials", {
       redirect: false,
       identifier: form.identifier,
       password: form.password,
     })
 
-
-
-
-
-
-
-
-
-
-
     console.log(res);
 
-    setLoading(false)
 
     if (res?.error) {
       setError("Invalid email or password")
       return
     }
+    const role = session?.user?.role
 
-    router.push("/dashboard")
+      if (role === 1) 
+        {
+        router.push("/admindashboard")
+        } else if (role === 2) 
+          {
+           router.push("/employer/dashboard")
+          } 
+          else 
+          {
+          router.push("/")
+         }    
+ 
   }
+  finally {
+    setLoading(false)
+  }
+}
 
 
   if (session) {
