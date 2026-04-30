@@ -38,10 +38,20 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
 
-  // 🔐 Admin + Super Admin
-  if (pathname.startsWith("/admindashboard") && ![1, 2].includes(Number(token.role))){
+
+  if (pathname.startsWith("/superadmin") && ![1, 2].includes(Number(token.role))){
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
+
+
+
+
+  // 🔐 Admin + Super Admin
+  if (pathname.startsWith("/superadmin") && ![1, 2].includes(Number(token.role))){
+    return NextResponse.redirect(new URL("/unauthorized", request.url))
+  }
+
+
 
   return NextResponse.next()
 }
