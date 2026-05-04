@@ -2,7 +2,7 @@
 
 
 
-export default function AdddEmployee() {
+export default function AddEmployee() {
 
   //Now here I Will Call the Api to Create the User
 
@@ -14,6 +14,9 @@ export default function AdddEmployee() {
 
 
   return (
+
+
+
     <div className="min-h-screen p-6 bg-black ">
       <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
         {/* Header */}

@@ -1,15 +1,8 @@
 'use client'
 
-
 import SideTabs from "../components/SideTabs";
-
 import  { useState} from "react";
-
 import AddEmployee from "./AddEmployee"
-
-
-
-
 import { Shield, ChartNoAxesColumn, Users, UserCheck, Calendar, FileText ,CircleAlert, Activity,
 } from "lucide-react";
 
@@ -24,13 +17,14 @@ const Sidebar = () => {
 
   
 
-  return (
+return (
 
-  <div className="flex   "   >
+  <div className="flex">
 
+  
     <div className="w-[320px] min-h-screen bg-[#140702] text-[#D8C1A5] border-r border-[#3B2417] flex flex-col">
-      
-      {/* Logo Section */}
+
+      {/* Logo */}
       <div className="px-8 py-10 border-b border-[#3B2417]">
         <div className="flex items-start gap-4">
           <div className="mt-1">
@@ -49,36 +43,30 @@ const Sidebar = () => {
         </div>
       </div>
 
-
-      {/* /her is the ActiveTab  */}
-
-      <div className="flex flex-col gap-6 px-6 py-8"> 
-        <SideTabs  activeTab={activeTab}   onChange={setActiveTab} />    
+      {/* Tabs */}
+      <div className="flex flex-col gap-6 px-6 py-8">
+        <SideTabs
+          activeTab={activeTab}
+          onChange={setActiveTab}
+        />
       </div>
-
-
-  </div>
-
+    </div>
 
     {/* Right Content */}
+    <div className="flex-1 p-6">
 
+      <h2 className="text-black text-2xl">
+        Here the right side Content Will be displayed
+      </h2>
 
-      <div className="flex-1 p-6 w-[500px]  ">
-
-
-<h2 className="text-black text-2xl ">Hereq the right side Content Will be displayed </h2>
-
-      {activeTab ===8  && <AddEmployee  />}
-
-       </div>      
+      {activeTab === 8 && <AddEmployee />}
 
     </div>
-   
 
+  </div>
+)
 
+}
 
-  
-  );
-};
 
 export default Sidebar;

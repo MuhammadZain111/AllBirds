@@ -5,50 +5,50 @@ import { Shield, ChartNoAxesColumn, Users, UserCheck, Calendar, FileText ,Circle
 
 
 
-
+import {useEffect} from "react"
 
 
 const menuItems = [
   {
     name: "Overview",
     icon: ChartNoAxesColumn,
-    id: "1", 
+    id: 1, 
   },
   {
     name: "User Management",
     icon: Users,
-     id: "2", 
+     id: 2, 
   },
   {
     name: "Products",
     icon: UserCheck,
-    id: "3", 
+    id: 3, 
   },
   {
     name: "New Prducts",
     icon: Calendar,
-    id: "4", 
+    id: 4, 
   },
   {
     name: "Reports & Analytics",
     icon: FileText,
-    id: "5", 
+    id: 5, 
   },
   {
     name: "Financial Disputes",
     icon: CircleAlert,
-    id: "6", 
+    id: 6, 
     active: true,
   },
   {
     name: "System Logs",
     icon: Activity,
-    id: "7",
+    id: 7,
   },
   {
     name: "Add",
     icon: ChartNoAxesColumn,
-    id: "8", 
+    id:8, 
   },
 ];
 
@@ -56,13 +56,14 @@ const menuItems = [
 
 
 
-
-
-
-
 export default function SideTabs({ activeTab, onChange }) {
+
+
+useEffect(() => { console.log(activeTab) }, [])
+
+
   return (
-    <div className="flex  flex-col gap-6 px-6 py-8  ">
+    <div className="flex flex-col gap-6 px-6 py-8  ">
       {menuItems.map((tab) => {
         const isActive = activeTab === tab.id;
         const Icon = tab.icon;
@@ -81,6 +82,7 @@ export default function SideTabs({ activeTab, onChange }) {
               <span className="text-[15px] font-semibold">
                 {tab.name}
               </span>
+          
             </button>
 
         );
