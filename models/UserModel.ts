@@ -26,19 +26,20 @@ const UserSchema = new mongoose.Schema(
       enum: [1, 2, 3],
       default: 3 
       },
-
       resetPasswordToken:{
-     type: String ,
-    },
-
-    resetPasswordExpire:{
-    default:Date.now,
+       type: String ,
+    },  
+       resetPasswordExpire:{
+        default:Date.now,
+     }, 
+      resetOTP:
+     {
+      type:String,
      }, 
 
+     
 
-
-
-    isVerified: {
+      isVerified: {
       type: Boolean,
       default: true,
     },
