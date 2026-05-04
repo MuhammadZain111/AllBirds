@@ -1,14 +1,20 @@
 'use client';
 
 const tabs = [
-  { id: "overview", label: "Overview" },
-  { id: "users", label: "Users" },
-  { id: "subadmin", label: "SubAdmin" },
+  { id: 1, label: "Overview" },
+  { id: 2, label: "Users" },
+  { id: 3, label: "SubAdmin" },
+  { id:4 , label: "Add Products"}
 ];
+
+
+
+
+
 
 export default function DashboardTabs({ activeTab, onChange }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 cursor-pointer   ">
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
         return (

@@ -1,10 +1,10 @@
+import dbConnect  from "@/lib/dbConnect";
+import UserModel from "@/models/UserModel";
+import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcryptjs";
-import { DbConnect } from "@/lib/DbConnect";
-import UserModel from "@/models/UserModel";
-import FacebookProvider from "next-auth/providers/facebook"
-import GoogleProvider from "next-auth/providers/google"
+import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
 
 
 
@@ -12,7 +12,7 @@ import GoogleProvider from "next-auth/providers/google"
 
 
 
-export const authOptions: NextAuthOptions = {
+ const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize(credentials) {
-        await DbConnect();
+        await dbConnect();
 
         try {
           if (!credentials?.identifier || !credentials?.password) {
@@ -124,3 +124,4 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
+export {authOptions} ;

@@ -3,9 +3,13 @@
 import { Shield, ChartNoAxesColumn, Users, UserCheck, Calendar, FileText ,CircleAlert, Activity,
 } from "lucide-react";
 
-
-
 import {useEffect} from "react"
+
+
+
+
+
+
 
 
 const menuItems = [
@@ -56,6 +60,8 @@ const menuItems = [
 
 
 
+
+
 export default function SideTabs({ activeTab, onChange }) {
 
 
@@ -82,8 +88,9 @@ useEffect(() => { console.log(activeTab) }, [])
               <span className="text-[15px] font-semibold">
                 {tab.name}
               </span>
-          
             </button>
+            
+
 
         );
       })}

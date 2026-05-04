@@ -7,13 +7,13 @@ import DashboardStats from "./DashboardStats";
 import UsersTable from "./UsersTable";
 import OrdersTable from "./OrdersTable";
 import { useSession } from "next-auth/react"
-
+import AddProducts from "./AddProduct"
 
 
 const mockUsers = [
-  { id: "u1", name: "Ali Khan", email: "ali@example.com", type: "use", status: "Active" },
-  { id: "u2", name: "Sara Noor", email: "sara@example.com", type: "user", status: "Pending" },
-  { id: "u3", name: "Hamza Tariq", email: "hamza@example.com", type: "user", status: "Active" },
+  { id: 1, name: "Ali Khan", email: "ali@example.com", type: "use", status: "Active" },
+  { id: 2, name: "Sara Noor", email: "sara@example.com", type: "user", status: "Pending" },
+  { id: 3, name: "Hamza Tariq", email: "hamza@example.com", type: "user", status: "Active" },
 ];
 
 
@@ -35,8 +35,8 @@ export default function AdminDashboard() {
 const session=useSession();
 
 
-// const role = session?.user?.role
 
+// const role = session?.user?.role
 
 
 // if (session.user.role === 1) {
@@ -68,7 +68,8 @@ const session=useSession();
 
 
 
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState(1);
+
   const [search, setSearch] = useState("");
 
   const filteredUsers = useMemo(() => {
@@ -100,17 +101,6 @@ const session=useSession();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   
 
   return (
@@ -119,19 +109,21 @@ const session=useSession();
 
       <DashboardTabs activeTab={activeTab} onChange={setActiveTab} />
 
-      {activeTab === "overview" && (
+      {activeTab === 1 && (
         <DashboardStats
           stats={[
             { label: "Total Users", value: String(mockUsers.length) },
             { label: "Pending Orders", value: "1" },
             { label: "Completed Orders", value: "12" },
+
           ]}
         />
       )}
 
-      {activeTab === "users" && <UsersTable users={filteredUsers} />}
+      {activeTab === 2 && <UsersTable users={filteredUsers} />}
 
 
+    {activeTab === 4 && <AddProducts users={filteredUsers} />}
 
 
       {/* {activeTab === "Orders" && <OrdersTable orders={filteredOrders} />} */}

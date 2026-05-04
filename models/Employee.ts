@@ -1,7 +1,14 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+
+const EmployeeSchema = new mongoose.Schema(
   {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
     username: {
       type: String,
       required: true,
@@ -13,6 +20,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      trim: true,
       lowercase: true,
     },
 
@@ -21,34 +29,6 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
-    role: {
-      type: Number,
-      enum: [1, 2, 3],
-      default: 3 
-      },
-
-      resetPasswordToken:{
-     type: String ,
-    },
-
-    resetPasswordExpire:{
-    default:Date.now,
-     }, 
-
-
-
-
-    isVerified: {
-      type: Boolean,
-      default: true,
-    },
-
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-
-    // 
     phoneNumber: {
       type: String,
       required: true,
@@ -84,15 +64,18 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    
+    role: {
+    type: Number,
+    enum: [1, 2, 3],
+    default: 2 
+      }
   },
-
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
+const Employee =
+  mongoose.models.Employee || mongoose.model("Employee", EmployeeSchema);
 
-
-const UserModel =
-  mongoose.models.User || mongoose.model("User", UserSchema);
-
-export default UserModel;
+export default Employee;

@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+
+
 export default function AddProductPage() {
   const [formData, setFormData] = useState({
     title: "",
@@ -9,7 +11,6 @@ export default function AddProductPage() {
     price: "",
     category: "",
     stock: "",
-    image: "",
   });
 
   const handleChange = (e) => {
@@ -43,7 +44,8 @@ export default function AddProductPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">
+    
+      <h1 className="text-3xl font-bold mb-6 text-black   ">
         Add Product
       </h1>
 
@@ -51,19 +53,20 @@ export default function AddProductPage() {
         onSubmit={handleSubmit}
         className="space-y-4"
       >
+
         <input
           type="text"
           name="title"
           placeholder="Product Title"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
+          className="w-full border p-3 rounded text-black "
         />
 
         <textarea
           name="description"
           placeholder="Description"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
+          className="w-full border p-3 rounded text-black " 
         />
 
         <input
@@ -71,7 +74,7 @@ export default function AddProductPage() {
           name="price"
           placeholder="Price"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
+          className="w-full border p-3 rounded text-black"
         />
 
         <input
@@ -79,7 +82,7 @@ export default function AddProductPage() {
           name="category"
           placeholder="Category"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
+          className="w-full border p-3 rounded text-black  "
         />
 
         <input
@@ -87,16 +90,16 @@ export default function AddProductPage() {
           name="stock"
           placeholder="Stock"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
+          className="w-full border p-3 rounded text-black   "
         />
 
-        <input
+        {/* <input
           type="text"
           name="image"
           placeholder="Image URL"
           onChange={handleChange}
-          className="w-full border p-3 rounded"
-        />
+          className="w-full border p-3 rounded text-black  "
+        /> */}
 
         <button
           type="submit"
