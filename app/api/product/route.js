@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnect";
 import Product from "@/models/Product";
 
+
 export async function POST(request) {
   try {
     await dbConnect();

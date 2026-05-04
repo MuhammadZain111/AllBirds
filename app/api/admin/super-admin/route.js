@@ -5,7 +5,9 @@ import dbConnect from "@/lib/dbConnect"
 import bcrypt from "bcryptjs"
 import { NextResponse } from "next/server"
 
-export async function POST(req) {
+
+export async function POST(req) 
+{
   await dbConnect()
 
   const session = await getServerSession(authOptions)
@@ -18,6 +20,11 @@ export async function POST(req) {
     )
   }
 
+
+// here is the code for creatingn the su-admin or Sub User  .........
+
+
+
   const { email, password } = await req.json()
 
   const hashedPassword = await bcrypt.hash(password, 10)
@@ -25,7 +32,7 @@ export async function POST(req) {
   const user = await User.create({
     email,
     password: hashedPassword,
-    role: 2   // 👈 sub admin
+    role: 2   
   })
 
   return NextResponse.json(user)

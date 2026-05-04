@@ -55,9 +55,7 @@ return (
     {/* Right Content */}
     <div className="flex-1 p-6">
 
-      <h2 className="text-black text-2xl">
-        Here the right side Content Will be displayed
-      </h2>
+     
 
       {activeTab === 8 && <AddEmployee />}
 
