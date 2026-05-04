@@ -33,28 +33,20 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url))
   }
 
+
   // 🔐 Super Admin only
   if (pathname.startsWith("/superadmin") && token.role !== 1) {
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
 
 
-  if (pathname.startsWith("/superadmin") && ![1, 2].includes(Number(token.role))){
+   if (pathname.startsWith("/admindashboard") && token.role !== 2) {
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
-
-
-
-
-  // 🔐 Admin + Super Admin
-  if (pathname.startsWith("/superadmin") && ![1, 2].includes(Number(token.role))){
-    return NextResponse.redirect(new URL("/unauthorized", request.url))
-  }
-
-
 
   return NextResponse.next()
 }
+
 
 export const config = {
   matcher: [

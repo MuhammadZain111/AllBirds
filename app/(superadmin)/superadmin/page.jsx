@@ -1,10 +1,23 @@
+
 import React from 'react'
+
+import Sidebar from "../components/Sidebar"
+
+
+
+
 
 function page() {
 
-    return (
+  return (
     <div>
-      <h2>Welcome to Super Admin</h2>
+
+    <Sidebar />
+
+
+<h2 className="bg-black" >welcome to super admin  adahboard 
+
+</h2>
 
 
     </div>

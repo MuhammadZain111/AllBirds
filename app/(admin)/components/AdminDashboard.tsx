@@ -86,17 +86,17 @@ const session=useSession();
 
   //Here is the Orders Table ...
 
-  const filteredOrders = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return mockUsers;
-    return mockOrders.filter((u) => {
-      return (
-        u.name.toLowerCase().includes(q) ||
-        u.email.toLowerCase().includes(q) ||
-        u.type.toLowerCase().includes(q)
-      );
-    });
-  }, [search]);
+  // const filteredOrders = useMemo(() => {
+  //   const q = search.trim().toLowerCase();
+  //   if (!q) return mockUsers;
+  //   return mockOrders.filter((u) => {
+  //     return (
+  //       u.name.toLowerCase().includes(q) ||
+  //       u.email.toLowerCase().includes(q) ||
+  //       u.type.toLowerCase().includes(q)
+  //     );
+  //   });
+  // }, [search]);
 
 
 
@@ -131,7 +131,10 @@ const session=useSession();
 
       {activeTab === "users" && <UsersTable users={filteredUsers} />}
 
-      {activeTab === "Orders" && <OrdersTable orders={filteredOrders} />}
+
+
+
+      {/* {activeTab === "Orders" && <OrdersTable orders={filteredOrders} />} */}
     </section>
   );
 }

@@ -1,8 +1,5 @@
 //Here I will create the Admin Layout
 
-
-
-
 function page() {
   return (
     <div>
