@@ -14,6 +14,7 @@ export default function ResetPasswordPage() {
 
   const router = useRouter()
 
+  
   useEffect(() => {
     const savedEmail = localStorage.getItem("resetEmail")
 
@@ -54,7 +55,7 @@ export default function ResetPasswordPage() {
         localStorage.removeItem("resetEmail")
 
         setTimeout(() => {
-          router.push("/login")
+          router.push("/sign-in")
         }, 2000)
       }
 
