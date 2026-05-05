@@ -2,6 +2,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 
 export default function SignUpPage() {
  
@@ -54,32 +56,56 @@ export default function SignUpPage() {
   }
   
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col text-black  w-full max-w-md mx-auto p-6 border rounded-lg shadow mt-4 " >
-       
-         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-       
-        <label  className="text-black  "  > Username</label>
-      <input placeholder="Username"  className="bg-white w-75"
-      onChange={e => setForm({ ...form, username: e.target.value })} />
-      
-      <label  className="text-black   "  > email</label>
-      <input placeholder="Email"   className="bg-white text-black    w-75 mt-2"
-      onChange={e => setForm({ ...form, email: e.target.value })} />
+   <div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
+  
+  <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white">
+    
+    <form
+      onSubmit={handleSubmit}
+      className="bg-[#1E1830] flex flex-col items-center px-4 space-y-4 py-6 rounded-2xl p-6"
+    >
+      <h2 className="text-2xl md:text-4xl font-semibold">Sign Up</h2>
 
-       {errors.email && (
-        <p className="text-red-500 text-sm">{errors.email}</p>  
-          )}
+      <input
+        placeholder="Username"
+        className="w-full bg-[#352C4D] rounded-xl px-5 py-4 outline-none text-white my-3"
+        onChange={e => setForm({ ...form, username: e.target.value })}
+      />
 
+      <input
+        placeholder="Email"
+        className="w-full bg-[#352C4D] rounded-xl px-5 py-4 outline-none text-white my-3"
+        onChange={e => setForm({ ...form, email: e.target.value })}
+      />
 
+      {errors.email && (
+        <p className="text-red-500 text-sm">{errors.email}</p>
+      )}
 
+      <input
+        placeholder="Password"
+        type="password"
+        className="w-full bg-[#352C4D] rounded-xl px-5 py-4 outline-none text-white my-3"
+        onChange={e => setForm({ ...form, password: e.target.value })}
+      />
 
-       <label  className="text-black"  > Password</label>
-      <input placeholder="Password" type="text" className="bg-white w-75" onChange={e => setForm({ ...form, password: e.target.value })} />
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-[#8B5CF6] hover:bg-[#7C4DF2] transition rounded-xl py-4 text-xl font-medium"
+      >
+        {loading ? "Signing Up..." : "Sign Up"}
+      </button>
 
-      <button type="submit" 
-      disabled={loading}
-      className="w-full bg-black text-white p-2 rounded"  >
-         {loading ? "Signing Up..." : "Sign Up"}</button>
+      <p className="mt-4 text-white">
+        Already have an account?{" "}
+        <Link href="/sign-in" className="underline">
+          Log in
+        </Link>
+      </p>
     </form>
+
+  </div>
+</div>
   );
 }

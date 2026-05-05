@@ -94,32 +94,37 @@ export default function Page() {
   
   
   return (
-    <div className="w-full max-w-md mx-auto p-6 border rounded-lg shadow bg-gray-400 flex  flex-col  items-center justify-center ">
 
-      <h2 className="text-2xl font-bold mb-4 ">Sign In</h2>
+<div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+
+    <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white  ">
+
+      <form onSubmit={handleSubmit} className="bg-[#1E1830] flex flex-col items-center px-4 space-y-4 py-6 rounded-2xl p-6" >
         
 
-        <label className="text-black   "  > email</label>
+   <h2 className="text-2xl md:text-4xl font-semibold ">Sign In</h2>
+
+
+
          <input
           type="text"         
         name="identifier"    
         placeholder="Email or Username"
         value={form.identifier}
         onChange={handleChange}
-        className="w-full p-2 border rounded bg-white text-black"
+        className=" w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3"
         required
         />
 
-       <label className="text-black ">Password</label>
+      
         <input
           type="text"
           name="password"
           placeholder="Password"
           value={form.password}
           onChange={handleChange}
-          className="w-full p-2 border rounded bg-white text-black "
+          className="w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3 "
           required
         />
 
@@ -128,15 +133,20 @@ export default function Page() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-black text-white p-2 rounded"
+          className="p-2 w-full bg-[#8B5CF6] hover:bg-[#7C4DF2] transition-all duration-300 rounded-xl py-4 text-xl font-medium mt-2 mt-4 cursor-pointer"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
 
+      <Link href="/forgot-password" className=" cursor-pointer w-full text-white text-black px-4 py-2 rounded"
+      >
+        Forgot Password
+      </Link>
+
 
         <button
         onClick={() => signIn("facebook")}
-        className="bg-blue-600 text-white px-4 py-2 rounded w-full   cursor-pointer  "
+        className=" text-white px-4 py-2 rounded w-full border-2   cursor-pointer  "
       >
         Continue with Facebook
       </button>
@@ -144,19 +154,24 @@ export default function Page() {
 
        <button
         onClick={() => signIn("google")}
-        className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
+        className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
       >
         Continue with Google..
       </button>
 
+  <p className="mt-4 text-white">
+      Dont have an account?{" "}
+        <Link href="/sign-in" className="underline">
+          Sign up
+        </Link>
+      </p>
 
-    <Link href="/forgot-password" className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
-      >
-        Forgot Password
-      </Link>
+
 
 
       </form>
+    </div>
+
     </div>
   )
 }

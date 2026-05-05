@@ -5,16 +5,32 @@ import { useState } from "react";
 import SideDrawer from './SideDrawer'
 import BottomDrawer from './BottomDrawer'
 
+import ProfileAvatar from "./ProfileAvatar";
+import {useSession } from "next-auth/react";
+
+
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  
+
+
+  const { data: session, status} = useSession();
+
+
+
   const [drawer, setDrawer] = useState(false);
 
   
-
-
   const [bottomOpen, setBottomOpen] = useState(false);
+
+
+
+const [opendropdown, setOpendropdown] = useState(false);
+
+
+const [openavatar,setopenavatar] = useState();
+
 
   return (
     <>
@@ -57,7 +73,13 @@ export default function Navbar() {
           {/* ===== RIGHT (Desktop Actions) ===== */}
           <div className="hidden md:flex items-center gap-6 text-black">
 
-            <Link href="/about">About</Link>
+         <div className="relative inline-block" 
+        >
+          <Link className="cursor-pointer " href="/">My Account  
+            </Link>
+            </div>
+          
+
             <Link href="/">Rerun</Link>
 
             <Image
@@ -85,6 +107,14 @@ export default function Navbar() {
               />
             </button>
 
+
+ 
+   { status === "loading" ? null : session && <ProfileAvatar/>}
+           
+
+
+
+
           </div>
         </div>
       </nav>
@@ -109,7 +139,17 @@ export default function Navbar() {
           ))}
 
           <div className="mt-6 bg-white px-4 py-4 space-y-4">
-            <Link href="/">My Account</Link>
+            
+        <div className="relative inline-block" 
+          onMouseEnter={() => setOpendropdown(true)}
+            onMouseLeave={() => setOpendropdown(false)}
+        >
+          <Link className="cursor-pointer " href="/">My Account  
+            </Link>
+            //here profile drop down 
+            </div>
+            
+
             <Link href="/about">About</Link>
             <Link href="/services">ReRun</Link>
             <Link href="/contact">Help</Link>
