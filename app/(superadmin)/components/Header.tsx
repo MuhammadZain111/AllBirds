@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Profile from "./Profile";
+import {useSession } from "next-auth/react";
 
 import {
   Moon,
@@ -13,7 +14,25 @@ import {
 } from "lucide-react";
 
 function Header() {
+
   const [dropdown, setDropdown] = useState(false);
+
+const { data: session, status } = useSession();
+
+
+ if (status === 'loading') {
+  return <p>Loading...</p>; // Or a spinner
+}
+
+if (status === 'authenticated') {
+  // Session is available, you can access session.user
+  console.log(session.user);
+} 
+else {
+  // User is not authenticated
+  return <p className="  text-black ">Access denied</p>;
+}
+
 
   return (
     <div>
@@ -89,13 +108,23 @@ function Header() {
             {/* Divider */}
             <div className="my-6 border-t border-gray-200"></div>
 
-            {/* Logout */}
+        {session && (
+          <>
             <button className="flex items-center gap-4 text-slate-700 hover:text-red-500 transition">
               <LogOut className="w-5 h-5" />
               <span className="text-lg font-medium">
-                Sign in
+                Sign out 
+
               </span>
             </button>
+  </>
+)}
+
+
+         
+
+
+
           </div>
         )}
       </div>

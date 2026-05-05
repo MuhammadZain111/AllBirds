@@ -89,12 +89,16 @@ const [openavatar,setopenavatar] = useState();
               alt="search"
             />
 
+
+           <Link className="cursor-pointer"   href="/profile">
             <Image
               src="/icons/login.svg"
               width={24}
               height={24}
               alt="login"
             />
+             </Link>
+           
 
             <Link href="/contact">Help</Link>
 
@@ -146,7 +150,7 @@ const [openavatar,setopenavatar] = useState();
         >
           <Link className="cursor-pointer " href="/">My Account  
             </Link>
-            //here profile drop down 
+            //here profile drop down
             </div>
             
 

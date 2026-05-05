@@ -43,17 +43,12 @@ const UserSchema = new mongoose.Schema(
      {
       type:String,
      }, 
-     
+
      avatar: {
      type: String,
      default: "",
-}
-
-
-
-
-     
-
+},
+  
       isVerified: {
       type: Boolean,
       default: false,

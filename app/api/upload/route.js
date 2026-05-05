@@ -13,7 +13,6 @@ export async function POST(req) {
         error: "No file uploaded",
       });
     }
-
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 

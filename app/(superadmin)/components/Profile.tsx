@@ -3,6 +3,7 @@ import { useState } from "react";
 import {useSession } from "next-auth/react";
 
 
+
 import {
   User,
   Settings,
@@ -12,13 +13,20 @@ import {
 
 
 export default function ProfileDropdown() {
+
+
+ const  { data :session,status } = useSession();
+
+
+
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
 
-      {/* Dropdown Card */}
+    
       <div className="mt-8 w-full max-w-xl rounded-[32px] border border-gray-200 bg-white shadow-sm p-8">
         
-        {/* User Info */}
+    
         <div>
           <h2 className="text-2xl font-semibold text-slate-700">
             Musharof Chowdhury
@@ -51,11 +59,19 @@ export default function ProfileDropdown() {
         {/* Divider */}
         <div className="my-10 border-t border-gray-200"></div>
 
-        {/* Logout */}
-        <button className="flex items-center gap-5 text-slate-700 hover:text-red-500 transition">
-          <LogOut className="w-10 h-10 text-slate-500" />
-          <span className="text-3xl font-medium">Sign out</span>
-        </button>
+
+{session && (
+  <>
+  
+    <button className="flex items-center gap-5 text-slate-700 hover:text-red-500 transition">
+      <LogOut className="w-10 h-10 text-slate-500" />
+      <span className="text-3xl font-medium">
+        Sign out
+      </span>
+    </button>
+  </>
+)}
+
       </div>
     </div>
   );
