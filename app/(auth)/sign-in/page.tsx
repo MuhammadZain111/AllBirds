@@ -5,6 +5,11 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
+
+
+
+
 
 export default function Page() {
 
@@ -145,30 +150,12 @@ export default function Page() {
       </button>
 
 
-
-          <button
-        onClick={() => signIn("google")}
-        className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
+    <Link href="/forgot-password" className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
       >
         Forgot Password
-      </button>
+      </Link>
 
 
-
-          <button
-        onClick={() => signIn("google")}
-        className=" cursor-pointer w-full bg-white text-black px-4 py-2 rounded"
-      >
-        Reset Password
-      </button>
-
-
-
-
-
-
-
-      
       </form>
     </div>
   )

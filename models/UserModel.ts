@@ -26,11 +26,18 @@ const UserSchema = new mongoose.Schema(
       enum: [1, 2, 3],
       default: 3 
       },
+
+    verificationToken: {
+       type: String,
+       },
+
+
       resetPasswordToken:{
        type: String ,
     },  
        resetPasswordExpire:{
-        default:Date.now,
+          type: Date,
+            default:Date.now,
      }, 
       resetOTP:
      {
@@ -41,7 +48,7 @@ const UserSchema = new mongoose.Schema(
 
       isVerified: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     createdAt: {
@@ -52,17 +59,14 @@ const UserSchema = new mongoose.Schema(
     // 
     phoneNumber: {
       type: String,
-      required: true,
     },
 
     department: {
       type: String,
-      required: true,
     },
 
     departmentRole: {
       type: String,
-      required: true,
     },
 
     address: {
@@ -73,7 +77,7 @@ const UserSchema = new mongoose.Schema(
     accountStatus: {
       type: String,
       enum: ["active", "Inactive","blocked"],
-      default: "Active",
+      default: "active",
     },
 
     permissions: {
