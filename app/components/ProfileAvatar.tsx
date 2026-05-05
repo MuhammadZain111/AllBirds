@@ -17,7 +17,7 @@ export default function ProfileAvatar() {
         <div className="bg-[#1E1830] border border-gray-700 rounded-xl shadow-lg p-2">
 
 
-  <p className="text white">username </p>
+        <p className="text white">username </p>
 
 
 

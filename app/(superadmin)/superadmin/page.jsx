@@ -3,6 +3,7 @@ import React from 'react'
 
 import Sidebar from "../components/Sidebar"
 
+import Header from "../components/Header"
 
 
 
@@ -10,14 +11,15 @@ import Sidebar from "../components/Sidebar"
 function page() {
 
   return (
-    <div>
+    <div  className="min-h-screen flex bg-[#ede9e2]"  >
 
-    <Sidebar />
-
-
-<h2 className="bg-black" >welcome to super admin  adahboard 
-
-</h2>
+     <aside className="w-64  text-white">
+     <Sidebar />
+      </aside>
+      
+      <main className="flex-1">
+      <Header />
+      </main>
 
 
     </div>

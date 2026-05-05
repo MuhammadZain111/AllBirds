@@ -69,28 +69,30 @@ export const  productsCategory = [
     category:"women",
     image: "/images/shoes2.png",
     title: "MEN'S CANVAS CRUISER",
+    bg:"bg-[#7a8fa3]",
     subtitle: "Adventurous Auburn",
     price: 75,
   },
 
- {
-    id:"5",
-    category:"women",
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-  },
+//  {
+//     id:"5",
+//     category:"women",
+//     image: "/images/shoes2.png",
+//     title: "MEN'S CANVAS CRUISER",
+//     subtitle: "Adventurous Auburn",
+//       bg:"bg-[#7a8fa3]",
+//     price: 75,
+//   },
 
 
- {
-    id:"5",
-    category:"women",
-    image: "/images/shoes2.png",
-    title: "MEN'S CANVAS CRUISER",
-    subtitle: "Adventurous Auburn",
-    price: 75,
-  },
+//  {
+//     id:"5",
+//     category:"women",
+//     image: "/images/shoes2.png",
+//     title: "MEN'S CANVAS CRUISER",
+//     subtitle: "Adventurous Auburn",
+//     price: 75,
+//   },
 
 
 ];

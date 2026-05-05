@@ -2,9 +2,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
-
-
-
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("")
   const [loading, setLoading] = useState(false)

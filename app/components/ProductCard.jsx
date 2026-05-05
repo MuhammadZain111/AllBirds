@@ -30,6 +30,7 @@ export const ProductCard = ({ image, title, bg, id ,category}) => {
           Men
           </Link>
 
+
            <Link
             href={`/products/category/${category}`}
             className="text-white border border-white/40 px-4 py-2 rounded-full text-sm hover:bg-white hover:text-black  hover:cursor-pointer opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0  mt-2"
@@ -38,6 +39,13 @@ export const ProductCard = ({ image, title, bg, id ,category}) => {
           </Link>
 
 
+
+             <Link
+            href={`/products/category/${category}`}
+            className="text-white border border-white/40 px-4 py-2 rounded-full text-sm hover:bg-white hover:text-black  hover:cursor-pointer opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0  mt-2"
+          >
+          Women
+          </Link>
 
 
 

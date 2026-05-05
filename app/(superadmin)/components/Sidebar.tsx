@@ -22,17 +22,18 @@ return (
   <div className="flex">
 
   
-    <div className="w-[320px] min-h-screen bg-[#140702] text-[#D8C1A5] border-r border-[#3B2417] flex flex-col">
+    <div className="w-[320px] min-h-screen text-[#D8C1A5] border-r border-[#3B2417] flex flex-col">
 
       {/* Logo */}
-      <div className="px-8 py-10 border-b border-[#3B2417]">
+      <div className="px-8 py-10 border-b ">
+        
         <div className="flex items-start gap-4">
           <div className="mt-1">
             <Shield className="w-10 h-10 text-[#E6C17D]" strokeWidth={2} />
           </div>
 
           <div>
-            <h1 className="text-[22px] leading-none font-bold text-white">
+            <h1 className="text-[18px] leading-none font-bold text-white text-black.      ">
               All Birds ..
             </h1>
 
@@ -57,7 +58,7 @@ return (
 
      
 
-      {activeTab === 8 && <AddEmployee />}
+      
 
     </div>
 

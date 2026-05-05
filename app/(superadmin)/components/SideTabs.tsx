@@ -1,14 +1,10 @@
 'use client'
 
+
 import { Shield, ChartNoAxesColumn, Users, UserCheck, Calendar, FileText ,CircleAlert, Activity,
 } from "lucide-react";
 
 import {useEffect} from "react"
-
-
-
-
-
 
 
 
@@ -62,6 +58,7 @@ const menuItems = [
 
 
 
+
 export default function SideTabs({ activeTab, onChange }) {
 
 
@@ -80,8 +77,8 @@ useEffect(() => { console.log(activeTab) }, [])
             key={tab.id}
             type="button"
             onClick={() => onChange(tab.id)}
-            className={`flex items-center gap-5 px-4 py-2 cursor-pointer rounded-[28px] transition-all duration-300 hover:bg-[#E5B168] ${
-            isActive ? "bg-[#E5B168] text-[#2B160D]" : "border text-white text-black"
+            className={`flex items-center gap-5 w-full w  px-6 py-2 cursor-pointer rounded-sm transition-all duration-300 hover:bg-[#E5B168] ${
+            isActive ? "bg-[7592ff] text-[#2B160D]" : "text-black text-black"
               }`}
             >
             <Icon className="w-8 h-8" strokeWidth={2.2} />    
