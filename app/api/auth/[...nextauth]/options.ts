@@ -7,7 +7,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 
 // Add this check at the top of authOptions.ts temporarily
-console.log("SECRET loaded:", !!process.env.NEXTAUTH_SECRET);
+// console.log("SECRET loaded:", !!process.env.NEXTAUTH_SECRET);
 
  const authOptions: NextAuthOptions = {
   providers: [

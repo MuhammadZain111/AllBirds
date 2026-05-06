@@ -16,7 +16,7 @@ export async function POST(req) {
   try {
     await dbConnect();
 
-    // ── 1. Auth ──────────────────────────────────────────────
+    // ── 1. Auth ─────────
     const session = await getServerSession(authOptions);
     if (!session?.user?.email) {
       return NextResponse.json(
@@ -25,7 +25,7 @@ export async function POST(req) {
       );
     }
 
-    // ── 2. File extraction ───────────────────────────────────
+    // ── 2. File extraction ────
     const formData = await req.formData();
     const file = formData.get("file");
 
@@ -101,7 +101,7 @@ export async function POST(req) {
       updatedUser = await User.findOneAndUpdate(
         { email: session.user.email },
         { profileImage: newImageUrl },
-        { new: true } // ← was `{ returnDocument: "after" }` — that's a MongoDB driver option, not Mongoose
+        { returnDocument: "after" }// ← was `{ returnDocument: "after" }` — that's a MongoDB driver option, not Mongoose
       );
     } catch (dbError) {
       console.error("DB error:", dbError);
