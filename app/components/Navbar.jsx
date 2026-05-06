@@ -7,7 +7,9 @@ import BottomDrawer from './BottomDrawer'
 
 import ProfileAvatar from "./ProfileAvatar";
 import {useSession } from "next-auth/react";
+import { useRouter } from 'next/navigation'
 
+import { signOut } from "next-auth/react";
 
 
 
@@ -25,11 +27,24 @@ export default function Navbar() {
   const [bottomOpen, setBottomOpen] = useState(false);
 
 
-
 const [opendropdown, setOpendropdown] = useState(false);
 
 
 const [openavatar,setopenavatar] = useState();
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (session) {
+      router.push("/profile");
+    } else {
+      router.push("/sign-in");
+    }
+  };
+
+
+
+
 
 
   return (
@@ -89,16 +104,18 @@ const [openavatar,setopenavatar] = useState();
               alt="search"
             />
 
-
-           <Link className="cursor-pointer"   href="/profile">
+         
+           <button className="cursor-pointer"  onClick={handleClick}>
             <Image
               src="/icons/login.svg"
               width={24}
               height={24}
               alt="login"
             />
-             </Link>
-           
+             </button>
+
+
+            <button className="cursor-pointer bg-black text-white   "  onClick={() => signOut()}>Sign out</button>
 
             <Link href="/contact">Help</Link>
 

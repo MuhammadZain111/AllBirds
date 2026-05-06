@@ -5,11 +5,10 @@ import { useState } from "react";
 
 
 
+export default function EditProfileModal({open, onClose, user}) {
 
 
-export default function EditProfileModal({open, onClose}) {
-
-    
+  const [checked, setChecked] = useState(false);
 
 if (!open) return null;
 
@@ -40,27 +39,27 @@ if (!open) return null;
             <input
               type="text"
               placeholder="First name"
-              className="w-full rounded-lg border-2 border-gray-800 px-5 py-4 text-lg outline-none focus:border-black"
+              className="w-full rounded-lg border-2 border-gray-800 px-5 py-2 text-lg outline-none focus:border-black text-black "
             />
 
             {/* Last Name */}
             <input
               type="text"
               placeholder="Last name"
-              className="w-full rounded-lg border border-gray-300 px-5 py-4 text-lg outline-none focus:border-gray-500"
+              className="w-full rounded-lg border border-gray-300 px-5 py-2 text-lg outline-none focus:border-gray-500 text-black "
             />
           </div>
 
-          {/* Email */}
-          <div className="rounded-lg border border-gray-300 px-5 py-4">
-            <p className="text-sm text-gray-500">Email</p>
 
-            <p className="mt-1 text-lg md:text-xl text-black break-all">
-              csmuhammadzain@gmail.com
-            </p>
+          {/* Email */}
+          <div className="rounded-lg border border-gray-300 px-5 py-1">             
+            <p className="text-sm text-gray-500">Email</p>
+             <input type="email" value={user.email}readOnly
+          className="text-black p-2 w-full cursor-not-allowed focus:outline-hidden  "
+        />
           </div>
 
-          {/* Checkbox */}
+          {/* Checkbox */}    
           <label className="flex items-center gap-4 cursor-pointer">
             
             <button

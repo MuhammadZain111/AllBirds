@@ -161,7 +161,7 @@ export default function Page() {
 
   <p className="mt-4 text-white">
       Dont have an account?{" "}
-        <Link href="/sign-in" className="underline">
+        <Link href="/sign-up" className="underline">
           Sign up
         </Link>
       </p>

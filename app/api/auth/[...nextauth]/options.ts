@@ -7,11 +7,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 
 
-
-
-
-
-
  const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -91,24 +86,38 @@ import GoogleProvider from "next-auth/providers/google";
   ],
 
   callbacks: {
+    
     async jwt({ token, user }) {
+  // 1. First login ONLY, add user info to token
+  if (user) {
+    token._id = user.id?.toString();
+    token.email = user.email;
+  }
 
-      if (user) {
-        token._id = user.id;
-        token.email = user.email;
-        token.username = user.username;
-        token.role = user.role;
-      }
-      return token;
-    },
+  // 2. ALWAYS enrich from DB (important fix)
+  if (token.email) {
+    await dbConnect();
+
+    const dbUser = await UserModel.findOne({ email: token.email });
+
+    if (dbUser) {
+      token._id = dbUser._id.toString();
+      token.email = dbUser.email;
+      token.username = dbUser.username;
+      token.role = dbUser.role;
+    }
+  }
+
+  return token;
+},
 
     async session({ session, token }) {
 
       if (session.user) {
-        session.user._id = token._id as string;
-        session.user.email = token.email as string;
-        session.user.username = token.username as string;
-        session.user.role = token.role as number;
+        session.user._id = (token._id as string) ?? "";
+        session.user.email = (token.email as string) ?? "";
+        session.user.username = (token.username as string) ?? "";
+        session.user.role = (token.role as number) ?? 0;
       }
       return session;
     },
@@ -117,9 +126,9 @@ import GoogleProvider from "next-auth/providers/google";
   pages: {
     signIn: "/sign-in",
   },
-
   session: {
     strategy: "jwt",
+     maxAge: 24 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

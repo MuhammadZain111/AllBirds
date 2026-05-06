@@ -1,140 +1,200 @@
-import React from 'react'
+"use client";
 
-import {useState} from 'react'
-
-import Modal from './Modal'
-
+import React, { useState } from "react";
+import { useSession } from "next-auth/react";
+import Modal from "./Modal";
+import Link from "next/link";
 
 
 function Profile() {
 
+  const { data: session, status } = useSession();
 
-    const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-    const [name ,setName] =useState();
+  const [preview, setPreview] = useState(null);
 
-    const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState(null);
 
-const handleImageChange = (e) => {
-  const file = e.target.files[0];
-
-  if (file) {
-    setPreview(URL.createObjectURL(file));
+  if (status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen text-gray-600">
+        Loading profile...
+      </div>
+    );
   }
-};
 
 
-
-const handleUpload = async (e) => {
- 
-const file = e.target.files[0];
-
-  const formData = new FormData();
-  formData.append("file", file);
-
-  const res = await fetch("/api/upload", {
-    method: "POST",
-    body: formData,
-  });
-
-  const data = await res.json();
-
-  console.log(data.imageUrl);
-};
+    console.log("session is",session,status);
 
 
-
-
-
-  return (
-
-
-     <div className=" " >
-      
-      <h3 className="text-black "  >Profile</h3>
-
-      <div className="border-3 text-black    " > 
-       
-       <p className="text-black"> Name  </p>
-
-
-        <button onClick={() => setOpenModal(true)}>
-        Edit Profile 
-      </button>
-     
-        <p className="text-black">Email</p>
-
-      </div>
-
-
-
-      <div className=" ">
-
-      <div className=" ">
-        <p>Adress</p>
-      </div>
-
-     <div className="space-y-3">
-{/*   
-  <label className="block text-lg font-medium text-gray-700">
-    Profile Image
-  </label>
-
-  <input
-    type="file"
-    accept="image/*"
-    className="block w-full rounded-lg border border-gray-300 p-3 text-sm file:mr-4 file:rounded-md file:border-0 file:bg-slate-800 file:px-4 file:py-2 file:text-white hover:file:bg-slate-700"
-  /> */}
-
-
-<form>
-
-<label className="block text-lg font-medium text-gray-700">
-    Profile Image
-  </label>
-
-  {/* Preview */}
-  {preview && (
-    <img           
-      src={preview}
-      alt="Preview"
-      className="h-28 w-28 rounded-full object-cover border"
-    />
-  )}
-
-
-
-  {/* Input */}
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageChange}
-    className="block w-full rounded-lg border border-gray-300 p-3 text-sm
-    file:mr-4 file:rounded-md file:border-0
-    file:bg-slate-800 file:px-4 file:py-2
-    file:text-white hover:file:bg-slate-700"
-  />
-
-</div>
-
-
-
-</form>
-
-
-      </div>
-
-       <Modal open={openModal}
-             onClose={() => setOpenModal(false)}
-      />
-
-
-
-
-
-
-    </div>
-  )
+ if (status === 'loading') {
+  return <p>Loading...</p>; 
 }
 
-export default Profile
+if (status === 'authenticated') {
+
+  console.log(session);
+} 
+
+ else {
+   return <p className="  text-black ">Access denied</p>;
+ }
+
+
+   const user = {
+    name: "Zain",
+    email: "zain@gmail.com",
+  };
+
+//   if (!session) {
+//     return (
+//       <div className="flex items-center justify-center h-screen text-red-500 text-lg font-medium">
+//         Access Denied — Please Login
+//       </div>
+//     );
+//   }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+
+    if (!image) return alert("Please select an image");
+
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("email", session.user.email);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log(data);
+  };
+
+  return (
+    <>
+      <div className="flex w-full py-4 px-6 bg-white border-b items-center gap-6 text-black">
+       <Link href=""   > Orders </Link> 
+        <Link href=""   > Profile  </Link>
+       </div>
+
+ <div className="min-h-screen bg-gray-50 flex justify-center p-6">
+      
+      <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
+
+
+          <div className="flex items-center gap-4 border-b pb-6">
+
+            <div>
+            <h2 className="text-xl font-semibold text-gray-800">
+             Name: zain
+            </h2>
+            <p className="text-gray-500 text-sm    ">
+             Email:  {session.user.email}
+            </p>
+          </div> 
+    </div>
+
+        <div className="flex items-center gap-4 border-b pb-6">
+          <img
+            src={preview || "https://i.pravatar.cc/100"}
+            alt="profile"
+            className="w-16 h-16 rounded-full object-cover border"
+          />
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800">
+              {/* {session.user.name} */}
+            </h2>
+            <p className="text-gray-500 text-sm">
+              {/* {session.user.email} */}
+            </p>
+          </div>
+
+          <button
+            onClick={() => setOpenModal(true)}
+            className="ml-auto px-4 py-2 rounded-lg bg-black text-white text-sm hover:bg-gray-800 transition"
+          >
+            Edit Profile
+          </button>
+        </div>
+
+        {/* Upload Section */}
+        <form onSubmit={handleUpload} className="mt-8 space-y-5">
+
+          <h3 className="text-lg font-semibold text-gray-700">
+            Update Profile Image
+          </h3>
+
+          {/* Preview Box */}
+          {preview && (
+            <div className="flex justify-center">
+              <img
+                src={preview}
+                alt="preview"
+                className="w-28 h-28 rounded-full object-cover border-4 border-gray-200 shadow"
+              />
+            </div>
+          )}
+
+          {/* Upload Box */}
+          <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-6 cursor-pointer hover:border-gray-500 transition bg-gray-50">
+            
+            <span className="text-gray-600 text-sm">
+              Click to select or change image
+            </span>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
+
+          {/* Button */}
+          <button
+            type="submit"
+            className="w-full py-3 rounded-xl bg-[#8B5CF6] text-white font-medium hover:bg-[#7C4DF2]  transition"
+          >
+            Upload Image
+          </button>
+        </form>
+
+      </div>
+
+      {/* Modal */}
+      <Modal
+        user={user}
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      />
+    </div>
+
+
+
+
+
+
+</>
+     
+
+
+
+
+   
+  );
+}
+
+export default Profile;

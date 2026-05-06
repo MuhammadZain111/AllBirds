@@ -1,41 +1,120 @@
-
-
 import cloudinary from "@/lib/cloudinary";
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import dbConnect from "@/lib/dbConnect";
+import User from "@/models/UserModel";
+
+
+
 
 export async function POST(req) {
   try {
-    const data = await req.formData();
-    const file = data.get("file");
+    await dbConnect();
 
-    if (!file) {
-      return NextResponse.json({
-        error: "No file uploaded",
-      });
+    //  Auth Check
+
+    const session = await getServerSession(authOptions);
+
+    if (!session?.user?.email) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized - Please login" },
+        { status: 401 }
+      );
     }
+
+    // 📦 GET FILE
+    const formData = await req.formData();
+    const file = formData.get("file");
+
+    //  FILE VALIDATION
+    if (!file || typeof file === "string") {
+      return NextResponse.json(
+        { success: false, message: "No valid file provided" },
+        { status: 400 }
+      );
+    }
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const result = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream(
-          {
-            folder: "profile_avatars",
-          },
-          (error, result) => {
-            if (error) reject(error);
-            else resolve(result);
-          }
-        )
-        .end(buffer);
+    // ☁️ CLOUDINARY UPLOAD
+    let uploadResult;
+
+    try {
+      uploadResult = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: "profile_avatars",
+            },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          )
+          .end(buffer);
+      });
+    } catch (cloudError) {
+      console.error("Cloudinary Error:", cloudError);
+
+      return NextResponse.json(
+        { success: false, message: "Image upload failed" },
+        { status: 500 }
+      );
+    }
+
+    if (!uploadResult?.secure_url) {
+      return NextResponse.json(
+        { success: false, message: "Failed to get image URL" },
+        { status: 500 }
+      );
+    }
+
+    const imageUrl = uploadResult.secure_url;
+
+    // 🗄️ DATABASE UPDATE
+    let updatedUser;
+
+    try {
+      updatedUser = await User.findOneAndUpdate(
+        { email: session.user.email },
+        { profileImage: imageUrl },
+        { new: true }
+      );
+    } catch (dbError) {
+      console.error("DB Error:", dbError);
+
+      return NextResponse.json(
+        { success: false, message: "Database update failed" },
+        { status: 500 }
+      );
+    }
+
+    if (!updatedUser) {
+      return NextResponse.json(
+        { success: false, message: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    // ✅ SUCCESS RESPONSE
+    return NextResponse.json({
+      success: true,
+      message: "Profile image updated successfully",
+      imageUrl,
     });
 
-    return NextResponse.json({
-      imageUrl: result.secure_url,
-    });
   } catch (error) {
-    return NextResponse.json({
-      error: error.message,
-    });
+    console.error("Server Error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Internal Server Error",
+        error: error.message,
+      },
+      { status: 500 }
+    );
   }
-}w
+}
