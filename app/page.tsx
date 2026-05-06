@@ -17,18 +17,17 @@ export default function Home() {
 const   data   = useSession();
 
 
-
     console.log("session is",data);
 
 
- if (status === 'loading') {
-  return <p>Loading...</p>; // Or a spinner
-}
+//  if (status === 'loading') {
+//   return <p>Loading...</p>; // Or a spinner
+// }
 
-if (status === 'authenticated') {
-  // Session is available, you can access session.user
-  console.log(session.user);
-} 
+// if (status === 'authenticated') {
+//   // Session is available, you can access session.user
+//   console.log(session.user);
+// } 
 
 // else {
 //   // User is not authenticated

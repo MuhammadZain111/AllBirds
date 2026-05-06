@@ -11,7 +11,7 @@ export default function AuthProvider({
   session?: any
 }) {
   return (
-    <SessionProvider session={session ?? null}>
+    <SessionProvider >
       {children}
     </SessionProvider>
   )

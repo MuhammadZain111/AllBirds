@@ -1,4 +1,4 @@
-import dbConnect  from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
@@ -6,6 +6,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 
+// Add this check at the top of authOptions.ts temporarily
+console.log("SECRET loaded:", !!process.env.NEXTAUTH_SECRET);
 
  const authOptions: NextAuthOptions = {
   providers: [
@@ -86,32 +88,47 @@ import GoogleProvider from "next-auth/providers/google";
   ],
 
   callbacks: {
-    
-    async jwt({ token, user }) {
-  // 1. First login ONLY, add user info to token
+    async jwt({ token, user, account }) {
+
+      console.log("JWT fired | user:", !!user, "| email:", token.email, "| lastFetched:", token.lastFetched);
+  // First login — seed token from user object
   if (user) {
     token._id = user.id?.toString();
     token.email = user.email;
   }
 
-  // 2. ALWAYS enrich from DB (important fix)
-  if (token.email) {
-    await dbConnect();
+  const shouldRefreshFromDB =
+    !token.lastFetched ||
+    Date.now() - (token.lastFetched as number) > 60 * 1000;
 
-    const dbUser = await UserModel.findOne({ email: token.email });
+  if (token.email && shouldRefreshFromDB) {
+    try {
+      await dbConnect();
+      const dbUser = await UserModel.findOne({ email: token.email });
+        console.log(" DB user found:", !!dbUser);
 
-    if (dbUser) {
-      token._id = dbUser._id.toString();
-      token.email = dbUser.email;
-      token.username = dbUser.username;
-      token.role = dbUser.role;
+      if (dbUser) {
+        token._id = dbUser._id.toString();
+        token.email = dbUser.email;
+        token.username = dbUser.username;
+        token.role = dbUser.role;
+      }
+    } catch (err) {
+      console.error("JWT DB fetch error:", err);
+      //  Don't crash — keep existing token data
+    } finally {
+      //  CRITICAL: always update lastFetched so we don't
+      // hammer DB on every request when DB is down
+      token.lastFetched = Date.now();
     }
   }
 
   return token;
 },
-
     async session({ session, token }) {
+       
+      console.log("SESSION fired | token._id:", token._id, "| token.email:", token.email);
+
 
       if (session.user) {
         session.user._id = (token._id as string) ?? "";
@@ -129,8 +146,9 @@ import GoogleProvider from "next-auth/providers/google";
   session: {
     strategy: "jwt",
      maxAge: 24 * 60 * 60,
+     updateAge: 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export {authOptions} ;
+export { authOptions };
