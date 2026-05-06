@@ -30,8 +30,6 @@ const UserSchema = new mongoose.Schema(
     verificationToken: {
        type: String,
        },
-
-
       resetPasswordToken:{
        type: String ,
     },  
@@ -43,13 +41,8 @@ const UserSchema = new mongoose.Schema(
      {
       type:String,
      }, 
-
-     avatar: {
-     type: String,
-     default: "",
-},
-  
-      isVerified: {
+    
+     isVerified: {
       type: Boolean,
       default: false,
     },
@@ -91,6 +84,16 @@ const UserSchema = new mongoose.Schema(
     joiningDate: {
       type: Date,
       default: Date.now,
+    },
+    
+    profileImage: {
+      type: String,
+      default: "",
+    },
+
+    bio: {
+      type: String,
+      default: "",
     },
     
   },

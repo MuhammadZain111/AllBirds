@@ -55,6 +55,7 @@ if (status === 'authenticated') {
 //     );
 //   }
 
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
@@ -80,7 +81,11 @@ if (status === 'authenticated') {
 
     const data = await res.json();
     console.log(data);
+    console.log("Upload response:", data);
+    console.log("Uploaded image URL successfullly:");
   };
+
+
 
   return (
     <>
@@ -98,7 +103,7 @@ if (status === 'authenticated') {
 
             <div>
             <h2 className="text-xl font-semibold text-gray-800">
-             Name: zain
+             Name: {session.user.username}
             </h2>
             <p className="text-gray-500 text-sm    ">
              Email:  {session.user.email}
@@ -166,7 +171,7 @@ if (status === 'authenticated') {
           {/* Button */}
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-[#8B5CF6] text-white font-medium hover:bg-[#7C4DF2]  transition"
+            className="w-full py-3 rounded-xl bg-[#8B5CF6] text-white font-medium hover:bg-[#7C4DF2] transition cursor-pointer  "
           >
             Upload Image
           </button>

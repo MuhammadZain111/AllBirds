@@ -1,15 +1,18 @@
 import cloudinary from "@/lib/cloudinary";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/models/UserModel";
 
 
 
 
+
+
 export async function POST(req) {
   try {
+ 
     await dbConnect();
 
     //  Auth Check
@@ -23,9 +26,12 @@ export async function POST(req) {
       );
     }
 
-    // 📦 GET FILE
+
+    //  GET FILE
     const formData = await req.formData();
     const file = formData.get("file");
+
+console.log("Received file:", file);
 
     //  FILE VALIDATION
     if (!file || typeof file === "string") {
@@ -38,8 +44,9 @@ export async function POST(req) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // ☁️ CLOUDINARY UPLOAD
+    // CLOUDINARY UPLOAD
     let uploadResult;
+
 
     try {
       uploadResult = await new Promise((resolve, reject) => {
@@ -73,8 +80,13 @@ export async function POST(req) {
 
     const imageUrl = uploadResult.secure_url;
 
-    // 🗄️ DATABASE UPDATE
+    // DATABASE UPDATE
     let updatedUser;
+
+    
+console.log("Updating user with email:", session.user.email, "to have image URL:", imageUrl);
+
+
 
     try {
       updatedUser = await User.findOneAndUpdate(
@@ -83,7 +95,7 @@ export async function POST(req) {
         { new: true }
       );
     } catch (dbError) {
-      console.error("DB Error:", dbError);
+      console.error("Db Error:", dbError);
 
       return NextResponse.json(
         { success: false, message: "Database update failed" },
@@ -98,13 +110,14 @@ export async function POST(req) {
       );
     }
 
-    // ✅ SUCCESS RESPONSE
+    // SUCCESS RESPONSE
     return NextResponse.json({
       success: true,
       message: "Profile image updated successfully",
       imageUrl,
     });
 
+    
   } catch (error) {
     console.error("Server Error:", error);
 
