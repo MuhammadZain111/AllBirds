@@ -79,6 +79,7 @@ if (status === 'authenticated') {
       body: formData,
     });
 
+    
     const data = await res.json();
     console.log(data);
     console.log("Upload response:", data);

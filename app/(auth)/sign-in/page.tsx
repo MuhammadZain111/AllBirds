@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import { useSession, signIn, signOut } from "next-auth/react"
@@ -11,14 +9,15 @@ import Link from "next/link"
 
 
 
+
+
+
+
 export default function Page() {
 
-
-  
+ 
   const { data: session } = useSession()
   const router = useRouter()
-
-  
 
   const [form, setForm] = useState({
     identifier: "",
@@ -82,14 +81,14 @@ export default function Page() {
 }
 
 
-  if (session) {
-    return (
-      <>
-        <p>Signed in as {session.user?.email}</p>
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
+  // if (session) {
+  //   return (
+  //     <>
+  //       <p>Signed in as {session.user?.email}</p>
+  //       <button onClick={() => signOut()}>Sign out</button>
+  //     </>
+  //   )
+  // }
 
   
   
