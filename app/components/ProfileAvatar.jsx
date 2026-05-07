@@ -37,35 +37,7 @@ export default function ProfileAvatar() {
           />
         </button>
 
-        <div>
-          <h2 className="text-2xl font-semibold text-slate-700">
-            Musharof Chowdhury
-          </h2>
-
-          <p className="mt-2 text-1xl text-slate-500">randomuser@pimjo.com</p>
-        </div>
-
-        {/* Menu Items */}
-        <div className="mt-10 space-y-8">
-          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
-            <User className="w-4 h-1 text-slate-500" />
-            <span className="text-3xl font-medium">Edit profile</span>
-          </button>
-
-          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
-            <Settings className="w-4 h-1 text-slate-500" />
-            <span className="text-3xl font-medium">Account settings</span>
-          </button>
-
-          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
-            <CircleHelp className="w-4 h-1 text-slate-500" />
-            <span className="text-3xl font-medium">Support</span>
-          </button>
-        </div>
-
-        {/* Divider */}
-        <div className="my-10 border-t border-gray-200"></div>
-
+        
         {session && (
           <>
             <button

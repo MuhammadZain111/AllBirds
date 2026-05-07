@@ -52,9 +52,9 @@ export default function Page() {
       const role = session?.user?.role;
 
       if (role === 1) {
-        router.push("/admindashboard");
+        router.push("/superadmin");
       } else if (role === 2) {
-        router.push("/employer/dashboard");
+        router.push("/admindashboard");
       } else {
         router.push("/");
       }
@@ -126,7 +126,7 @@ export default function Page() {
           </button>
 
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/"  })}
             className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
           >
             Continue with Google..

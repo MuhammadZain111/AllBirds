@@ -4,11 +4,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import SideDrawer from "./SideDrawer";
 import BottomDrawer from "./BottomDrawer";
-
-import ProfileAvatar from "./ProfileAvatar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import ProfileDropdown from "./ProfileDropdown";
 
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
 
@@ -58,6 +57,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 px-4">
           <div className="flex items-center gap-4">
             {/* Mobile Hamburger */}
+
             <button
               onClick={() => setOpen(!open)}
               className="md:hidden text-2xl text-black"
@@ -126,8 +126,7 @@ export default function Navbar() {
               ? null
               : session && (
                   <div className="relative">
-                    {/* Profile Button */}
-
+                   
                     <button
                       onClick={() => setDropdown(!dropdown)}
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
@@ -141,61 +140,16 @@ export default function Navbar() {
                       />
                     </button>
 
-                    {/* Dropdown */}
-                    {dropdown && (
-                      <div className="absolute top-16 right-0 w-[350px] rounded-3xl border border-gray-200 bg-white shadow-lg p-6 z-50">
-                        {/* User Info */}
-                        <div>
-                          <h2 className="text-xl font-semibold text-slate-700">
-                            Musharof Chowdhury
-                          </h2>
-
-                          <p className="mt-1 text-sm text-slate-500">
-                            randomuser@pimjo.com
-                          </p>
-                        </div>
-                        {/* Menu Items */}
-                        <div className="mt-8 space-y-6">
-                          <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
-                            <span className="text-lg font-medium">
-                              Edit profile
-                            </span>
-                          </button>
-
-                          <Link
-                            href="/profile"
-                            className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition"
-                          >
-                            <Settings className="w-5 h-5" />
-                            <span className="text-lg font-medium">
-                              Account settings
-                            </span>
-                          </Link>
-
-                          <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
-                            <CircleHelp className="w-5 h-5" />
-                            <span className="text-lg font-medium">Support</span>
-                          </button>
-                        </div>
-                        {/* Divider */}
-                        <div className="my-6 border-t border-gray-200"></div>
-                        {/* Logout */}{" "}
-                        <button
-                          className="cursor-pointer text-black"
-                          onClick={() => signOut()}
-                        >
-                          Sign Out
-                        </button>
-                        {/* Avatar Component */}
-                      </div>
-                    )}
+                    {dropdown && <ProfileDropdown Opendropdown={dropdown} setOpenDropdown={setDropdown} />}
                   </div>
                 )}
           </div>
         </div>
       </nav>
 
-      {/* ================= MOBILE MENU ================= */}
+
+
+      {/*===== MOBILE MENU == */}
       <div
         className={`fixed left-0 top-16 w-full h-[calc(100vh-4rem)] bg-[#f5f5f3] z-50
         transition-transform duration-300 ease-in-out overflow-hidden
