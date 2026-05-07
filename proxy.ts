@@ -12,6 +12,8 @@ export async function proxy(request: NextRequest) {
 
   const  pathname  = request.nextUrl.pathname
 
+  console.log("PATHNAME:", pathname);
+  ;
 
   // const path = req.nextUrl.pathname
 
@@ -30,7 +32,7 @@ export async function proxy(request: NextRequest) {
 
   
   if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url))
+    return NextResponse.redirect(new URL("/sign-in", request.url))
   }
 
 
@@ -44,6 +46,13 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/unauthorized", request.url))
   }
 
+
+
+
+if (token && (pathname === "/sign-in" || pathname === "/sign-up")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   return NextResponse.next()
 }
 
@@ -53,6 +62,8 @@ export const config = {
     "/dashboard/:path*",
     "/admin/:path*",
     "/superadmin/:path*",
-    "/admindashboard/:path*"
+    "/admindashboard/:path*",
+    "/sign-in/profile",
+    "/sign-up/profile",
   ]
 };

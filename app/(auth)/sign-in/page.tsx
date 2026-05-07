@@ -7,17 +7,18 @@ import Link from "next/link"
 
 
 
-
-
-
-
-
-
 export default function Page() {
 
  
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const router = useRouter()
+
+
+
+// if (session) {
+//     router.push("/");
+//   }
+
 
   const [form, setForm] = useState({
     identifier: "",
@@ -118,7 +119,7 @@ export default function Page() {
 
       
         <input
-          type="text"
+          type="password"
           name="password"
           placeholder="Password"
           value={form.password}

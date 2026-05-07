@@ -145,7 +145,7 @@ export default function ResetPasswordPage() {
           </button>
 
           {message && (
-            <p className="text-center text-sm mt-3">
+            <p className="text-center text-sm mt-3 text-black">
               {message}
             </p>
           )}

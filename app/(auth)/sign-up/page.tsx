@@ -1,13 +1,24 @@
 // app/sign-up/page.tsx
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useState } from "react";
 
 
 export default function SignUpPage() {
+
+
+    const { data: session, status } = useSession()
+    const router = useRouter()
+  
+
+  //  if (session) {
+  //      router.push("/");
+  //  }
  
-  const router = useRouter();
+
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [loading, setLoading] = useState(false);
 

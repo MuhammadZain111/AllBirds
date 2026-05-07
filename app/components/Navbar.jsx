@@ -1,33 +1,49 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import SideDrawer from './SideDrawer'
 import BottomDrawer from './BottomDrawer'
 
 import ProfileAvatar from "./ProfileAvatar";
 import {useSession } from "next-auth/react";
 import { useRouter } from 'next/navigation'
-
 import { signOut } from "next-auth/react";
+
+
+import {
+  Moon,
+  Bell,
+  User,
+  Settings,
+  CircleHelp,
+  LogOut,
+} from "lucide-react";
+
+
+
+
+
 
 
 
 export default function Navbar() {
+ 
+ 
   const [open, setOpen] = useState(false);
-
 
   const { data: session, status} = useSession();
 
-
-
   const [drawer, setDrawer] = useState(false);
-
   
   const [bottomOpen, setBottomOpen] = useState(false);
 
+   const [opendropdown, setOpendropdown] = useState(false);
 
-const [opendropdown, setOpendropdown] = useState(false);
+   const [dropdown, setDropdown] = useState(false);
+
+
+
 
 
 const [openavatar,setopenavatar] = useState();
@@ -43,6 +59,26 @@ const [openavatar,setopenavatar] = useState();
   };
 
 
+
+
+  const [user, setUser] = useState(null);
+  
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("/api/get-user");
+      const data = await res.json();
+  
+      if (data.success) {
+        setUser(data.user);
+      }
+    };
+  
+    fetchUser();
+  }, []);
+  
+  
+  
 
 
 
@@ -115,8 +151,7 @@ const [openavatar,setopenavatar] = useState();
              </button>
 
 
-            <button className="cursor-pointer bg-black text-white   "  onClick={() => signOut()}>Sign out</button>
-
+           
             <Link href="/contact">Help</Link>
 
             <button onClick={() => setDrawer(true)}>
@@ -129,9 +164,76 @@ const [openavatar,setopenavatar] = useState();
             </button>
 
 
- 
-   { status === "loading" ? null : session && <ProfileAvatar/>}
-           
+ {status === "loading" ? null : session && (
+  <div className="relative">
+
+    {/* Profile Button */}
+
+
+    <button
+     onClick={() => setDropdown(!dropdown)}
+     className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer">
+        <Image
+      src={user?.profileImage || "/default-avatar.png"}
+      width={50}
+      height={40}
+      alt="Profile Image"
+      className="rounded-full object-cover" />
+      </button>
+
+
+    {/* Dropdown */}
+    {dropdown && (
+      <div className="absolute top-16 right-0 w-[350px] rounded-3xl border border-gray-200 bg-white shadow-lg p-6 z-50">
+
+        {/* User Info */}
+        <div>
+          <h2 className="text-xl font-semibold text-slate-700">
+            Musharof Chowdhury
+          </h2>
+
+          <p className="mt-1 text-sm text-slate-500">
+            randomuser@pimjo.com
+          </p>
+        </div>
+
+        {/* Menu Items */}
+        <div className="mt-8 space-y-6">
+
+          <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
+            <span className="text-lg font-medium">Edit profile</span>
+          </button>
+
+          <Link className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
+            <Settings className="w-5 h-5" />
+            <span className="text-lg font-medium">Account settings</span>
+          </Link>
+
+          <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
+            <CircleHelp className="w-5 h-5" />
+            <span className="text-lg font-medium">Support</span>
+          </button>
+
+        </div>
+
+        {/* Divider */}
+        <div className="my-6 border-t border-gray-200"></div>
+
+        {/* Logout */} <button className="cursor-pointer text-black"  onClick={() => signOut()}>Sign Out
+        </button>
+
+        {/* Avatar Component */}
+
+      </div>
+    )}
+
+  </div>
+)}
+
+
+
+
+
 
 
 

@@ -1,17 +1,24 @@
 "use client";
+import { useState,useEffect } from "react";
+import {useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
-import { User } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
-
+import {
+  
+  User,
+  Settings,
+  CircleHelp,
+  LogOut}
+  from "lucide-react"
 
 
 
 export default function ProfileAvatar() {
 
-const { data: session } = useSession();
+
+ const  { data :session,status } = useSession();
+
 
 const [user, setUser] = useState(null);
 
@@ -30,11 +37,15 @@ useEffect(() => {
 }, []);
 
 
+
   return (
-    <div className="relative inline-block group">
-      
-  
-      <button className="w-10 h-10 rounded-full bg-[#352C4D] hover:bg-[#4B3B6B] flex items-center justify-center text-white transition">
+    <div className="min-h-screen bg-gray-100 p-6">
+
+    
+      <div className="mt-8 w-full max-w-xl rounded-[32px] border border-gray-200 bg-white shadow-sm p-8">
+        
+
+    <button className="w-10 h-10 rounded-full bg-[#352C4D] hover:bg-[#4B3B6B] flex items-center justify-center text-white transition">
         <Image
       src={user?.profileImage || "/default-avatar.png"}
       width={50}
@@ -43,24 +54,60 @@ useEffect(() => {
       className="rounded-full" />
       </button>
 
-      {/* Dropdown */}
-      <div className="absolute right-0 top-full pt-2 w-40 hidden group-hover:block z-50">
-        <div className="bg-[#1E1830] border border-gray-700 rounded-xl shadow-lg p-2">
 
 
-        <p className="text-white">username: {user?.name || session?.user?.name}</p>
 
-          <button
-            onClick={() => signOut({ callbackUrl: "/sign-in" })}
-            className="w-full text-left px-4 py-2 rounded-lg text-white hover:bg-[#352C4D] transition"
-          >
-            Sign Out Hello ....
+    
+        <div>
+          <h2 className="text-2xl font-semibold text-slate-700">
+            Musharof Chowdhury
+          </h2>
 
+          <p className="mt-2 text-1xl text-slate-500">
+            randomuser@pimjo.com
+          </p>
+        </div>
+
+        {/* Menu Items */}
+        <div className="mt-10 space-y-8">
+
+          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
+            <User className="w-4 h-1 text-slate-500" />
+            <span className="text-3xl font-medium">Edit profile</span>
           </button>
 
-        </div>
-      </div>
+          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
+            <Settings className="w-4 h-1 text-slate-500" />
+            <span className="text-3xl font-medium">Account settings</span>
+          </button>
 
+          <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
+            <CircleHelp className="w-4 h-1 text-slate-500" />
+            <span className="text-3xl font-medium">Support</span>
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="my-10 border-t border-gray-200"></div>
+
+
+{session && (
+  <>
+  
+    <button className="flex items-center gap-5 text-slate-700 hover:text-red-500 transition"
+    onClick={() => signOut({ callbackUrl: "/sign-in" })}
+    >
+     
+    
+    </button>
+  </>
+)}
+
+      </div>
     </div>
   );
 }
+
+
+
+
