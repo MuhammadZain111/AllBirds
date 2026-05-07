@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import AddEmployee from "../../AdminComponents/AddEmployee";
+import Header from "../../AdminComponents/Header";
+import Sidebar from "../../AdminComponents/Sidebar";
 
 function Page() {
   const { data: session, status } = useSession();
@@ -24,7 +23,7 @@ function Page() {
   return (
     <div className="min-h-screen flex bg-white">
       <aside className="w-64 text-white">
-        <Sidebar />
+      <Sidebar />
       </aside>
 
       <main className="flex-1">

@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Profile from "./Profile";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 
-import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
+import { Bell, CircleHelp, Moon, Settings, User } from "lucide-react";
 
 function Header() {
   const [dropdown, setDropdown] = useState(false);

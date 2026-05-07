@@ -97,7 +97,7 @@ export default function Sidebar() {
 
             {/* Title Only in Open Mode */}
             {open && (
-              <h1 className="text-3xl font-bold text-slate-900">TailAdmin</h1>
+              <h1 className="text-3xl font-bold text-slate-900">SuperAdmin</h1>
             )}
           </div>
 
@@ -138,7 +138,7 @@ export default function Sidebar() {
                       key={i}
                       // onClick={() => setActive(item.id)}
                       onClick={() =>
-                        router.push(`/admindashboard?tab=${item.id}`)
+                        router.push(`/superadmin?tab=${item.id}`)
                       }
                       className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
                       
