@@ -4,10 +4,15 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const { data: session, status } = useSession();
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  const google_auth_error = searchParams.get("error");
 
   // if (session) {
   //     router.push("/");
@@ -72,6 +77,20 @@ export default function Page() {
   //   )
   // }
 
+  // if (status === 'loading') {
+  //     return <p>Loading...</p>; // Or a spinner
+  //   }
+
+  //   if (status === 'authenticated') {
+  //     // Session is available, you can access session.user
+  //     console.log(session.user);
+  //   }
+
+  //   else {
+  //     // User is not authenticated
+  //     return <p className="  text-black ">Access denied</p>;
+  //   }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
       <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white  ">
@@ -125,12 +144,22 @@ export default function Page() {
             Continue with Facebook
           </button>
 
-          <button
-            onClick={() => signIn("google", { callbackUrl: "/" })}
-            className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
-          >
-            Continue with Google..
-          </button>
+          <div>
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
+            >
+              Continue with Google..
+            </button>
+
+            {google_auth_error && (
+              <p className="text-red-500 mt-4">
+                {error === "OAuthCallback" && "Login failed. Please try again."}
+                {error === "AccessDenied" && "Access denied by Google."}
+                {error === "Configuration" && "Auth misconfigured."}
+              </p>
+            )}
+          </div>
 
           <p className="mt-4 text-white">
             Dont have an account?{" "}

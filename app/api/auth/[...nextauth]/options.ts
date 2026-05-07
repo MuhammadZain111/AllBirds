@@ -92,6 +92,11 @@ const authOptions: NextAuthOptions = {
         "| lastFetched:",
         token.lastFetched,
       );
+
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
+      }
+
       // First login — seed token from user
       if (user) {
         token._id = user.id?.toString();
@@ -143,9 +148,9 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
-
   pages: {
     signIn: "/sign-in",
+    error: "/auth/error",
   },
   session: {
     strategy: "jwt",

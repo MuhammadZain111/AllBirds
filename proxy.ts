@@ -24,8 +24,16 @@ export async function proxy(request: NextRequest) {
 
   // If NOT logged in → block dashboard
 
+  if (pathname.startsWith("/api/auth")) {
+    return NextResponse.next();
+  }
+
   if (!token) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+
+  if (token && (pathname === "/sign-in" || pathname === "/sign-up")) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   // 🔐 Super Admin only
@@ -37,10 +45,6 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
-  if (token && (pathname === "/sign-in" || pathname === "/sign-up")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
   return NextResponse.next();
 }
 
@@ -50,7 +54,6 @@ export const config = {
     "/admin/:path*",
     "/superadmin/:path*",
     "/admindashboard/:path*",
-    "/sign-in/profile",
-    "/sign-up/profile",
+    "/profile/:path*",
   ],
 };
