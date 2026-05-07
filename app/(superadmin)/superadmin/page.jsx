@@ -1,28 +1,26 @@
 'use client'
 
 import React from 'react'
-
 import Sidebar from "../components/Sidebar"
-
 import Header from "../components/Header"
-
 import {useSession} from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
+import AddEmployee from '../components/AddEmployee';
 
 
 
-function page() {
+function Page() {
 
 
-
-   const  { data :session,status } = useSession();
+  const  { data :session,status } = useSession();
 
 
  if (status === 'loading') {
-  return <p>Loading...</p>; // Or a spinner
+  return <p>Loading...</p>; 
 }
 
 if (status === 'authenticated') {
-  // Session is available, you can access session.user
+  // Session is available, You can access session.user
   console.log(session.user);
 } 
 
@@ -31,7 +29,11 @@ if (status === 'authenticated') {
 //   return <p className="  text-black ">Access denied</p>;
 // }
 
+const router = useRouter();
 
+const searchParams = useSearchParams();
+
+const activeTab = Number(searchParams.get("tab")) || 1;
 
 
   return (
@@ -40,9 +42,13 @@ if (status === 'authenticated') {
      <aside className="w-64  text-white">
      <Sidebar />
       </aside>
+    
       
       <main className="flex-1">
       <Header />
+      {activeTab === 1 && <AddEmployee />}
+
+
       </main>
 
 
@@ -50,4 +56,6 @@ if (status === 'authenticated') {
   )
 }
 
-export default page
+
+
+export default Page

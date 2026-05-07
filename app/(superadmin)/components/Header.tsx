@@ -35,11 +35,11 @@ else {
 
 
   return (
-    <div>
-      <h2>Here is the Header Component</h2>
+    <div className="bg-white w-full  ">
+      
 
       {/* Top Header */}
-      <div className="flex items-center justify-end gap-4 relative">
+      <div className="w-full flex items-center justify-end gap-4 relative">
         
         {/* Dark Mode */}
         <button className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center bg-white">
