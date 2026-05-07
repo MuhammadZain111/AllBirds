@@ -1,5 +1,5 @@
-"use client"
-import React from 'react'
+"use client";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -7,34 +7,18 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
 
+function ProductDetail({ product }) {
+  const [selectedSize, setSelectedSize] = useState(null);
 
-function ProductDetail({product}) {
+  const images = ["/shoe1.png", "/shoe2.png", "/shoe3.png", "/shoe4.png"];
 
-
-  const   [selectedSize, setSelectedSize] = useState(null);
-
-const images = [
-  "/shoe1.png",
-  "/shoe2.png",
-  "/shoe3.png",
-  "/shoe4.png",
-];
-
-
-const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
+  const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
   return (
-    
-      <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
-        
+    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
       <div className="grid md:grid-cols-2 gap-10 items-start">
-    
         <div className="w-full">
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            className="rounded-xl"
-          >
+          <Swiper modules={[Navigation]} navigation className="rounded-xl">
             {images.map((img, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-[400px] md:h-[500px]">
@@ -56,7 +40,12 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
                 key={i}
                 className="relative w-20 h-16 border rounded-md overflow-hidden cursor-pointer"
               >
-                <Image src={product.image} alt="thumb" fill className="object-cover" />
+                <Image
+                  src={product.image}
+                  alt="thumb"
+                  fill
+                  className="object-cover"
+                />
               </div>
             ))}
           </div>
@@ -64,16 +53,11 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
         {/* RIGHT SIDE (FIXED DETAILS) */}
         <div className="bg-white p-6 rounded-xl shadow-md sticky top-6text-black  ">
-          
-          <h1 className="text-2xl font-semibold">
-            {product.title}
-          </h1>
+          <h1 className="text-2xl font-semibold">{product.title}</h1>
 
           <p className="text-sm text-gray-500 mt-1">
             ALSO AVAILABLE IN:{" "}
-            <span className="underline cursor-pointer">
-              WOMEN'S SIZES
-            </span>
+            <span className="underline cursor-pointer">WOMEN'S SIZES</span>
           </p>
 
           <div className="mt-4 flex items-center gap-3">
@@ -135,9 +119,7 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
         </div>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default ProductDetail
-
+export default ProductDetail;

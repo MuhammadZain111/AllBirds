@@ -1,12 +1,9 @@
 import { products } from "@/app/data/products";
 import ProductDetailPage from "./ProductDetailPage";
 
-
-
-
 export default async function Page({ params }) {
-   const { id } = await params;
-   console.log(id);
+  const { id } = await params;
+  console.log(id);
   console.log("PARAMS:", params);
   console.log("PARAMS:", params);
   console.log("ID:", params.id);
@@ -15,9 +12,7 @@ export default async function Page({ params }) {
     return <h1>No ID found</h1>;
   }
 
-  const product = products.find(
-    (p) => String(p.id) === String(id)
-  );
+  const product = products.find((p) => String(p.id) === String(id));
 
   console.log("PRODUCT:", product);
 
@@ -27,4 +22,3 @@ export default async function Page({ params }) {
 
   return <ProductDetailPage product={product} />;
 }
-

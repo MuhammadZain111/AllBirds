@@ -1,12 +1,11 @@
-'use client';
+"use client";
 
 const tabs = [
   { id: 1, label: "Overview" },
   { id: 2, label: "Users" },
   { id: 3, label: "SubAdmin" },
-  { id:4 , label: "Add Products"}
+  { id: 4, label: "Add Products" },
 ];
-
 
 export default function DashboardTabs({ activeTab, onChange }) {
   return (

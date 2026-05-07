@@ -1,87 +1,79 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ResetPasswordPage() {
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const [email, setEmail] = useState("")
-  const [otp, setOtp] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState("")
+  const router = useRouter();
 
-  const router = useRouter()
-
-  
   useEffect(() => {
-    const savedEmail = localStorage.getItem("resetEmail")
+    const savedEmail = localStorage.getItem("resetEmail");
 
     if (savedEmail) {
-      setEmail(savedEmail)
+      setEmail(savedEmail);
     }
-  }, [])
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match")
-      return
+      setMessage("Passwords do not match");
+      return;
     }
 
     try {
-      setLoading(true)
-      setMessage("")
+      setLoading(true);
+      setMessage("");
 
       const response = await fetch("/api/forgot_password", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
           otp,
-          password
-        })
-      })
+          password,
+        }),
+      });
 
-      const data = await response.json()
+      const data = await response.json();
 
-      setMessage(data.message)
+      setMessage(data.message);
 
       if (response.ok) {
-        localStorage.removeItem("resetEmail")
+        localStorage.removeItem("resetEmail");
 
         setTimeout(() => {
-          router.push("/sign-in")
-        }, 2000)
+          router.push("/sign-in");
+        }, 2000);
       }
-
     } catch (error) {
-      console.log(error)
-      setMessage("Something went wrong")
+      console.log(error);
+      setMessage("Something went wrong");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-
         <h1 className="text-3xl font-bold text-center mb-6 text-black   ">
           Reset Password
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
           <div>
-            <label className="block mb-2 font-medium text-black ">
-              Email
-            </label>
+            <label className="block mb-2 font-medium text-black ">Email</label>
 
             <input
               type="email"
@@ -92,9 +84,7 @@ export default function ResetPasswordPage() {
           </div>
 
           <div>
-            <label className="block mb-2 font-medium text-black ">
-              OTP
-            </label>
+            <label className="block mb-2 font-medium text-black ">OTP</label>
 
             <input
               type="text"
@@ -145,14 +135,10 @@ export default function ResetPasswordPage() {
           </button>
 
           {message && (
-            <p className="text-center text-sm mt-3 text-black">
-              {message}
-            </p>
+            <p className="text-center text-sm mt-3 text-black">{message}</p>
           )}
-
         </form>
-
       </div>
     </div>
-  )
+  );
 }

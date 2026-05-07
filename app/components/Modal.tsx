@@ -1,40 +1,33 @@
-
 import { X } from "lucide-react";
 import { useState } from "react";
 
-
-
-
-export default function EditProfileModal({open, onClose, user}) {
-
-
+export default function EditProfileModal({ open, onClose, user }) {
   const [checked, setChecked] = useState(false);
 
-if (!open) return null;
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      
       {/* Modal */}
       <div className="w-full max-w-3xl rounded-2xl bg-white shadow-2xl border border-gray-200">
-        
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5">
           <h2 className="text-2xl md:text-3xl font-bold text-black">
             Edit profile
           </h2>
 
-          <button onClick={() => onClose()}    className="text-gray-500 hover:text-black transition">
+          <button
+            onClick={() => onClose()}
+            className="text-gray-500 hover:text-black transition"
+          >
             <X className="w-8 h-8" strokeWidth={2} />
           </button>
         </div>
 
         {/* Body */}
         <div className="px-6 pb-6 space-y-5">
-          
           {/* Name Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            
             {/* First Name */}
             <input
               type="text"
@@ -50,18 +43,19 @@ if (!open) return null;
             />
           </div>
 
-
           {/* Email */}
-          <div className="rounded-lg border border-gray-300 px-5 py-1">             
+          <div className="rounded-lg border border-gray-300 px-5 py-1">
             <p className="text-sm text-gray-500">Email</p>
-             <input type="email" value={user.email}readOnly
-          className="text-black p-2 w-full cursor-not-allowed focus:outline-hidden  "
-        />
+            <input
+              type="email"
+              value={user.email}
+              readOnly
+              className="text-black p-2 w-full cursor-not-allowed focus:outline-hidden  "
+            />
           </div>
 
-          {/* Checkbox */}    
+          {/* Checkbox */}
           <label className="flex items-center gap-4 cursor-pointer">
-            
             <button
               type="button"
               onClick={() => setChecked(!checked)}
@@ -97,7 +91,6 @@ if (!open) return null;
 
           {/* Footer Buttons */}
           <div className="flex justify-end gap-4 pt-6">
-            
             {/* Cancel */}
             <button className="rounded-lg bg-slate-800 px-7 py-3 text-lg font-semibold text-white transition hover:bg-slate-700">
               Cancel

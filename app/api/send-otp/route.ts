@@ -11,10 +11,7 @@ export async function POST(req) {
     const { email } = await req.json();
 
     if (!email) {
-      return Response.json(
-        { message: "Email is required" },
-        { status: 400 }
-      );
+      return Response.json({ message: "Email is required" }, { status: 400 });
     }
 
     // ⛔ Rate limiting (1 min)
@@ -22,7 +19,7 @@ export async function POST(req) {
     if (rateLimit.get(email) && now - rateLimit.get(email) < 60000) {
       return Response.json(
         { message: "Wait 1 minute before requesting again" },
-        { status: 429 }
+        { status: 429 },
       );
     }
     rateLimit.set(email, now);
@@ -31,10 +28,7 @@ export async function POST(req) {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return Response.json(
-        { message: "User not found" },
-        { status: 404 }
-      );
+      return Response.json({ message: "User not found" }, { status: 404 });
     }
 
     // 🔢 Generate OTP
@@ -82,13 +76,12 @@ export async function POST(req) {
     return Response.json({
       message: "OTP sent successfully",
     });
-
   } catch (error) {
     console.error("OTP ERROR:", error);
 
     return Response.json(
       { message: "Server error", error: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

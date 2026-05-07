@@ -1,9 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import Product from "@/models/Product";
 
-
-
-
 export async function POST(request) {
   try {
     await dbConnect();
@@ -17,7 +14,7 @@ export async function POST(request) {
         success: true,
         product,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return Response.json(
@@ -25,8 +22,7 @@ export async function POST(request) {
         success: false,
         message: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

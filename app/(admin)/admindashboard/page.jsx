@@ -37,8 +37,9 @@ function Page() {
 
       <main className="flex-1">
         <Header />
-        {activeTab === 1 && <AddProduct/> }
+        {/* {activeTab === 1 && role === 1 && <AddProduct/> } */}
       </main>
+
 
     </div>
   )

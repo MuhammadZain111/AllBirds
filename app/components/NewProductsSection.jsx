@@ -28,10 +28,7 @@ function NewProductsSection() {
   return (
     <div className="flex items-center justify-between        ">
       {products.slice(0, 3).map((product) => (
-        <NewProductsCard
-          key={product.id}
-          product={product}
-        />
+        <NewProductsCard key={product.id} product={product} />
       ))}
     </div>
   );

@@ -1,45 +1,27 @@
-"use client"
-import React from 'react'
+"use client";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import  Accordion from "./Accordion";
-import ProductFeature from "./ProductFeature"
-import Item from "./Item"
+import Accordion from "./Accordion";
+import ProductFeature from "./ProductFeature";
+import Item from "./Item";
 
+function ProductDetail({ product }) {
+  const [selectedSize, setSelectedSize] = useState(null);
 
+  const images = ["/shoe1.png", "/shoe2.png", "/shoe3.png", "/shoe4.png"];
 
-
-function ProductDetail({product}) {
-
-const   [selectedSize, setSelectedSize] = useState(null);
-
-const images = [
-  "/shoe1.png",
-  "/shoe2.png",
-  "/shoe3.png",
-  "/shoe4.png",
-];
-
-
-const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
-
+  const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
   return (
-    
-      <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
-        
+    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
       <div className="grid md:grid-cols-2 gap-10 items-start">
-    
         <div className="w-full">
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            className="rounded-xl"
-          >
+          <Swiper modules={[Navigation]} navigation className="rounded-xl">
             {images.map((img, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-[400px] md:h-[500px]">
@@ -61,28 +43,29 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
                 key={i}
                 className="relative w-20 h-16 border rounded-md overflow-hidden cursor-pointer"
               >
-                <Image src={product.image} alt="thumb" fill className="object-cover" />
+                <Image
+                  src={product.image}
+                  alt="thumb"
+                  fill
+                  className="object-cover"
+                />
               </div>
             ))}
           </div>
         </div>
 
-    
         <div className="bg-white p-6 rounded-xl shadow-md sticky top-6 text-black w-full ">
-          
-          <h1 className="text-2xl font-semibold">
-            {product.title}
-          </h1>
+          <h1 className="text-2xl font-semibold">{product.title}</h1>
 
           <p className="text-sm text-gray-500 mt-1 text-black ">
             ALSO AVAILABLE IN:{" "}
-            <span className="underline cursor-pointer">
-              WOMEN'S SIZES
-            </span>
+            <span className="underline cursor-pointer">WOMEN'S SIZES</span>
           </p>
 
           <div className="mt-4 flex items-center gap-3">
-            <span className="text-xl font-bold text-black">Price ${product.price}</span>
+            <span className="text-xl font-bold text-black">
+              Price ${product.price}
+            </span>
             <span className="bg-gray-200 text-xs px-2 py-1 rounded-full">
               FREE SHIPPING
             </span>
@@ -138,34 +121,23 @@ const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
             Easy Returns
           </p>
         </div>
-
-
-
       </div>
-
-
-
-  //Here  is the product Feature Section
-
-
-
+      //Here is the product Feature Section
       <Accordion title="Materials & Sustainability" defaultOpen>
-       <div className="grid md:grid-cols-3 gap-6">
-        <Item title="Upper Tree Knit" text="TENCEL™ Lyocell + recycled polyester blend" />
-        <Item title="Midsole SweetFoam®" text="Sugarcane-based EVA foam" />
-      <Item title="Outsole Natural Rubber" text="Durable rubber for traction" />
+        <div className="grid md:grid-cols-3 gap-6">
+          <Item
+            title="Upper Tree Knit"
+            text="TENCEL™ Lyocell + recycled polyester blend"
+          />
+          <Item title="Midsole SweetFoam®" text="Sugarcane-based EVA foam" />
+          <Item
+            title="Outsole Natural Rubber"
+            text="Durable rubber for traction"
+          />
         </div>
-       </Accordion>
-
-
-
-
-
-
+      </Accordion>
     </div>
-
-  )
+  );
 }
 
-export default ProductDetail
-
+export default ProductDetail;

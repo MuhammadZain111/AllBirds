@@ -9,7 +9,7 @@ import GoogleProvider from "next-auth/providers/google";
 // Add this check at the top of authOptions.ts temporarily
 // console.log("SECRET loaded:", !!process.env.NEXTAUTH_SECRET);
 
- const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -34,101 +34,105 @@ import GoogleProvider from "next-auth/providers/google";
             ],
           });
 
-
-
           if (!user) {
-             return null;
+            return null;
           }
 
           const isVerified = user.isVerified ?? user.verified;
 
           if (!isVerified) {
-          return null;
+            return null;
           }
 
           const isPasswordCorrect = await bcrypt.compare(
             credentials.password,
-            user.password
+            user.password,
           );
 
           if (!isPasswordCorrect) {
-           return null
+            return null;
           }
 
           return {
             id: user._id.toString(),
             email: user.email,
             username: user.username,
-            role: user.role 
+            role: user.role,
           };
-        } 
-         catch (error) {
-         console.error("authorize error:", error); // ✅ log it
-          return null; 
+        } catch (error) {
+          console.error("authorize error:", error); // ✅ log it
+          return null;
         }
       },
     }),
 
-
     FacebookProvider({
-    clientId: process.env.FACEBOOK_CLIENT_ID!,
-    clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
-    authorization: {
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      authorization: {
         params: {
-          scope: "email,public_profile", 
+          scope: "email,public_profile",
         },
       },
-     }),
-  
-     GoogleProvider({
+    }),
+
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-  
   ],
 
   callbacks: {
     async jwt({ token, user, account }) {
-
-      console.log("JWT fired | user:", !!user, "| email:", token.email, "| lastFetched:", token.lastFetched);
-  // First login — seed token from user object
-  if (user) {
-    token._id = user.id?.toString();
-    token.email = user.email;
-  }
-
-  const shouldRefreshFromDB =
-    !token.lastFetched ||
-    Date.now() - (token.lastFetched as number) > 60 * 1000;
-
-  if (token.email && shouldRefreshFromDB) {
-    try {
-      await dbConnect();
-      const dbUser = await UserModel.findOne({ email: token.email });
-        console.log(" DB user found:", !!dbUser);
-
-      if (dbUser) {
-        token._id = dbUser._id.toString();
-        token.email = dbUser.email;
-        token.username = dbUser.username;
-        token.role = dbUser.role;
+      console.log(
+        "JWT fired | user:",
+        !!user,
+        "| email:",
+        token.email,
+        "| lastFetched:",
+        token.lastFetched,
+      );
+      // First login — seed token from user object
+      if (user) {
+        token._id = user.id?.toString();
+        token.email = user.email;
       }
-    } catch (err) {
-      console.error("JWT DB fetch error:", err);
-      //  Don't crash — keep existing token data
-    } finally {
-      //  CRITICAL: always update lastFetched so we don't
-      // hammer DB on every request when DB is down
-      token.lastFetched = Date.now();
-    }
-  }
 
-  return token;
-},
+      const shouldRefreshFromDB =
+        !token.lastFetched ||
+        Date.now() - (token.lastFetched as number) > 60 * 1000;
+
+      if (token.email && shouldRefreshFromDB) {
+        try {
+          await dbConnect();
+          const dbUser = await UserModel.findOne({ email: token.email });
+          console.log(" DB user found:", !!dbUser);
+
+          if (dbUser) {
+            token._id = dbUser._id.toString();
+            token.email = dbUser.email;
+            token.username = dbUser.username;
+            token.role = dbUser.role;
+          }
+        } catch (err) {
+          console.error("JWT DB fetch error:", err);
+          //  Don't crash — keep existing token data
+        } finally {
+          //  CRITICAL: always update lastFetched so we don't
+          // hammer DB on every request when DB is down
+          token.lastFetched = Date.now();
+        }
+      }
+
+      return token;
+    },
     async session({ session, token }) {
-       
-      console.log("SESSION fired | token._id:", token._id, "| token.email:", token.email);
-
+      console.log(
+        "SESSION fired | token._id:",
+        token._id,
+        "| token.email:",
+        token.email,
+      );
 
       if (session.user) {
         session.user._id = (token._id as string) ?? "";
@@ -145,8 +149,8 @@ import GoogleProvider from "next-auth/providers/google";
   },
   session: {
     strategy: "jwt",
-     maxAge: 24 * 60 * 60,
-     updateAge: 60 * 60,
+    maxAge: 24 * 60 * 60,
+    updateAge: 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

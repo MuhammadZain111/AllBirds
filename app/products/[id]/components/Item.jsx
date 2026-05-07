@@ -1,6 +1,3 @@
-
-
-
 export default function Item({ title, text }) {
   return (
     <div className="flex gap-4 items-start">

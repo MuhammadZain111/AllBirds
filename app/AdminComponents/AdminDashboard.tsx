@@ -9,35 +9,22 @@
 // import { useSession } from "next-auth/react"
 // import AddProducts from "../(admin)/components/AddProduct"
 
-
 // const mockUsers = [
 //   { id: 1, name: "Ali Khan", email: "ali@example.com", type: "use", status: "Active" },
 //   { id: 2, name: "Sara Noor", email: "sara@example.com", type: "user", status: "Pending" },
 //   { id: 3, name: "Hamza Tariq", email: "hamza@example.com", type: "user", status: "Active" },
 // ];
 
-
-
-
 // const mockOrders = [
 //   { id: "l1", Name: "Ayesha Malik", email: "ayesha@law.com", specialization: "Corporate", yearsOfExperience: 7 },
 //   { id: "l2", Name: "Omar Riaz", email: "omar@law.com", specialization: "Family", yearsOfExperience: 5 },
 // ];
 
-
-
-
-
-
 // export default function AdminDashboard() {
-
 
 // const session=useSession();
 
-
-
 // // const role = session?.user?.role
-
 
 // // if (session.user.role === 1) {
 // //   show Admin Dashboard
@@ -46,7 +33,6 @@
 // // } else {
 // //   show User Dashboard
 // // // }
-
 
 // // useEffect(() => {
 // //   if (session?.user.role === 1) {
@@ -61,12 +47,6 @@
 // //     fetch("/api/user/profile")
 // //   }
 // // }, [session])
-
-
-
-
-
-
 
 //   const [activeTab, setActiveTab] = useState(1);
 
@@ -84,7 +64,6 @@
 //     });
 //   }, [search]);
 
-
 //   //Here is the Orders Table ...
 
 //   // const filteredOrders = useMemo(() => {
@@ -98,10 +77,6 @@
 //   //     );
 //   //   });
 //   // }, [search]);
-
-
-
-  
 
 //   return (
 //     <section className="space-y-6">
@@ -122,9 +97,7 @@
 
 //       {activeTab === 2 && <UsersTable users={filteredUsers} />}
 
-
 //     {activeTab === 4 && <AddProducts users={filteredUsers} />}
-
 
 //       {/* {activeTab === "Orders" && <OrdersTable orders={filteredOrders} />} */}
 //     </section>

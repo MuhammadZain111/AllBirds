@@ -1,12 +1,7 @@
-import React from 'react'
-
+import React from "react";
 
 function NewsSection() {
-  return (
-    <div>
-      
-    </div>
-  )
+  return <div></div>;
 }
 
-export default NewsSection
+export default NewsSection;

@@ -7,11 +7,9 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import styles from  "./hero.module.css"
+import styles from "./hero.module.css";
 
 export default function HeroSection() {
-
-
   const swiperRef = useRef(null);
 
   const DURATION = 4000;
@@ -27,7 +25,6 @@ export default function HeroSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [isPlaying, setIsPlaying] = useState(true);
-
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -54,7 +51,6 @@ export default function HeroSection() {
     return () => cancelAnimationFrame(frame);
   }, [activeIndex, isPlaying]);
 
- 
   const togglePlay = () => {
     if (!swiperRef.current) return;
 
@@ -69,30 +65,25 @@ export default function HeroSection() {
 
   return (
     <div className="w-full overflow-x-hidden">
+      <div
+        className={`h-[30vh] pt-1 pb-2 font-serif  text-white rounded-md md:mb-3 flex flex-col items-center justify-center mt-3  ${styles.custom_color}`}
+      >
+        <h2 className="text-2xl leading-tight select-none  sm:text-2xl md:pt-2 md:pb-4 lg:text-2xl xl:text-[2.5rem] flex items-center justify-center ">
+          <p>
+            <strong>30% Off Your Order When You Spend $140+</strong>
+          </p>
+        </h2>
 
-     <div className={`h-[30vh] pt-1 pb-2 font-serif  text-white rounded-md md:mb-3 flex flex-col items-center justify-center mt-3  ${styles.custom_color}`} >
-     
-      <h2 className="text-2xl leading-tight select-none  sm:text-2xl md:pt-2 md:pb-4 lg:text-2xl xl:text-[2.5rem] flex items-center justify-center ">
-       <p>
-       <strong >
-        30% Off Your Order When You Spend $140+
-       </strong>
-       </p>
-      
-       </h2>
+        <h2 className="">Discount Automatically Applied at Checkout.</h2>
+      </div>
 
-       <h2 className="">Discount Automatically Applied at Checkout.</h2>
-
- </div>
-
-  
       <div className="relative w-full h-[70vh] md:h-[90vh]">
-
-     
         <div className="absolute bottom-3 left-3 right-3 z-20 flex gap-2">
           {slides.map((_, index) => (
-            <div key={index} className="flex-1 h-[3px] bg-gray-400/40 overflow-hidden">
-              
+            <div
+              key={index}
+              className="flex-1 h-[3px] bg-gray-400/40 overflow-hidden"
+            >
               <div
                 className="h-full bg-white origin-left transition-all"
                 style={{
@@ -100,15 +91,14 @@ export default function HeroSection() {
                     index === activeIndex
                       ? `scaleX(${progress})`
                       : index < activeIndex
-                      ? "scaleX(1)"
-                      : "scaleX(0)",
+                        ? "scaleX(1)"
+                        : "scaleX(0)",
                 }}
               />
             </div>
           ))}
         </div>
 
-  
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
@@ -127,7 +117,6 @@ export default function HeroSection() {
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               <div className="relative w-full h-full">
-
                 <Image
                   src={slide.img}
                   alt="Hero"
@@ -136,7 +125,6 @@ export default function HeroSection() {
                   className="object-cover"
                 />
 
-            
                 <div className="absolute inset-0 flex flex-col justify-end items-start md:items-end p-6 md:p-16">
                   <h1 className="text-white text-xl md:text-3xl mb-4">
                     The New Canvas Cruiser Collection
@@ -151,13 +139,11 @@ export default function HeroSection() {
                     </button>
                   </div>
                 </div>
-
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
-  
         <button
           onClick={togglePlay}
           className="absolute bottom-4 right-4 z-20 bg-white px-4 py-2 text-sm"

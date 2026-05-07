@@ -9,38 +9,30 @@ export async function POST(req: Request) {
   try {
     console.log("Signup API started");
 
-    
     await dbConnect();
     console.log("DB connected");
-
 
     const { email, username, password } = await req.json();
     console.log("📩 Request data received:", { email, username });
 
     if (!email || !password || !username) {
       console.log("Missing fields");
-      return NextResponse.json(
-        { error: "Missing fields" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    
     const existingUser = await UserModel.findOne({ email });
 
     if (existingUser) {
       console.log(" User already exists:", email);
       return NextResponse.json(
         { error: "User already exists" },
-        { status: 409 }
+        { status: 409 },
       );
     }
-
 
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log("🔒 Password hashed");
 
-    
     const verificationToken = crypto.randomBytes(32).toString("hex");
     console.log("🔑 Verification token generated");
 
@@ -55,7 +47,6 @@ export async function POST(req: Request) {
     });
 
     console.log("User created:", user._id);
-
 
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
       console.log("Email credentials missing in .env");
@@ -98,7 +89,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(
       { message: "User created. Verification email sent." },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error: any) {
     console.error("SIGNUP ERROR OCCURRED");
@@ -112,7 +103,7 @@ export async function POST(req: Request) {
         error: "Server error",
         details: error.message, // helps debugging in dev
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

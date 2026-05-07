@@ -24,25 +24,24 @@ const UserSchema = new mongoose.Schema(
     role: {
       type: Number,
       enum: [1, 2, 3],
-      default: 3 
-      },
+      default: 3,
+    },
 
     verificationToken: {
-       type: String,
-       },
-      resetPasswordToken:{
-       type: String ,
-    },  
-       resetPasswordExpire:{
-          type: Date,
-            default:Date.now,
-     }, 
-      resetOTP:
-     {
-      type:String,
-     }, 
-    
-     isVerified: {
+      type: String,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpire: {
+      type: Date,
+      default: Date.now,
+    },
+    resetOTP: {
+      type: String,
+    },
+
+    isVerified: {
       type: Boolean,
       default: false,
     },
@@ -52,7 +51,7 @@ const UserSchema = new mongoose.Schema(
       default: Date.now,
     },
 
-    // 
+    //
     phoneNumber: {
       type: String,
     },
@@ -72,7 +71,7 @@ const UserSchema = new mongoose.Schema(
 
     accountStatus: {
       type: String,
-      enum: ["active", "Inactive","blocked"],
+      enum: ["active", "Inactive", "blocked"],
       default: "active",
     },
 
@@ -85,7 +84,7 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    
+
     profileImage: {
       type: String,
       default: "",
@@ -95,15 +94,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    
   },
 
-  { timestamps: true }
+  { timestamps: true },
 );
 
-
-
-const UserModel =
-  mongoose.models.User || mongoose.model("User", UserSchema);
+const UserModel = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default UserModel;

@@ -1,86 +1,67 @@
-'use client'
+"use client";
 
-import { useSession, signIn, signOut } from "next-auth/react"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-
-
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Page() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
- 
-  const { data: session, status } = useSession()
-  const router = useRouter()
-
-
-
-// if (session) {
-//     router.push("/");
-//   }
-
+  // if (session) {
+  //     router.push("/");
+  //   }
 
   const [form, setForm] = useState({
     identifier: "",
     password: "",
-  })
+  });
 
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  if (error) {
-    setError("")
-  }
-  }
-
-
+    setForm({ ...form, [e.target.name]: e.target.value });
+    if (error) {
+      setError("");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-   
+    e.preventDefault();
 
-    if (loading) return
+    if (loading) return;
 
-     setLoading(true)
-      setError("")
+    setLoading(true);
+    setError("");
 
-   try {
-    const res = await signIn("credentials", {
-      redirect: false,
-      identifier: form.identifier,
-      password: form.password,
-    })
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        identifier: form.identifier,
+        password: form.password,
+      });
 
-    console.log(res);
+      console.log(res);
 
+      if (res?.error) {
+        setError("Invalid email or password");
+        return;
+      }
+      const role = session?.user?.role;
 
-    if (res?.error) {
-      setError("Invalid email or password")
-      return
+      if (role === 1) {
+        router.push("/admindashboard");
+      } else if (role === 2) {
+        router.push("/employer/dashboard");
+      } else {
+        router.push("/");
+      }
+    } finally {
+      setLoading(false);
     }
-    const role = session?.user?.role
-
-      if (role === 1) 
-        {
-        router.push("/admindashboard")
-        } else if (role === 2) 
-          {
-           router.push("/employer/dashboard")
-          } 
-          else 
-          {
-          router.push("/")
-         }    
- 
-  }
-  finally {
-    setLoading(false)
-  }
-}
-
+  };
 
   // if (session) {
   //   return (
@@ -91,87 +72,74 @@ export default function Page() {
   //   )
   // }
 
-  
-  
   return (
-
-<div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
-
-
-    <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white  ">
-
-      <form onSubmit={handleSubmit} className="bg-[#1E1830] flex flex-col items-center px-4 space-y-4 py-6 rounded-2xl p-6" >
-        
-
-   <h2 className="text-2xl md:text-4xl font-semibold ">Sign In</h2>
-
-
-
-         <input
-          type="text"         
-        name="identifier"    
-        placeholder="Email or Username"
-        value={form.identifier}
-        onChange={handleChange}
-        className=" w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3"
-        required
-        />
-
-      
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3 "
-          required
-        />
-
-        {error && <p className="text-red-500">{error}</p>}
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="p-2 w-full bg-[#8B5CF6] hover:bg-[#7C4DF2] transition-all duration-300 rounded-xl py-4 text-xl font-medium mt-2 mt-4 cursor-pointer"
+    <div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
+      <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white  ">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#1E1830] flex flex-col items-center px-4 space-y-4 py-6 rounded-2xl p-6"
         >
-          {loading ? "Signing in..." : "Sign In"}
-        </button>
+          <h2 className="text-2xl md:text-4xl font-semibold ">Sign In</h2>
 
-      <Link href="/forgot-password" className=" cursor-pointer w-full text-white text-black px-4 py-2 rounded"
-      >
-        Forgot Password
-      </Link>
+          <input
+            type="text"
+            name="identifier"
+            placeholder="Email or Username"
+            value={form.identifier}
+            onChange={handleChange}
+            className=" w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3"
+            required
+          />
 
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            className="w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3 "
+            required
+          />
 
-        <button
-        onClick={() => signIn("facebook")}
-        className=" text-white px-4 py-2 rounded w-full border-2   cursor-pointer  "
-      >
-        Continue with Facebook
-      </button>
+          {error && <p className="text-red-500">{error}</p>}
 
+          <button
+            type="submit"
+            disabled={loading}
+            className="p-2 w-full bg-[#8B5CF6] hover:bg-[#7C4DF2] transition-all duration-300 rounded-xl py-4 text-xl font-medium mt-2 mt-4 cursor-pointer"
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
 
-       <button
-        onClick={() => signIn("google")}
-        className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
-      >
-        Continue with Google..
-      </button>
+          <Link
+            href="/forgot-password"
+            className=" cursor-pointer w-full text-white text-black px-4 py-2 rounded"
+          >
+            Forgot Password
+          </Link>
 
-  <p className="mt-4 text-white">
-      Dont have an account?{" "}
-        <Link href="/sign-up" className="underline">
-          Sign up
-        </Link>
-      </p>
+          <button
+            onClick={() => signIn("facebook")}
+            className=" text-white px-4 py-2 rounded w-full border-2   cursor-pointer  "
+          >
+            Continue with Facebook
+          </button>
 
+          <button
+            onClick={() => signIn("google")}
+            className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
+          >
+            Continue with Google..
+          </button>
 
-
-
-      </form>
+          <p className="mt-4 text-white">
+            Dont have an account?{" "}
+            <Link href="/sign-up" className="underline">
+              Sign up
+            </Link>
+          </p>
+        </form>
+      </div>
     </div>
-
-    </div>
-  )
+  );
 }

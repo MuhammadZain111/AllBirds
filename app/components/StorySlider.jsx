@@ -30,7 +30,6 @@ function StorySlider() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-auto lg:h-[80vh] mt-2">
-
       {/* LEFT BIG IMAGE */}
       <div className="lg:col-span-2 relative w-full h-[400px] lg:h-full overflow-hidden rounded-xl">
         <Image
@@ -43,7 +42,6 @@ function StorySlider() {
 
       {/* RIGHT SIDE */}
       <div className="lg:col-span-3 grid grid-rows-2 gap-6 h-[600px] lg:h-full">
-
         {/* TOP FULL WIDTH */}
         <div className="relative w-full h-full overflow-hidden rounded-xl">
           <Image
@@ -56,7 +54,6 @@ function StorySlider() {
 
         {/* BOTTOM 2 IMAGES */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-
           <div className="relative w-full h-[250px] md:h-full overflow-hidden rounded-xl">
             <Image
               src={slides[activeIndex].img3}
@@ -74,11 +71,8 @@ function StorySlider() {
               className="object-cover"
             />
           </div>
-
         </div>
-
       </div>
-
     </div>
   );
 }

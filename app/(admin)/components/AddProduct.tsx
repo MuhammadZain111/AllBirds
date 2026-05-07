@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-
-
 export default function AddProductPage() {
   const [formData, setFormData] = useState({
     title: "",
@@ -44,16 +42,9 @@ export default function AddProductPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
-    
-      <h1 className="text-3xl font-bold mb-6 text-black   ">
-        Add Product
-      </h1>
+      <h1 className="text-3xl font-bold mb-6 text-black   ">Add Product</h1>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4"
-      >
-
+      <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
           name="title"
@@ -66,7 +57,7 @@ export default function AddProductPage() {
           name="description"
           placeholder="Description"
           onChange={handleChange}
-          className="w-full border p-3 rounded text-black " 
+          className="w-full border p-3 rounded text-black "
         />
 
         <input
@@ -101,10 +92,7 @@ export default function AddProductPage() {
           className="w-full border p-3 rounded text-black  "
         /> */}
 
-        <button
-          type="submit"
-          className="bg-black text-white px-6 py-3 rounded"
-        >
+        <button type="submit" className="bg-black text-white px-6 py-3 rounded">
           Add Product
         </button>
       </form>

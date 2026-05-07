@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
 
-
-
-
-
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();
@@ -20,7 +16,7 @@ export async function GET(req: NextRequest) {
     if (!token || !email) {
       return NextResponse.json(
         { success: false, message: "Invalid verification link" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -34,7 +30,7 @@ export async function GET(req: NextRequest) {
     if (!user) {
       return NextResponse.json(
         { success: false, message: "Invalid or expired token" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -42,7 +38,7 @@ export async function GET(req: NextRequest) {
     if (user.verificationTokenExpire < Date.now()) {
       return NextResponse.json(
         { success: false, message: "Token expired" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -59,13 +55,12 @@ export async function GET(req: NextRequest) {
       success: true,
       message: "Email verified successfully",
     });
-
   } catch (error) {
     console.log(error);
 
     return NextResponse.json(
       { success: false, message: "Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

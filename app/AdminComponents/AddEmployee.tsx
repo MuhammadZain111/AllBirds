@@ -1,15 +1,13 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function AddEmployee() {
-
   const router = useRouter();
-  
 
   const [form, setForm] = useState({
-    name:"",
+    name: "",
     username: "",
     email: "",
     password: "",
@@ -21,8 +19,6 @@ export default function AddEmployee() {
     permissions: [],
     joiningDate: "",
   });
-
-
 
   const [loading, setLoading] = useState(false);
 
@@ -67,8 +63,6 @@ export default function AddEmployee() {
       return;
     }
 
-
-
     try {
       const res = await fetch("/api/admin", {
         method: "POST",
@@ -76,10 +70,7 @@ export default function AddEmployee() {
         body: JSON.stringify(form),
       });
 
-        
       console.log(" Data Sent Succesfully ........   ");
-
-      
 
       const data = await res.json();
 
@@ -98,7 +89,6 @@ export default function AddEmployee() {
   return (
     <div className="min-h-screen p-6 bg-white">
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
-
         {/* Header */}
         <div className="bg-black text-white px-6 py-6">
           <h1 className="text-xl font-bold">Create Employee Account</h1>
@@ -108,10 +98,10 @@ export default function AddEmployee() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-
-
+        <form
+          onSubmit={handleSubmit}
+          className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <input
             name="name"
             value={form.name}
@@ -138,7 +128,6 @@ export default function AddEmployee() {
             className="border p-3 rounded-xl text-black"
           />
 
-
           {/* Phone */}
           <input
             name="phoneNumber"
@@ -147,7 +136,6 @@ export default function AddEmployee() {
             placeholder="Phone Number"
             className="border p-3 rounded-xl text-black"
           />
-
 
           {/* Password */}
           <input

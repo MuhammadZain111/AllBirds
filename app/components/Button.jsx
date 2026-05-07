@@ -1,9 +1,11 @@
-export default function Button({ text, onClick, type = "button",
-variant = "primary",
+export default function Button({
+  text,
+  onClick,
+  type = "button",
+  variant = "primary",
   disabled = false,
 }) {
-  const baseStyle =
-    "px-4 py-2 rounded-md font-medium transition duration-200";
+  const baseStyle = "px-4 py-2 rounded-md font-medium transition duration-200";
 
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700",

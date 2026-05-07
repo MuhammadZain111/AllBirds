@@ -1,14 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-
-
-
 const NewProductsCard = ({ product }) => {
-  
   return (
     <div className="w-[500px] h-[800px] rounded-xl overflow-hidden cursor-pointer group relative">
-
       <Image
         src={product.image}
         alt={product.title}
@@ -19,9 +14,7 @@ const NewProductsCard = ({ product }) => {
       <div className="absolute inset-0 bg-black/10"></div>
 
       <div className="absolute bottom-5 w-full px-4 text-white">
-        <h2 className="text-lg font-semibold mb-3">
-          {product.title}
-        </h2>
+        <h2 className="text-lg font-semibold mb-3">{product.title}</h2>
 
         <div className="flex gap-3 mb-2">
           <button className="flex-1 bg-white text-black font-semibold rounded-xl hover:bg-gray-200 transition">
@@ -33,7 +26,6 @@ const NewProductsCard = ({ product }) => {
           </button>
         </div>
       </div>
-
     </div>
   );
 };

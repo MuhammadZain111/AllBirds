@@ -1,13 +1,8 @@
 import React from "react";
 
-
-
 export default function ShoeSlider() {
   return (
-
-    
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
-
       <SliderCard
         image="/shoe1.png"
         title="NEW ARRIVALS"

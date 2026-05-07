@@ -4,16 +4,6 @@ import { useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-
-
-
-
-
-
-
-
-
-
 import {
   Menu,
   X,
@@ -69,8 +59,6 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -109,9 +97,7 @@ export default function Sidebar() {
 
             {/* Title Only in Open Mode */}
             {open && (
-              <h1 className="text-3xl font-bold text-slate-900">
-                TailAdmin
-              </h1>
+              <h1 className="text-3xl font-bold text-slate-900">TailAdmin</h1>
             )}
           </div>
 
@@ -151,7 +137,7 @@ export default function Sidebar() {
                     <button
                       key={i}
                       // onClick={() => setActive(item.id)}
-                         onClick={()=>router.push(`/dashboard?tab=${item.id}`)}
+                      onClick={() => router.push(`/dashboard?tab=${item.id}`)}
                       className={`group flex w-full items-center rounded-2xl transition-all duration-200
                       
                       ${
@@ -171,9 +157,7 @@ export default function Sidebar() {
                         <Icon
                           size={20}
                           className={`${
-                            isActive
-                              ? "text-blue-600"
-                              : "text-slate-500"
+                            isActive ? "text-blue-600" : "text-slate-500"
                           }`}
                         />
 
@@ -181,9 +165,7 @@ export default function Sidebar() {
                         {open && (
                           <span
                             className={`text-lg font-semibold ${
-                              isActive
-                                ? "text-blue-600"
-                                : "text-slate-700"
+                              isActive ? "text-blue-600" : "text-slate-700"
                             }`}
                           >
                             {item.name}
@@ -200,10 +182,7 @@ export default function Sidebar() {
                             </span>
                           )}
 
-                          <ChevronDown
-                            size={18}
-                            className="text-slate-500"
-                          />
+                          <ChevronDown size={18} className="text-slate-500" />
                         </div>
                       )}
                     </button>
@@ -215,8 +194,8 @@ export default function Sidebar() {
         </div>
       </aside>
 
-{/* her will e the main content */}
-      
+      {/* her will e the main content */}
+
       {/* <main
         className={`transition-all duration-300 p-6 ${
           open ? "ml-[290px]" : "ml-[90px]"

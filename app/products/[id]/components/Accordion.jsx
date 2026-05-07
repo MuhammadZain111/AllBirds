@@ -1,9 +1,5 @@
 import { useState } from "react";
 
-
-
-
-
 export default function Accordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
 

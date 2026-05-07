@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 export default function UsersTable({ users }) {
   return (
@@ -11,7 +11,6 @@ export default function UsersTable({ users }) {
               <th className="py-2">Name</th>
               <th className="py-2">Email</th>
               <th className="py-2">Type</th>
-        
             </tr>
           </thead>
           <tbody>
@@ -20,7 +19,6 @@ export default function UsersTable({ users }) {
                 <td className="py-2">{user.name}</td>
                 <td className="py-2">{user.email}</td>
                 <td className="py-2">{user.type}</td>
-
               </tr>
             ))}
           </tbody>

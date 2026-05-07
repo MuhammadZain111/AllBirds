@@ -9,9 +9,6 @@ const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 const UPLOAD_TIMEOUT_MS = 10_000;
 
-
-
-
 export async function POST(req) {
   try {
     await dbConnect();
@@ -21,7 +18,7 @@ export async function POST(req) {
     if (!session?.user?.email) {
       return NextResponse.json(
         { success: false, message: "Unauthorized – please log in" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -32,7 +29,7 @@ export async function POST(req) {
     if (!file || typeof file === "string") {
       return NextResponse.json(
         { success: false, message: "No valid file provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -43,14 +40,14 @@ export async function POST(req) {
           success: false,
           message: `Invalid file type. Allowed: ${ALLOWED_TYPES.join(", ")}`,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (file.size > MAX_SIZE_BYTES) {
       return NextResponse.json(
         { success: false, message: "File too large. Maximum size is 5 MB" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -72,8 +69,8 @@ export async function POST(req) {
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(
           () => reject(new Error("Cloudinary upload timed out")),
-          UPLOAD_TIMEOUT_MS
-        )
+          UPLOAD_TIMEOUT_MS,
+        ),
       );
 
       uploadResult = await Promise.race([uploadPromise, timeoutPromise]);
@@ -81,14 +78,14 @@ export async function POST(req) {
       console.error("Cloudinary error:", cloudError);
       return NextResponse.json(
         { success: false, message: "Image upload failed" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     if (!uploadResult?.secure_url) {
       return NextResponse.json(
         { success: false, message: "Failed to get image URL from Cloudinary" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -101,7 +98,7 @@ export async function POST(req) {
       updatedUser = await User.findOneAndUpdate(
         { email: session.user.email },
         { profileImage: newImageUrl },
-        { returnDocument: "after" }// ← was `{ returnDocument: "after" }` — that's a MongoDB driver option, not Mongoose
+        { returnDocument: "after" }, // ← was `{ returnDocument: "after" }` — that's a MongoDB driver option, not Mongoose
       );
     } catch (dbError) {
       console.error("DB error:", dbError);
@@ -113,7 +110,7 @@ export async function POST(req) {
 
       return NextResponse.json(
         { success: false, message: "Database update failed" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -125,7 +122,7 @@ export async function POST(req) {
 
       return NextResponse.json(
         { success: false, message: "User not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -148,7 +145,7 @@ export async function POST(req) {
     console.error("Unhandled server error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

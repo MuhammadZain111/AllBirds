@@ -1,18 +1,10 @@
-'use client'
+"use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-
-
-
-
-
 export default function HeroSection() {
-
-
-    return (
+  return (
     <div className="relative h-screen bg-white flex items-center justify-center overflow-hidden">
-
       {/* Vertical Line */}
       <motion.div
         initial={{ height: 0 }}
@@ -28,9 +20,6 @@ export default function HeroSection() {
         transition={{ duration: 1, ease: "easeOut" }}
         className="w-[1000px] h-[500px] rounded-full border-4 border-gray-300 flex items-center justify-center overflow-hidden bg-[url('/images/about_hero1.png')] bg-cover bg-center"
       >
-      
-
-      
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -38,11 +27,13 @@ export default function HeroSection() {
           className="relative text-center text-white px-6"
         >
           <p className="text-lg  text-white  font-black   ">
-          We set out to create an entirely new category of shoes inspired by natural materials, guided by an ethos to create better things in a better way. We’ve made a lot of progress, but we’re just getting started.
+            We set out to create an entirely new category of shoes inspired by
+            natural materials, guided by an ethos to create better things in a
+            better way. We’ve made a lot of progress, but we’re just getting
+            started.
           </p>
         </motion.div>
       </motion.div>
-
 
       <motion.img
         src="/images/aboutshoe1.png"

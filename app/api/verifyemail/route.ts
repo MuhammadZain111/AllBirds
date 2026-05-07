@@ -1,11 +1,6 @@
-
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
 import { NextResponse } from "next/server";
-
-
-
-
 
 export async function GET(req: Request) {
   try {
@@ -17,10 +12,7 @@ export async function GET(req: Request) {
     const email = searchParams.get("email");
 
     if (!token || !email) {
-      return NextResponse.json(
-        { error: "Invalid request" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
     const user = await UserModel.findOne({
@@ -31,7 +23,7 @@ export async function GET(req: Request) {
     if (!user) {
       return NextResponse.json(
         { error: "Invalid or expired token" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -42,12 +34,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json(
       { message: "Email verified successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
-    return NextResponse.json(
-      { error: "Server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

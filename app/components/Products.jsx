@@ -7,35 +7,21 @@ import "swiper/css/navigation";
 import Image from "next/image";
 import { useState } from "react";
 
-
-
-const images = [
-  "/shoe1.png",
-  "/shoe2.png",
-  "/shoe3.png",
-  "/shoe4.png",
-];
-
+const images = ["/shoe1.png", "/shoe2.png", "/shoe3.png", "/shoe4.png"];
 
 const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
 export default function ProductPage() {
-  con
-  st [selectedSize, setSelectedSize] = useState(null);
+  con;
+  st[(selectedSize, setSelectedSize)] = useState(null);
 
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
-      
       {/* GRID */}
       <div className="grid md:grid-cols-2 gap-10 items-start">
-        
         {/* LEFT SIDE (SLIDER) */}
         <div className="w-full">
-          <Swiper
-            modules={[Navigation]}
-            navigation
-            className="rounded-xl"
-          >
+          <Swiper modules={[Navigation]} navigation className="rounded-xl">
             {images.map((img, index) => (
               <SwiperSlide key={index}>
                 <div className="relative w-full h-[400px] md:h-[500px]">
@@ -65,16 +51,11 @@ export default function ProductPage() {
 
         {/* RIGHT SIDE (FIXED DETAILS) */}
         <div className="bg-white p-6 rounded-xl shadow-md sticky top-6">
-          
-          <h1 className="text-2xl font-semibold">
-            Men's Canvas Cruiser
-          </h1>
+          <h1 className="text-2xl font-semibold">Men's Canvas Cruiser</h1>
 
           <p className="text-sm text-gray-500 mt-1">
             ALSO AVAILABLE IN:{" "}
-            <span className="underline cursor-pointer">
-              WOMEN'S SIZES
-            </span>
+            <span className="underline cursor-pointer">WOMEN'S SIZES</span>
           </p>
 
           <div className="mt-4 flex items-center gap-3">

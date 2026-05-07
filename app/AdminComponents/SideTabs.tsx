@@ -1,43 +1,48 @@
-'use client'
+"use client";
 
-
-import { Shield, ChartNoAxesColumn, Users, UserCheck, Calendar, FileText ,CircleAlert, Activity,
+import {
+  Shield,
+  ChartNoAxesColumn,
+  Users,
+  UserCheck,
+  Calendar,
+  FileText,
+  CircleAlert,
+  Activity,
 } from "lucide-react";
 
-import {useEffect} from "react"
-
-
+import { useEffect } from "react";
 
 const menuItems = [
   {
     name: "Overview",
     icon: ChartNoAxesColumn,
-    id: 1, 
+    id: 1,
   },
   {
     name: "User Management",
     icon: Users,
-     id: 2, 
+    id: 2,
   },
   {
     name: "Products",
     icon: UserCheck,
-    id: 3, 
+    id: 3,
   },
   {
     name: "New Prducts",
     icon: Calendar,
-    id: 4, 
+    id: 4,
   },
   {
     name: "Reports & Analytics",
     icon: FileText,
-    id: 5, 
+    id: 5,
   },
   {
     name: "Financial Disputes",
     icon: CircleAlert,
-    id: 6, 
+    id: 6,
     active: true,
   },
   {
@@ -48,22 +53,14 @@ const menuItems = [
   {
     name: "Add",
     icon: ChartNoAxesColumn,
-    id:8, 
+    id: 8,
   },
 ];
 
-
-
-
-
-
-
-
 export default function SideTabs({ activeTab, onChange }) {
-
-
-useEffect(() => { console.log(activeTab) }, [])
-
+  useEffect(() => {
+    console.log(activeTab);
+  }, []);
 
   return (
     <div className="flex flex-col gap-6 px-6 py-8  ">
@@ -72,23 +69,17 @@ useEffect(() => { console.log(activeTab) }, [])
         const Icon = tab.icon;
 
         return (
-    
-           <button
+          <button
             key={tab.id}
             type="button"
             onClick={() => onChange(tab.id)}
             className={`flex items-center gap-5 w-full w  px-6 py-2 cursor-pointer rounded-sm transition-all duration-300 hover:bg-[#E5B168] ${
-            isActive ? "bg-[7592ff] text-[#2B160D]" : "text-black text-black"
-              }`}
-            >
-            <Icon className="w-8 h-8" strokeWidth={2.2} />    
-              <span className="text-[15px] font-semibold">
-                {tab.name}
-              </span>
-            </button>
-            
-
-
+              isActive ? "bg-[7592ff] text-[#2B160D]" : "text-black text-black"
+            }`}
+          >
+            <Icon className="w-8 h-8" strokeWidth={2.2} />
+            <span className="text-[15px] font-semibold">{tab.name}</span>
+          </button>
         );
       })}
     </div>

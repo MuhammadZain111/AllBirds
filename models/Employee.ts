@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const EmployeeSchema = new mongoose.Schema(
   {
     name: {
@@ -51,7 +50,7 @@ const EmployeeSchema = new mongoose.Schema(
 
     accountStatus: {
       type: String,
-      enum: ["active", "Inactive","blocked"],
+      enum: ["active", "Inactive", "blocked"],
       default: "Active",
     },
 
@@ -65,14 +64,14 @@ const EmployeeSchema = new mongoose.Schema(
       default: Date.now,
     },
     role: {
-    type: Number,
-    enum: [1, 2, 3],
-    default: 2 
-      }
+      type: Number,
+      enum: [1, 2, 3],
+      default: 2,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Employee =
