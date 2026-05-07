@@ -204,7 +204,7 @@ const [openavatar,setopenavatar] = useState();
             <span className="text-lg font-medium">Edit profile</span>
           </button>
 
-          <Link className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
+          <Link href="/profile"  className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
             <Settings className="w-5 h-5" />
             <span className="text-lg font-medium">Account settings</span>
           </Link>

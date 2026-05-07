@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import DashboardHeader from "./DashboardHeader";
 import DashboardTabs from "./DashboardTabs";
-import DashboardStats from "./DashboardStats";
+import DashboardStats from "../../AdminComponents/DashboardStats";
 import UsersTable from "./UsersTable";
 import OrdersTable from "./OrdersTable";
 import { useSession } from "next-auth/react"

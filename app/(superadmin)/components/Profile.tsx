@@ -52,7 +52,7 @@ export default function ProfileDropdown() {
 
           <button className="flex items-center gap-5 text-slate-700 hover:text-blue-600 transition">
             <CircleHelp className="w-4 h-1 text-slate-500" />
-            <span className="text-3xl font-medium">Support</span>
+            <span className="text-3xl font-medium">Support Premium</span>
           </button>
         </div>
 

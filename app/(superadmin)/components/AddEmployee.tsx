@@ -97,11 +97,11 @@ export default function AddEmployee() {
 
   return (
     <div className="min-h-screen p-6 bg-white">
-      <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
 
         {/* Header */}
-        <div className="bg-black text-white px-8 py-6">
-          <h1 className="text-3xl font-bold">Create Employee Account</h1>
+        <div className="bg-black text-white px-6 py-6">
+          <h1 className="text-xl font-bold">Create Employee Account</h1>
           <p className="text-gray-300 mt-2">
             Add a new employee who can manage the ecommerce store.
           </p>
