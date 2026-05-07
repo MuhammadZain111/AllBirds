@@ -37,7 +37,6 @@ export default function ProfileAvatar() {
           />
         </button>
 
-        
         {session && (
           <>
             <button

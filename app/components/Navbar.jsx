@@ -126,7 +126,6 @@ export default function Navbar() {
               ? null
               : session && (
                   <div className="relative">
-                   
                     <button
                       onClick={() => setDropdown(!dropdown)}
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
@@ -140,14 +139,17 @@ export default function Navbar() {
                       />
                     </button>
 
-                    {dropdown && <ProfileDropdown Opendropdown={dropdown} setOpenDropdown={setDropdown} />}
+                    {dropdown && (
+                      <ProfileDropdown
+                        Opendropdown={dropdown}
+                        setOpenDropdown={setDropdown}
+                      />
+                    )}
                   </div>
                 )}
           </div>
         </div>
       </nav>
-
-
 
       {/*===== MOBILE MENU == */}
       <div

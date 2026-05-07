@@ -126,7 +126,7 @@ export default function Page() {
           </button>
 
           <button
-            onClick={() => signIn("google", { callbackUrl: "/"  })}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
             className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
           >
             Continue with Google..

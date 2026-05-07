@@ -37,7 +37,8 @@
     "models/UserModel.ts",
     "app/api/get-user/route.js",
     "app/components/ProfileAvatar.jsx",
-    "app/not-found.tsx"
-, "app/components/ProfileDropdown.jsx"  ],
+    "app/not-found.tsx",
+    "app/components/ProfileDropdown.jsx"
+  ],
   "exclude": ["node_modules"]
 }
