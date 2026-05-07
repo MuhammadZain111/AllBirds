@@ -137,6 +137,8 @@ export default function Page() {
             Forgot Password
           </Link>
 
+     </form>
+
           <button
             onClick={() => signIn("facebook")}
             className=" text-white px-4 py-2 rounded w-full border-2   cursor-pointer  "
@@ -144,7 +146,7 @@ export default function Page() {
             Continue with Facebook
           </button>
 
-          <div>
+          <div className="w-full     ">
             <button
               onClick={() => signIn("google", { callbackUrl: "/" })}
               className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
@@ -167,7 +169,7 @@ export default function Page() {
               Sign up
             </Link>
           </p>
-        </form>
+   
       </div>
     </div>
   );
