@@ -18,11 +18,11 @@ export default function OrdersTable({ orders }) {
           <tbody>
 
             
-            {orders.map((lawyer) => (
-              <tr key={lawyer.id} className="border-b">
-                <td className="py-2">{lawyer.fullName}</td>
-                <td className="py-2">{lawyer.email}</td>
-                <td className="py-2">{lawyer.specialization}</td>
+            {orders.map((order) => (
+              <tr key={order.id} className="border-b">
+                <td className="py-2">{order.fullName}</td>
+                <td className="py-2">{order.email}</td>
+                <td className="py-2">{order.specialization}</td>
               </tr>
             ))}
           </tbody>

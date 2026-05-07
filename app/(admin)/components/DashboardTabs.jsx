@@ -8,10 +8,6 @@ const tabs = [
 ];
 
 
-
-
-
-
 export default function DashboardTabs({ activeTab, onChange }) {
   return (
     <div className="flex gap-2 cursor-pointer   ">

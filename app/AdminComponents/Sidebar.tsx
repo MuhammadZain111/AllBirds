@@ -142,8 +142,8 @@ export default function Sidebar() {
                     <button
                       key={i}
                       // onClick={() => setActive(item.id)}
-                         onClick={()=>router.push(`/dashboard?tab=${item.id}`)}
-                      className={`group flex w-full items-center rounded-2xl transition-all duration-200
+                         onClick={()=>router.push(`/admindashboard?tab=${item.id}`)}
+                      className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
                       
                       ${
                         open

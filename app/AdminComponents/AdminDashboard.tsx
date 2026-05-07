@@ -1,0 +1,132 @@
+// 'use client';
+
+// import { useMemo, useState } from "react";
+// import DashboardHeader from "../(admin)/components/DashboardHeader";
+// import DashboardTabs from "../(admin)/components/DashboardTabs";
+// import DashboardStats from "./DashboardStats";
+// import UsersTable from "../(admin)/components/UsersTable";
+// import OrdersTable from "../(admin)/components/OrdersTable";
+// import { useSession } from "next-auth/react"
+// import AddProducts from "../(admin)/components/AddProduct"
+
+
+// const mockUsers = [
+//   { id: 1, name: "Ali Khan", email: "ali@example.com", type: "use", status: "Active" },
+//   { id: 2, name: "Sara Noor", email: "sara@example.com", type: "user", status: "Pending" },
+//   { id: 3, name: "Hamza Tariq", email: "hamza@example.com", type: "user", status: "Active" },
+// ];
+
+
+
+
+// const mockOrders = [
+//   { id: "l1", Name: "Ayesha Malik", email: "ayesha@law.com", specialization: "Corporate", yearsOfExperience: 7 },
+//   { id: "l2", Name: "Omar Riaz", email: "omar@law.com", specialization: "Family", yearsOfExperience: 5 },
+// ];
+
+
+
+
+
+
+// export default function AdminDashboard() {
+
+
+// const session=useSession();
+
+
+
+// // const role = session?.user?.role
+
+
+// // if (session.user.role === 1) {
+// //   show Admin Dashboard
+// // } else if (session.user.role === 2) {
+// //   show Sub Admin Dashboard
+// // } else {
+// //   show User Dashboard
+// // // }
+
+
+// // useEffect(() => {
+// //   if (session?.user.role === 1) {
+// //     fetch("/api/admin/stats")
+// //   }
+
+// //   if (session?.user.role === 2) {
+// //     fetch("/api/subadmin/tasks")
+// //   }
+
+// //   if (session?.user.role === 3) {
+// //     fetch("/api/user/profile")
+// //   }
+// // }, [session])
+
+
+
+
+
+
+
+//   const [activeTab, setActiveTab] = useState(1);
+
+//   const [search, setSearch] = useState("");
+
+//   const filteredUsers = useMemo(() => {
+//     const q = search.trim().toLowerCase();
+//     if (!q) return mockUsers;
+//     return mockUsers.filter((u) => {
+//       return (
+//         u.name.toLowerCase().includes(q) ||
+//         u.email.toLowerCase().includes(q) ||
+//         u.type.toLowerCase().includes(q)
+//       );
+//     });
+//   }, [search]);
+
+
+//   //Here is the Orders Table ...
+
+//   // const filteredOrders = useMemo(() => {
+//   //   const q = search.trim().toLowerCase();
+//   //   if (!q) return mockUsers;
+//   //   return mockOrders.filter((u) => {
+//   //     return (
+//   //       u.name.toLowerCase().includes(q) ||
+//   //       u.email.toLowerCase().includes(q) ||
+//   //       u.type.toLowerCase().includes(q)
+//   //     );
+//   //   });
+//   // }, [search]);
+
+
+
+  
+
+//   return (
+//     <section className="space-y-6">
+//       <DashboardHeader search={search} onSearchChange={setSearch} />
+
+//       <DashboardTabs activeTab={activeTab} onChange={setActiveTab} />
+
+//       {activeTab === 1 && (
+//         <DashboardStats
+//           stats={[
+//             { label: "Total Users", value: String(mockUsers.length) },
+//             { label: "Pending Orders", value: "1" },
+//             { label: "Completed Orders", value: "12" },
+
+//           ]}
+//         />
+//       )}
+
+//       {activeTab === 2 && <UsersTable users={filteredUsers} />}
+
+
+//     {activeTab === 4 && <AddProducts users={filteredUsers} />}
+
+
+//       {/* {activeTab === "Orders" && <OrdersTable orders={filteredOrders} />} */}
+//     </section>
+//   );
+// }

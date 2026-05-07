@@ -5,7 +5,7 @@ import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import AddEmployee from '../components/AddEmployee';
+import AddEmployee from '../../AdminComponents/AddEmployee';
 
 function Page() {
 

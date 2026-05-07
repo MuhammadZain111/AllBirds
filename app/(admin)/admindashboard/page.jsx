@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import Sidebar from "../components/Sidebar"
+import Sidebar from "../../AdminComponents/Sidebar"
 import Header from "../../AdminComponents/Header"
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import AddEmployee from '../components/AddProduct';
-
+import AddProduct from '../components/AddProduct';
 
 
 function Page() {
@@ -29,7 +29,7 @@ function Page() {
 
 
   return (
-    <div className="min-h-screen flex bg-[#ede9e2]">
+    <div className="min-h-screen flex bg-white">
 
       <aside className="w-64 text-white">
         <Sidebar />
@@ -37,7 +37,7 @@ function Page() {
 
       <main className="flex-1">
         <Header />
-        {activeTab === 1 && <AddEmployee />}
+        {activeTab === 1 && <AddProduct/> }
       </main>
 
     </div>
