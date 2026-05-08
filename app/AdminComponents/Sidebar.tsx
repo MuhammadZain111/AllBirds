@@ -6,28 +6,35 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSession } from "next-auth/react";
 
-import {
-  Menu,
-  X,
-  LayoutGrid,
-  Bot,
-  ShoppingCart,
-  Calendar,
-  UserCircle,
-  ClipboardList,
-  FileText,
-  Table,
-  Layers,
-  MessageCircle,
-  Headphones,
-  Mail,
-  PieChart,
+import { Menu, X, LayoutGrid, Bot, ShoppingCart, Calendar, UserCircle, ClipboardList, FileText, Table, Layers, MessageCircle, Headphones, Mail,
   Box,
   ChevronDown,
   MoreHorizontal,
+  PieChart
 } from "lucide-react";
 
-const menuItems = [
+
+
+
+import {
+  Briefcase,
+  Users,
+  Building2,
+  Search,
+  Bookmark,
+  BarChart3,
+  GitBranch,
+  Bell,
+  CreditCard,
+  Settings
+} from "lucide-react";
+
+
+
+
+
+
+const supermenuItems = [
   {
     title: "MENU",
     items: [
@@ -61,6 +68,119 @@ const menuItems = [
 ];
 
 
+const employerMenuItems = [
+  {
+    title: "MAIN",
+    items: [
+      {
+        id: 1,
+        name: "Dashboard",
+        icon: LayoutGrid,
+      },
+      {
+        id: 2,
+        name: "Post Job",
+        icon: Briefcase,
+        badge: "NEW",
+      },
+      {
+        id: 3,
+        name: "Manage Jobs",
+        icon: ClipboardList,
+      },
+      {
+        id: 4,
+        name: "Applications",
+        icon: FileText,
+      },
+      {
+        id: 5,
+        name: "Shortlisted Candidates",
+        icon: Users,
+      },
+      {
+        id: 6,
+        name: "Interviews",
+        icon: Calendar,
+      },
+      {
+        id: 7,
+        name: "Messages",
+        icon: MessageCircle,
+      },
+      {
+        id: 8,
+        name: "Company Profile",
+        icon: Building2,
+      },
+    ],
+  },
+
+  {
+    title: "RECRUITMENT",
+    items: [
+      {
+        id: 9,
+        name: "Talent Search",
+        icon: Search,
+      },
+      {
+        id: 10,
+        name: "Saved Candidates",
+        icon: Bookmark,
+      },
+      {
+        id: 11,
+        name: "Job Analytics",
+        icon: BarChart3,
+      },
+      {
+        id: 12,
+        name: "Hiring Pipeline",
+        icon: GitBranch,
+      },
+    ],
+  },
+
+  {
+    title: "SETTINGS",
+    items: [
+      {
+        id: 13,
+        name: "Notifications",
+        icon: Bell,
+      },
+      {
+        id: 14,
+        name: "Billing & Plans",
+        icon: CreditCard,
+      },
+      {
+        id: 15,
+        name: "Settings",
+        icon: Settings,
+      },
+      {
+        id: 16,
+        name: "Help & Support",
+        icon: Headphones,
+      },
+    ],
+  },
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,6 +194,11 @@ export default function Sidebar() {
   const [open, setOpen] = useState(false);
 
   const {data:session , data} = useSession();
+
+
+
+const menuItems =session?.user?.role === 1 ? supermenuItems : employerMenuItems;
+  
 
   return (
     <div className="flex">
@@ -122,7 +247,7 @@ export default function Sidebar() {
 
         {/* Menu Sections */}
         <div className="px-3 py-6">
-          {menuItems.map((section, index) => (
+          { menuItems.map((section, index) => (
             <div key={index} className="mb-8">
               {/* Section Title */}
               {open ? (
@@ -142,10 +267,10 @@ export default function Sidebar() {
                   const isActive = active === item.id;
 
                   return (
-                    <button
-                      key={i}
-                      // onClick={() => setActive(item.id)}
-                      onClick={() => router.push(`/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`)}
+                    <button key={i}
+                     onClick={() => {router.push(`/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`);
+  setActive(item.id);
+}}
                       className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
                       
                       ${
@@ -157,7 +282,7 @@ export default function Sidebar() {
                       ${
                         isActive
                           ? "border border-blue-600 bg-blue-50"
-                          : "hover:bg-gray-100"
+                          : "hover:bg-gray-100 border-0"
                       }`}
                     >
                       {/* Left Side */}
