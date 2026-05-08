@@ -75,7 +75,7 @@ export default function AddEmployee() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/sign-in");
+        router.push("/superadmin");
       } else {
         alert(data.error || "Something went wrong");
       }

@@ -39,6 +39,6 @@
     "app/components/ProfileAvatar.jsx",
     "app/not-found.tsx",
     "app/components/ProfileDropdown.jsx"
-  ],
+, "app/components/ValidationItem.jsx"  ],
   "exclude": ["node_modules"]
 }

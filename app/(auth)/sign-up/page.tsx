@@ -5,10 +5,12 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import ValidationItem from "../../components/ValidationItem";
 
 export default function SignUpPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+
 
   //  if (session) {
   //      router.push("/");
@@ -20,6 +22,9 @@ export default function SignUpPage() {
   const [errors, setErrors] = useState({ email: "", password: "" });
 
   const [showPassword, setShowPassword] = useState(false);
+
+
+ const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +41,7 @@ export default function SignUpPage() {
 
       if (hasError) return;
     }
+
 
     try {
       const res = await fetch("/api/sign-up", {
@@ -59,9 +65,20 @@ export default function SignUpPage() {
     }
   };
 
+
+  const validations = {
+    length: form.password.length >= 8,
+    uppercase: /[A-Z]/.test(form.password),
+    lowercase: /[a-z]/.test(form.password),
+    numberOrSpecial: /[0-9!@#$%^&*]/.test(form.password),
+  };
+
+
+
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5F7FB] px-4">
-      <div className="w-[450px] max-w-xl bg-white rounded-[5px] p-4 md:p-8 shadow-lg border border-gray-200">
+      <div className="w-[460px] max-w-xl bg-white rounded-[5px] p-4 md:p-8 shadow-lg border border-gray-200">
         <form
           onSubmit={handleSubmit}
           className="flex flex-col items-center px-4 space-y-5 py-6 rounded-xl"
@@ -129,6 +146,32 @@ export default function SignUpPage() {
               Password must contain 1 - 16 characters
             </p>
           </div>
+      
+      <div className="w-full  mt-2 border rounded-2xl p-5 bg-white shadow-sm">
+        <h2 className="text-lg font-medium mb-4 text-black ">
+          Password must contain:
+        </h2>
+
+        <ValidationItem
+          valid={validations.length}
+          text="At least 8 characters"
+        />
+
+        <ValidationItem
+          valid={validations.uppercase}
+          text="One uppercase letter"
+        />
+
+        <ValidationItem
+          valid={validations.lowercase}
+          text="One lowercase letter"
+        />
+
+        <ValidationItem
+          valid={validations.numberOrSpecial}
+          text="One number or special character"
+        />
+      </div>
 
           {/* Submit Button */}
           <button
@@ -149,8 +192,18 @@ export default function SignUpPage() {
               Log in
             </Link>
           </p>
+
+           <p className="mt-1 text-[#475569]">
+            <Link
+              href="/"
+              className="text-[#2563EB] font-semibold hover:underline transition"
+            >
+              Return to Home Page
+            </Link>
+          </p>
         </form>
       </div>
     </div>
   );
 }
+

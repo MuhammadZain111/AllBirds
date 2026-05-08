@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
+import { useSession } from "next-auth/react";
+
 import {
   Menu,
   X,
@@ -58,6 +60,10 @@ const menuItems = [
   },
 ];
 
+
+
+
+
 export default function Sidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -66,6 +72,8 @@ export default function Sidebar() {
 
   // sidebar closed by default
   const [open, setOpen] = useState(false);
+
+  const {data:session , data} = useSession();
 
   return (
     <div className="flex">
@@ -97,7 +105,7 @@ export default function Sidebar() {
 
             {/* Title Only in Open Mode */}
             {open && (
-              <h1 className="text-3xl font-bold text-slate-900">SuperAdmin</h1>
+              <h1 className="text-3xl font-bold text-slate-900">{session?.user?.role === 1 ? "SuperAdmin" : "Employer"}</h1>
             )}
           </div>
 
@@ -137,7 +145,7 @@ export default function Sidebar() {
                     <button
                       key={i}
                       // onClick={() => setActive(item.id)}
-                      onClick={() => router.push(`/superadmin?tab=${item.id}`)}
+                      onClick={() => router.push(`/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`)}
                       className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
                       
                       ${

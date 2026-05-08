@@ -93,9 +93,7 @@ const authOptions: NextAuthOptions = {
         token.lastFetched,
       );
 
-      if (account?.access_token) {
-        token.accessToken = account.access_token;
-      }
+    
 
       // First login — seed token from user
       if (user) {
