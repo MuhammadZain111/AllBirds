@@ -34,7 +34,7 @@ import {
 
 
 
-const supermenuItems = [
+const employerMenuItems = [
   {
     title: "MENU",
     items: [
@@ -68,7 +68,7 @@ const supermenuItems = [
 ];
 
 
-const employerMenuItems = [
+const supermenuItems = [
   {
     title: "MAIN",
     items: [
