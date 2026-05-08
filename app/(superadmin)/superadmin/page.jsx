@@ -23,7 +23,7 @@ function Page() {
   return (
     <div className="min-h-screen flex bg-white">
       <aside className="w-64 text-white">
-      <Sidebar />
+        <Sidebar />
       </aside>
 
       <main className="flex-1">

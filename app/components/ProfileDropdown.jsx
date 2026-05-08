@@ -6,8 +6,8 @@ import { useRef, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
-  const { data: session,status } = useSession();
-  
+  const { data: session, status } = useSession();
+
   const dropdownRef = useRef();
 
   useEffect(() => {

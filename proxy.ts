@@ -24,16 +24,13 @@ export async function proxy(request: NextRequest) {
 
   // If NOT logged in → block dashboard
 
-
-
   if (pathname.startsWith("/api/auth")) {
     return NextResponse.next();
   }
 
-if (!token && (pathname === "/sign-in" || pathname === "/sign-up")) {
-  return NextResponse.next();
-}
-
+  if (!token && (pathname === "/sign-in" || pathname === "/sign-up")) {
+    return NextResponse.next();
+  }
 
   if (!token) {
     return NextResponse.redirect(new URL("/sign-in", request.url));

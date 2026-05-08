@@ -1,4 +1,7 @@
 "use client";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+
+import { FaChrome, FaFacebook } from "react-icons/fa";
 
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState } from "react";
@@ -25,6 +28,7 @@ export default function Page() {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -92,84 +96,136 @@ export default function Page() {
   //   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0F0B1A]">
-      <div className="w-[600px] max-w-2xl bg-[#241C38] rounded-[32px] p-4 md:p-6 text-white  ">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-[#1E1830] flex flex-col items-center px-4 space-y-4 py-6 rounded-2xl p-6"
-        >
-          <h2 className="text-2xl md:text-4xl font-semibold ">Sign In</h2>
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F7FB] px-4">
+      <div className="w-[450px]  bg-white rounded-[10px] p-8 md:p-8 shadow-lg border border-gray-100">
+        {/* Heading */}
+        <h2 className="text-1xl md:text-3xl font-bold text-center text-[#0F172A] mb-10">
+          Sign In
+        </h2>
 
-          <input
-            type="text"
-            name="identifier"
-            placeholder="Email or Username"
-            value={form.identifier}
-            onChange={handleChange}
-            className=" w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3"
-            required
-          />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          {/* Email / Username */}
+          <div>
+            <label className="block text-[#1E293B] font-semibold mb-3 text-lg">
+              Email or Username
+            </label>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full bg-[#352C4D] rounded-xl px-5 py-4 pr-14 outline-none text-white placeholder:text-gray-40 my-3 "
-            required
-          />
+            <div className="relative">
+              <input
+                type="text"
+                name="identifier"
+                placeholder="Enter your email or username"
+                value={form.identifier}
+                onChange={handleChange}
+                className="w-full border border-gray-200 rounded-sm py-4 pl-5 pr-14 text-black outline-none focus:border-[#0F172A] transition-all bg-white"
+                required
+              />
 
-          {error && <p className="text-red-500">{error}</p>}
+              <Mail className="absolute right-5 top-1/2 -translate-y-1/2 text-[#334155] w-5 h-5" />
+            </div>
+          </div>
 
+          {/* Password */}
+          <div>
+            <label className="block text-[#1E293B] font-semibold mb-3 text-lg">
+              Password
+            </label>
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={handleChange}
+                className="w-full border border-gray-200 rounded-sm py-4 pl-5 pr-14 text-black outline-none focus:border-[#0F172A] transition-all bg-white"
+                required
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-[#334155] cursor-pointer"
+              >
+                {showPassword ? (
+                  <EyeOff className="w-5 h-5" />
+                ) : (
+                  <Eye className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+
+            {/* Password Hint */}
+            <p className="text-sm text-gray-500 mt-3">
+              Password must contain 1 - 16 characters
+            </p>
+          </div>
+
+          {/* Error */}
+          {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
+
+          {/* Sign In Button */}
           <button
             type="submit"
             disabled={loading}
-            className="p-2 w-full bg-[#8B5CF6] hover:bg-[#7C4DF2] transition-all duration-300 rounded-xl py-4 text-xl font-medium mt-2 mt-4 cursor-pointer"
+            className="w-full bg-[#0F172A] hover:bg-black transition-all duration-300 text-white rounded-sm py-4 text-xl font-semibold cursor-pointer mt-2"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
 
+          {/* Forgot Password */}
           <Link
             href="/forgot-password"
-            className=" cursor-pointer w-full text-white text-black px-4 py-2 rounded"
+            className="text-center text-[#334155] hover:text-black transition font-medium"
           >
-            Forgot Password
+            Forgot Password?
           </Link>
+        </form>
 
-     </form>
+        {/* Divider */}
+        <div className="flex items-center gap-4 my-8">
+          <div className="flex-1 h-[1px] bg-gray-200"></div>
+          <span className="text-gray-400 font-medium">Or</span>
+          <div className="flex-1 h-[1px] bg-gray-200"></div>
+        </div>
 
-          <button
-            onClick={() => signIn("facebook")}
-            className=" text-white px-4 py-2 rounded w-full border-2   cursor-pointer  "
-          >
-            Continue with Facebook
-          </button>
+        {/* Google Button */}
+        <button
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="w-full flex items-center justify-center gap-3 bg-[#EEF5FF] hover:bg-[#E2ECFA] transition-all duration-300 rounded-sm py-4 text-[#0F172A] font-semibold text-lg border border-[#D8E4F8] cursor-pointer"
+        >
+          <FaChrome className="text-blue-500" />
+          Continue with Google
+        </button>
 
-          <div className="w-full     ">
-            <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-              className=" cursor-pointer w-full text-white border-2 text-black px-4 py-2 rounded"
-            >
-              Continue with Google..
-            </button>
+        {/* Facebook Button */}
+        <button
+          onClick={() => signIn("facebook")}
+          className="w-full flex items-center justify-center gap-3 bg-[#F8FAFC] hover:bg-[#EEF2F7] transition-all duration-300 rounded-sm py-4 text-[#0F172A] font-semibold text-lg border border-gray-200 cursor-pointer mt-4"
+        >
+          <FaFacebook className="text-blue-700" />
+          Continue with Facebook
+        </button>
 
-            {google_auth_error && (
-              <p className="text-red-500 mt-4">
-                {error === "OAuthCallback" && "Login failed. Please try again."}
-                {error === "AccessDenied" && "Access denied by Google."}
-                {error === "Configuration" && "Auth misconfigured."}
-              </p>
-            )}
-          </div>
-
-          <p className="mt-4 text-white">
-            Dont have an account?{" "}
-            <Link href="/sign-up" className="underline">
-              Sign up
-            </Link>
+        {/* Google Errors */}
+        {google_auth_error && (
+          <p className="text-red-500 mt-4 text-center">
+            {error === "OAuthCallback" && "Login failed. Please try again."}
+            {error === "AccessDenied" && "Access denied by Google."}
+            {error === "Configuration" && "Auth misconfigured."}
           </p>
-   
+        )}
+
+        {/* Footer */}
+        <p className="mt-10 text-center text-[#334155] text-lg">
+          Dont have an account?{" "}
+          <Link
+            href="/sign-up"
+            className="text-[#2563EB] font-semibold hover:underline"
+          >
+            Sign up
+          </Link>
+        </p>
       </div>
     </div>
   );
