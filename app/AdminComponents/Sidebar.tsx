@@ -79,13 +79,13 @@ const supermenuItems = [
       },
       {
         id: 2,
-        name: "Post Job",
+        name: "All Users",
         icon: Briefcase,
         badge: "NEW",
       },
       {
         id: 3,
-        name: "Manage Jobs",
+        name: "Add Employee",
         icon: ClipboardList,
       },
       {

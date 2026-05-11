@@ -5,6 +5,9 @@ import { useSearchParams } from "next/navigation";
 import AddEmployee from "../../AdminComponents/AddEmployee";
 import Header from "../../AdminComponents/Header";
 import Sidebar from "../../AdminComponents/Sidebar";
+import AllUsers from "../../AdminComponents/AllUsers";
+
+
 
 function Page() {
   const { data: session, status } = useSession();
@@ -28,7 +31,9 @@ function Page() {
 
       <main className="flex-1">
         <Header />
-        {activeTab === 1 && <AddEmployee />}
+        {activeTab === 1 && <AllUsers />}
+        {activeTab === 3 && <AddEmployee />}
+        
       </main>
     </div>
   );
