@@ -3,7 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+
 export default function AddEmployee() {
+
+
+
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -87,7 +91,7 @@ export default function AddEmployee() {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-white">
+    <div className="w-full min-h-screen p-4 bg-white">
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
         {/* Header */}
         <div className="bg-black text-white px-6 py-6">

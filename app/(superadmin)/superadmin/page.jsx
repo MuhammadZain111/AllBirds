@@ -7,6 +7,8 @@ import Header from "../../AdminComponents/Header";
 import Sidebar from "../../AdminComponents/Sidebar";
 import AllUsers from "../../AdminComponents/AllUsers";
 import WelcomeSection from "../../AdminComponents/WelcomeSection";
+import AllProducts from "../../AdminComponents/AllProducts";
+import AdminProfile from "../../AdminComponents/AdminProfile";
 
 
 
@@ -31,7 +33,7 @@ function Page() {
         <Sidebar />
       </aside>
 
-      <main className="flex flex-col flex-1 items-center justify-center pl-3 ">
+      <main className="flex flex-col flex-1 items-center justify-start pl-3 ">
         <Header />
         <WelcomeSection adminName={session?.user?.name || "Admin"} />
 
@@ -40,6 +42,8 @@ function Page() {
         {activeTab === 1 && <AllUsers />}
         {activeTab === 2 && <AllUsers />}
         {activeTab === 3 && <AddEmployee />}
+        {activeTab === 4 && <AllProducts />}
+        {activeTab === 5 && <AdminProfile />}
       </main>
     </div>
   );

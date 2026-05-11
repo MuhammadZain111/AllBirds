@@ -236,7 +236,7 @@ export default function UsersTable() {
           borderBottom: "1px solid #eee",
         }}
       >
-        <Typography variant="h5" fontWeight={700}>
+        <Typography variant="h5" fontWeight={700}   sx={{ color: "#000000" }}>
           Users Management
         </Typography>
 

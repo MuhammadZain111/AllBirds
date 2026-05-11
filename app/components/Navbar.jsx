@@ -129,7 +129,9 @@ export default function Navbar() {
               : session && (
                   <div className="relative">
                     <button
-                      onClick={() => setDropdown(!dropdown)}
+                    onClick={(e) => { e.stopPropagation();
+                      setDropdown(prev => !prev);}}
+                      // onClick={() => setDropdown((dropdown)=>!dropdown)}
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >
                       <Image

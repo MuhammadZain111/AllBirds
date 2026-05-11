@@ -43,7 +43,7 @@ function Header() {
         {/* Profile Button */}
         <button
           className="flex items-center gap-4 border rounded-xl px-4 py-2 bg-white"
-          onClick={() => setDropdown(!dropdown)}
+          onClick={() => setDropdown((dropdown) => !dropdown)}
         >
           <img
             src="https://i.pravatar.cc/100"

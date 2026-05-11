@@ -3,13 +3,13 @@ import Link from "next/link";
 import { Settings, CircleHelp } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
-  
+  const { data: session, status } = useSession();
+
   const dropdownRef = useRef();
 
-
-  
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -34,10 +34,12 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
           {/* User Info */}
           <div>
             <h2 className="text-xl font-semibold text-slate-700">
-              Musharof Chowdhury
+              {session?.user?.name || "User Name"}
             </h2>
 
-            <p className="mt-1 text-sm text-slate-500">randomuser@pimjo.com</p>
+            <p className="mt-1 text-sm text-slate-500">
+              {session?.user?.email || "randomuser@pimjo.com"}
+            </p>
           </div>
 
           {/* Menu Items */}

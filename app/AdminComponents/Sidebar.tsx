@@ -95,17 +95,17 @@ const supermenuItems = [
       },
       {
         id: 4,
-        name: "Applications",
+        name: "All Products",
         icon: FileText,
       },
       {
         id: 5,
-        name: "All Products",
+        name: " All Products",
         icon: Users,
       },
       {
         id: 6,
-        name: "Interviews",
+        name: "Complete Profile",
         icon: Calendar,
       },
       {
@@ -181,7 +181,7 @@ export default function Sidebar() {
   const [active, setActive] = useState(1);
 
   // sidebar closed by default
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const { data: session, data } = useSession();
 
