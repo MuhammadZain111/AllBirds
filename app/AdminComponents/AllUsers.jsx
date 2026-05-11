@@ -2,7 +2,6 @@
 
 import React, { useMemo, useState, useEffect } from "react";
 
-
 import {
   Avatar,
   Box,
@@ -18,10 +17,7 @@ import {
 
 import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 
-
 import { Edit, Delete, Visibility, Search } from "@mui/icons-material";
-
-
 
 const usersData = [
   {
@@ -100,59 +96,50 @@ function CustomToolbar({ search, setSearch, roleFilter, setRoleFilter }) {
 }
 
 export default function UsersTable() {
-
   const [search, setSearch] = useState("");
   const [roleFilter, setRoleFilter] = useState("All");
- 
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-  fetchUsers();
-}, []);
+    fetchUsers();
+  }, []);
 
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch("/api/get_all_users");
 
-const fetchUsers = async () => {
-  try {
-    const res = await fetch("/api/get_all_users");
+      if (!res.ok) {
+        throw new Error("Failed to fetch users");
+      }
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch users");
+      const data = await res.json();
+
+      setUsers(data.users || data); // safer handling
+
+      return data.users || data;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setUsers([]);
+      return [];
     }
+  };
 
-    const data = await res.json();
-
-    setUsers(data.users || data); // safer handling
-
-    return data.users || data;
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    setUsers([]);
-    return [];
-  }
-};
-
-
-
-
-//  const  filteredUsers = users.map((user) => {
-//   return {
-//     id: user._id,
-//     name: user.name,
-//     email: user.email,
-//     role: user.role,
-//     status: user.status,
-//     phone: user.phone || "N/A",
-//     createdAt: new Date(user.createdAt).toLocaleDateString("en-US", {
-//       day: "2-digit",
-//       month: "short",
-//       year: "numeric",
-//     }),
-//   };
-// });
-
-
-
-
+  //  const  filteredUsers = users.map((user) => {
+  //   return {
+  //     id: user._id,
+  //     name: user.name,
+  //     email: user.email,
+  //     role: user.role,
+  //     status: user.status,
+  //     phone: user.phone || "N/A",
+  //     createdAt: new Date(user.createdAt).toLocaleDateString("en-US", {
+  //       day: "2-digit",
+  //       month: "short",
+  //       year: "numeric",
+  //     }),
+  //   };
+  // });
 
   // const filteredUsers = useMemo(() => {
   //   return users.filter((user) => {
@@ -166,14 +153,8 @@ const fetchUsers = async () => {
   //   });
   // }, [search, roleFilter]);
 
-
-
-
-
-
-
-
-  const columns = [{
+  const columns = [
+    {
       field: "profile",
       headerName: "User",
       flex: 1.5,
@@ -285,7 +266,7 @@ const fetchUsers = async () => {
         borderRadius: 4,
         overflow: "hidden",
         border: "1px solid #e5e7eb",
-          ml: 1,
+        ml: 1,
       }}
     >
       <Box
@@ -294,14 +275,12 @@ const fetchUsers = async () => {
           borderBottom: "1px solid #eee",
         }}
       >
-        <Typography variant="h5" fontWeight={700}   sx={{ color: "#000000" }}>
+        <Typography variant="h5" fontWeight={700} sx={{ color: "#000000" }}>
           Users Management
-
         </Typography>
 
         <Typography variant="body2" color="text.secondary" mt={1}>
           Manage all system users from here.
-
           <p className="text-black    ">{users.length} users found</p>
         </Typography>
       </Box>

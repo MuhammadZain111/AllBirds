@@ -26,16 +26,12 @@ function Header({ search, onSearchChange }) {
     <div className="bg-white w-full flex ">
       {/* Top Header */}
 
-       <input
+      <input
         value=""
         onChange={(event) => onSearchChange(event.target.value)}
         className="mt-4 w-2xl rounded-md border px-3 py-2 text-sm text-black "
         placeholder="Search users or lawyers"
       />
-
-
-
-
 
       <div className="w-full flex items-center justify-end gap-4 relative">
         {/* Dark Mode */}
@@ -45,9 +41,6 @@ function Header({ search, onSearchChange }) {
 
         {/* Notification */}
         <div className="relative">
-         
-         
-         
           <button className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center bg-white">
             <Bell className="w-5 h-5 text-slate-500" />
           </button>

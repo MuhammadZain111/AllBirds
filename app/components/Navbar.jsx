@@ -11,8 +11,6 @@ import ProfileDropdown from "./ProfileDropdown";
 
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
 
-
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
@@ -129,8 +127,10 @@ export default function Navbar() {
               : session && (
                   <div className="relative">
                     <button
-                    onClick={(e) => { e.stopPropagation();
-                      setDropdown(prev => !prev);}}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setDropdown((prev) => !prev);
+                      }}
                       // onClick={() => setDropdown((dropdown)=>!dropdown)}
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >

@@ -6,8 +6,6 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import ProfileDropdown from "./ProfileDrop";
 
-
-
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
 
 function Header() {
@@ -60,43 +58,32 @@ function Header() {
           <span className="absolute top-0 right-0 w-3 h-3 bg-orange-400 rounded-full border-2 border-white"></span>
         </div>
 
-
-
-
         {/* Profile Button */}
-            {status === "loading"
-              ? null
-              : session && (
-                  <div className="relative">
-                    <button
-                      onClick={() => setDropdown(!dropdown)}
-                      className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer  "
-                    >
-                      <Image
-                        src={user?.profileImage || "/default-avatar.png"}
-                        width={50}
-                        height={40}
-                        alt="Profile Image"
-                        className="rounded-full object-cover"
-                      />
-                    </button>
+        {status === "loading"
+          ? null
+          : session && (
+              <div className="relative">
+                <button
+                  onClick={() => setDropdown(!dropdown)}
+                  className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer  "
+                >
+                  <Image
+                    src={user?.profileImage || "/default-avatar.png"}
+                    width={50}
+                    height={40}
+                    alt="Profile Image"
+                    className="rounded-full object-cover"
+                  />
+                </button>
 
-                    {dropdown && (
-                      <ProfileDropdown
-                        Opendropdown={dropdown}
-                        setOpenDropdown={setDropdown}
-                      />
-                    )}
-                  </div>
+                {dropdown && (
+                  <ProfileDropdown
+                    Opendropdown={dropdown}
+                    setOpenDropdown={setDropdown}
+                  />
                 )}
-
-
-
-
-
-
-
-       
+              </div>
+            )}
       </div>
     </div>
   );

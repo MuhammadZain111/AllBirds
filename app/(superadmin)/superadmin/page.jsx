@@ -10,9 +10,6 @@ import WelcomeSection from "../../AdminComponents/WelcomeSection";
 import AllProducts from "../../AdminComponents/AllProducts";
 import AdminProfile from "../../AdminComponents/AdminProfile";
 
-
-
-
 function Page() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
@@ -36,8 +33,6 @@ function Page() {
       <main className="flex flex-col flex-1 items-center justify-start pl-3 ">
         <Header />
         <WelcomeSection adminName={session?.user?.name || "Admin"} />
-
-
 
         {activeTab === 1 && <AllUsers />}
         {activeTab === 2 && <AllUsers />}

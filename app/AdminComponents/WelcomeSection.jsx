@@ -1,17 +1,8 @@
 import React from "react";
 
-
-
-
-
-
-
-
-
 function WelcomeSection({ adminName = "Admin" }) {
   return (
     <div className="w-[95%] flex items-center justify-between p-5 mt-5 border border-gray-200 rounded-xl bg-white shadow-sm mb-4">
-      
       {/* Left Side */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">

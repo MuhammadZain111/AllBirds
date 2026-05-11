@@ -3,11 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-
 export default function AddEmployee() {
-
-
-
   const router = useRouter();
 
   const [form, setForm] = useState({

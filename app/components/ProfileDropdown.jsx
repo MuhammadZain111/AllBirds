@@ -3,19 +3,13 @@ import Link from "next/link";
 import { Settings, CircleHelp } from "lucide-react";
 import { signOut } from "next-auth/react";
 
-
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
-  
   const dropdownRef = useRef();
-
 
   //  Close on outside click
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpenDropdown(false);
       }
     }
@@ -52,9 +46,7 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
         <h2 className="text-xl font-semibold text-slate-700">
           Musharof Chowdhury
         </h2>
-        <p className="mt-1 text-sm text-slate-500">
-          randomuser@pimjo.com
-        </p>
+        <p className="mt-1 text-sm text-slate-500">randomuser@pimjo.com</p>
       </div>
 
       {/* Menu Items */}

@@ -27,7 +27,6 @@ export async function POST(request) {
   }
 }
 
-
 export async function GET() {
   const products = await Product.find();
   return Response.json(products);

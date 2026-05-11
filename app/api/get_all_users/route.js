@@ -13,29 +13,29 @@ export async function GET() {
     if (!session?.user?.email) {
       return NextResponse.json(
         { success: false, message: "Unauthorized" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     const users = await User.find();
 
-    const formattedUsers = users.map(user => ({
+    const formattedUsers = users.map((user) => ({
       id: user._id,
-  ...user._doc
-}));
+      ...user._doc,
+    }));
 
     console.log("Users fetched:", formattedUsers);
 
     return NextResponse.json({
       success: true,
-      users: formattedUsers ,
+      users: formattedUsers,
     });
   } catch (error) {
     console.error("API Error:", error);
 
     return NextResponse.json(
       { success: false, message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
