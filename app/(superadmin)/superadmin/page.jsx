@@ -6,6 +6,10 @@ import AddEmployee from "../../AdminComponents/AddEmployee";
 import Header from "../../AdminComponents/Header";
 import Sidebar from "../../AdminComponents/Sidebar";
 import AllUsers from "../../AdminComponents/AllUsers";
+import WelcomeSection from "../../AdminComponents/WelcomeSection";
+
+
+
 
 function Page() {
   const { data: session, status } = useSession();
@@ -27,9 +31,14 @@ function Page() {
         <Sidebar />
       </aside>
 
-      <main className="flex-1">
+      <main className="flex flex-col flex-1 items-center justify-center pl-3 ">
         <Header />
+        <WelcomeSection adminName={session?.user?.name || "Admin"} />
+
+
+
         {activeTab === 1 && <AllUsers />}
+        {activeTab === 2 && <AllUsers />}
         {activeTab === 3 && <AddEmployee />}
       </main>
     </div>

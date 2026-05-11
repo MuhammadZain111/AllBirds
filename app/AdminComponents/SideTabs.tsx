@@ -57,6 +57,10 @@ const menuItems = [
   },
 ];
 
+
+
+
+
 export default function SideTabs({ activeTab, onChange }) {
   useEffect(() => {
     console.log(activeTab);

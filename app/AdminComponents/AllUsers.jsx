@@ -16,6 +16,7 @@ import {
 
 import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 
+
 import { Edit, Delete, Visibility, Search } from "@mui/icons-material";
 
 const usersData = [
@@ -109,6 +110,9 @@ export default function UsersTable() {
       return matchesSearch && matchesRole;
     });
   }, [search, roleFilter]);
+
+
+
 
   const columns = [
     {
@@ -219,10 +223,11 @@ export default function UsersTable() {
     <Paper
       elevation={0}
       sx={{
-        width: "100%",
+        width: "95%",
         borderRadius: 4,
         overflow: "hidden",
         border: "1px solid #e5e7eb",
+          ml: 1,
       }}
     >
       <Box
@@ -240,7 +245,7 @@ export default function UsersTable() {
         </Typography>
       </Box>
 
-      <Box sx={{ height: 600, width: "100%" }}>
+      <Box sx={{ height: 600, width: "90%" }}>
         <DataGrid
           rows={filteredUsers}
           columns={columns}

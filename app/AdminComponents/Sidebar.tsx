@@ -100,7 +100,7 @@ const supermenuItems = [
       },
       {
         id: 5,
-        name: "Shortlisted Candidates",
+        name: "All Products",
         icon: Users,
       },
       {
