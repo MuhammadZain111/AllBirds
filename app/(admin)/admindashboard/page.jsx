@@ -5,8 +5,10 @@ import Sidebar from "../../AdminComponents/Sidebar";
 import Header from "../../AdminComponents/Header";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import AddEmployee from "../components/AddProduct";
-import AddProduct from "../components/AddProduct";
+import AddEmployee from "../../AdminComponents/AddProduct";
+import AddProduct from "../../AdminComponents/AddProduct";
+import WelcomeSection from "../../AdminComponents/WelcomeSection";
+
 
 function Page() {
   const { data: session, status } = useSession();
@@ -26,17 +28,18 @@ function Page() {
   }
 
   return (
-    <div className="min-h-screen flex bg-white">
-      <aside className="w-64 text-white">
+    <div className="min-h-screen flex bg-white w-full">
+     
+      <aside className="w-[19%] text-white">
         <Sidebar />
       </aside>
 
-      <main className="flex-1">
-        <Header />
+      <main className="flex-1 w-[80%]">
+         <Header />
+      <WelcomeSection adminName={session?.user?.name || "Admin"} />       
         <p className="text-black">{activeTab}</p>
-        <p className="text-black"> here the admin wikl be laoded</p>
-        <p className="text-black">Role {session?.user?.role}</p>
-        {activeTab === 3 && session?.user?.role === 2 && <AddProduct />}
+        {/* <p className="text-black">Role {session?.user?.role}</p> */}
+        {activeTab === 2 && session?.user?.role === 2 && <AddProduct />}
       </main>
     </div>
   );

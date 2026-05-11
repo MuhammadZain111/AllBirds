@@ -9,7 +9,7 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
   const dropdownRef = useRef();
 
 
-  
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -34,10 +34,10 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
           {/* User Info */}
           <div>
             <h2 className="text-xl font-semibold text-slate-700">
-              Musharof Chowdhury
+             {session?.user?.name || "User Name"}
             </h2>
 
-            <p className="mt-1 text-sm text-slate-500">randomuser@pimjo.com</p>
+            <p className="mt-1 text-sm text-slate-500"> {session?.user?.email || "randomuser@pimjo.com"}  </p>
           </div>
 
           {/* Menu Items */}
