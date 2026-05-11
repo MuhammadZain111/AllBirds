@@ -17,8 +17,6 @@ function Page() {
 
   const role = session?.user?.role;
 
-
-
   if (status === "loading") {
     return <p>Loading...</p>;
   }
@@ -35,8 +33,8 @@ function Page() {
 
       <main className="flex-1">
         <Header />
-      <p className="text-black" >{activeTab}</p> 
-         <p className="text-black"> here the admin wikl be laoded</p>
+        <p className="text-black">{activeTab}</p>
+        <p className="text-black"> here the admin wikl be laoded</p>
         <p className="text-black">Role {session?.user?.role}</p>
         {activeTab === 3 && session?.user?.role === 2 && <AddProduct />}
       </main>

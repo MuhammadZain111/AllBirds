@@ -7,8 +7,6 @@ import Header from "../../AdminComponents/Header";
 import Sidebar from "../../AdminComponents/Sidebar";
 import AllUsers from "../../AdminComponents/AllUsers";
 
-
-
 function Page() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
@@ -33,7 +31,6 @@ function Page() {
         <Header />
         {activeTab === 1 && <AllUsers />}
         {activeTab === 3 && <AddEmployee />}
-        
       </main>
     </div>
   );

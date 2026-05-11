@@ -6,15 +6,26 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { useSession } from "next-auth/react";
 
-import { Menu, X, LayoutGrid, Bot, ShoppingCart, Calendar, UserCircle, ClipboardList, FileText, Table, Layers, MessageCircle, Headphones, Mail,
+import {
+  Menu,
+  X,
+  LayoutGrid,
+  Bot,
+  ShoppingCart,
+  Calendar,
+  UserCircle,
+  ClipboardList,
+  FileText,
+  Table,
+  Layers,
+  MessageCircle,
+  Headphones,
+  Mail,
   Box,
   ChevronDown,
   MoreHorizontal,
-  PieChart
+  PieChart,
 } from "lucide-react";
-
-
-
 
 import {
   Briefcase,
@@ -26,13 +37,8 @@ import {
   GitBranch,
   Bell,
   CreditCard,
-  Settings
+  Settings,
 } from "lucide-react";
-
-
-
-
-
 
 const employerMenuItems = [
   {
@@ -66,7 +72,6 @@ const employerMenuItems = [
     ],
   },
 ];
-
 
 const supermenuItems = [
   {
@@ -169,21 +174,6 @@ const supermenuItems = [
   },
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default function Sidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -193,12 +183,10 @@ export default function Sidebar() {
   // sidebar closed by default
   const [open, setOpen] = useState(false);
 
-  const {data:session , data} = useSession();
+  const { data: session, data } = useSession();
 
-
-
-const menuItems =session?.user?.role === 1 ? supermenuItems : employerMenuItems;
-  
+  const menuItems =
+    session?.user?.role === 1 ? supermenuItems : employerMenuItems;
 
   return (
     <div className="flex">
@@ -230,7 +218,9 @@ const menuItems =session?.user?.role === 1 ? supermenuItems : employerMenuItems;
 
             {/* Title Only in Open Mode */}
             {open && (
-              <h1 className="text-3xl font-bold text-slate-900">{session?.user?.role === 1 ? "SuperAdmin" : "Employer"}</h1>
+              <h1 className="text-3xl font-bold text-slate-900">
+                {session?.user?.role === 1 ? "SuperAdmin" : "Employer"}
+              </h1>
             )}
           </div>
 
@@ -247,7 +237,7 @@ const menuItems =session?.user?.role === 1 ? supermenuItems : employerMenuItems;
 
         {/* Menu Sections */}
         <div className="px-3 py-6">
-          { menuItems.map((section, index) => (
+          {menuItems.map((section, index) => (
             <div key={index} className="mb-8">
               {/* Section Title */}
               {open ? (
@@ -267,10 +257,14 @@ const menuItems =session?.user?.role === 1 ? supermenuItems : employerMenuItems;
                   const isActive = active === item.id;
 
                   return (
-                    <button key={i}
-                     onClick={() => {router.push(`/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`);
-  setActive(item.id);
-}}
+                    <button
+                      key={i}
+                      onClick={() => {
+                        router.push(
+                          `/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`,
+                        );
+                        setActive(item.id);
+                      }}
                       className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
                       
                       ${

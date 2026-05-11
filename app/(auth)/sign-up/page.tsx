@@ -11,7 +11,6 @@ export default function SignUpPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-
   //  if (session) {
   //      router.push("/");
   //  }
@@ -23,8 +22,7 @@ export default function SignUpPage() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-
- const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +39,6 @@ export default function SignUpPage() {
 
       if (hasError) return;
     }
-
 
     try {
       const res = await fetch("/api/sign-up", {
@@ -65,16 +62,12 @@ export default function SignUpPage() {
     }
   };
 
-
   const validations = {
     length: form.password.length >= 8,
     uppercase: /[A-Z]/.test(form.password),
     lowercase: /[a-z]/.test(form.password),
     numberOrSpecial: /[0-9!@#$%^&*]/.test(form.password),
   };
-
-
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5F7FB] px-4">
@@ -146,32 +139,32 @@ export default function SignUpPage() {
               Password must contain 1 - 16 characters
             </p>
           </div>
-      
-      <div className="w-full  mt-2 border rounded-2xl p-5 bg-white shadow-sm">
-        <h2 className="text-lg font-medium mb-4 text-black ">
-          Password must contain:
-        </h2>
 
-        <ValidationItem
-          valid={validations.length}
-          text="At least 8 characters"
-        />
+          <div className="w-full  mt-2 border rounded-2xl p-5 bg-white shadow-sm">
+            <h2 className="text-lg font-medium mb-4 text-black ">
+              Password must contain:
+            </h2>
 
-        <ValidationItem
-          valid={validations.uppercase}
-          text="One uppercase letter"
-        />
+            <ValidationItem
+              valid={validations.length}
+              text="At least 8 characters"
+            />
 
-        <ValidationItem
-          valid={validations.lowercase}
-          text="One lowercase letter"
-        />
+            <ValidationItem
+              valid={validations.uppercase}
+              text="One uppercase letter"
+            />
 
-        <ValidationItem
-          valid={validations.numberOrSpecial}
-          text="One number or special character"
-        />
-      </div>
+            <ValidationItem
+              valid={validations.lowercase}
+              text="One lowercase letter"
+            />
+
+            <ValidationItem
+              valid={validations.numberOrSpecial}
+              text="One number or special character"
+            />
+          </div>
 
           {/* Submit Button */}
           <button
@@ -193,7 +186,7 @@ export default function SignUpPage() {
             </Link>
           </p>
 
-           <p className="mt-1 text-[#475569]">
+          <p className="mt-1 text-[#475569]">
             <Link
               href="/"
               className="text-[#2563EB] font-semibold hover:underline transition"
@@ -206,4 +199,3 @@ export default function SignUpPage() {
     </div>
   );
 }
-

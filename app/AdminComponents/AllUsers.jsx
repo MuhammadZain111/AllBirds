@@ -14,17 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 
-import {
-  DataGrid,
-  GridToolbarContainer,
-} from "@mui/x-data-grid";
+import { DataGrid, GridToolbarContainer } from "@mui/x-data-grid";
 
-import {
-  Edit,
-  Delete,
-  Visibility,
-  Search,
-} from "@mui/icons-material";
+import { Edit, Delete, Visibility, Search } from "@mui/icons-material";
 
 const usersData = [
   {
@@ -56,12 +48,7 @@ const usersData = [
   },
 ];
 
-function CustomToolbar({
-  search,
-  setSearch,
-  roleFilter,
-  setRoleFilter,
-}) {
+function CustomToolbar({ search, setSearch, roleFilter, setRoleFilter }) {
   return (
     <GridToolbarContainer>
       <Stack
@@ -99,9 +86,7 @@ function CustomToolbar({
         >
           <MenuItem value="All">All Roles</MenuItem>
           <MenuItem value="Admin">Admin</MenuItem>
-          <MenuItem value="SuperAdmin">
-            Super Admin
-          </MenuItem>
+          <MenuItem value="SuperAdmin">Super Admin</MenuItem>
           <MenuItem value="User">User</MenuItem>
         </Select>
       </Stack>
@@ -109,26 +94,17 @@ function CustomToolbar({
   );
 }
 
-
-
 export default function UsersTable() {
   const [search, setSearch] = useState("");
-  const [roleFilter, setRoleFilter] =
-    useState("All");
+  const [roleFilter, setRoleFilter] = useState("All");
 
   const filteredUsers = useMemo(() => {
     return usersData.filter((user) => {
       const matchesSearch =
-        user.name
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        user.email
-          .toLowerCase()
-          .includes(search.toLowerCase());
+        user.name.toLowerCase().includes(search.toLowerCase()) ||
+        user.email.toLowerCase().includes(search.toLowerCase());
 
-      const matchesRole =
-        roleFilter === "All" ||
-        user.role === roleFilter;
+      const matchesRole = roleFilter === "All" || user.role === roleFilter;
 
       return matchesSearch && matchesRole;
     });
@@ -147,22 +123,14 @@ export default function UsersTable() {
           alignItems="center"
           sx={{ height: "100%" }}
         >
-          <Avatar>
-            {params.row.name[0]}
-          </Avatar>
+          <Avatar>{params.row.name[0]}</Avatar>
 
           <Box>
-            <Typography
-              fontSize={14}
-              fontWeight={600}
-            >
+            <Typography fontSize={14} fontWeight={600}>
               {params.row.name}
             </Typography>
 
-            <Typography
-              fontSize={12}
-              color="text.secondary"
-            >
+            <Typography fontSize={12} color="text.secondary">
               {params.row.email}
             </Typography>
           </Box>
@@ -189,8 +157,8 @@ export default function UsersTable() {
             params.value === "SuperAdmin"
               ? "secondary"
               : params.value === "Admin"
-              ? "primary"
-              : "default"
+                ? "primary"
+                : "default"
           }
           size="small"
         />
@@ -205,11 +173,7 @@ export default function UsersTable() {
       renderCell: (params) => (
         <Chip
           label={params.value}
-          color={
-            params.value === "Active"
-              ? "success"
-              : "error"
-          }
+          color={params.value === "Active" ? "success" : "error"}
           size="small"
         />
       ),
@@ -267,18 +231,11 @@ export default function UsersTable() {
           borderBottom: "1px solid #eee",
         }}
       >
-        <Typography
-          variant="h5"
-          fontWeight={700}
-        >
+        <Typography variant="h5" fontWeight={700}>
           Users Management
         </Typography>
 
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          mt={1}
-        >
+        <Typography variant="body2" color="text.secondary" mt={1}>
           Manage all system users from here.
         </Typography>
       </Box>
@@ -315,8 +272,7 @@ export default function UsersTable() {
             },
 
             "& .MuiDataGrid-cell": {
-              borderBottom:
-                "1px solid rgba(224,224,224,0.4)",
+              borderBottom: "1px solid rgba(224,224,224,0.4)",
             },
 
             "& .MuiDataGrid-row:hover": {

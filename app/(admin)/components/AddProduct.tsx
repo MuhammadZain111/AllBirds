@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function AddProductPage() {
   const [formData, setFormData] = useState({
     title: "",
-    description: "", 
+    description: "",
     price: "",
     category: "",
     stock: "",
