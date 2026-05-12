@@ -27,18 +27,22 @@ function Page() {
   }
 
   return (
-    <div className="min-h-screen flex bg-white w-full">
-      <aside className="w-[19%] text-white">
+    <div className="min-h-screen flex  w-full text-white">
+
+     <aside className="w-[19%] text-white">
         <Sidebar />
       </aside>
 
-      <main className="flex-1 w-[80%]">
+
+      <main className="flex-1 w-[80%] text-white ">
         <Header />
         <WelcomeSection adminName={session?.user?.name || "Admin"} />
         <p className="text-black">{activeTab}</p>
         {/* <p className="text-black">Role {session?.user?.role}</p> */}
-        {activeTab === 2 && session?.user?.role === 2 && <AddProduct />}
+        {activeTab === 3 && session?.user?.role === 2 && <AddProduct />}
       </main>
+
+
     </div>
   );
 }

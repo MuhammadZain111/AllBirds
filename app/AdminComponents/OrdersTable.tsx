@@ -1,6 +1,6 @@
 "use client";
 
-export default function OrdersTable({ orders }) {
+export default function OrdersTable({ orders}) {
   return (
     <section className="rounded-lg border bg-white p-4">
       <h2 className="mb-3 text-lg font-medium text-black">Users</h2>

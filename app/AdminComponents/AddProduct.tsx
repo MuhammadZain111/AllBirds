@@ -41,7 +41,8 @@ export default function AddProductPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
+    <div className="min-h-screen flex items-start justify-center p-6">
+
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-2xl p-8 border">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Add Product
