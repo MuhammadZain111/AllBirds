@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 import AddEmployee from "../../AdminComponents/AddProduct";
 import AddProduct from "../../AdminComponents/AddProduct";
 import WelcomeSection from "../../AdminComponents/WelcomeSection";
+import AllProducts from "../../AdminComponents/AllProducts";
 
 function Page() {
   const { data: session, status } = useSession();
@@ -27,19 +28,22 @@ function Page() {
   }
 
   return (
-    <div className="min-h-screen flex  w-full text-white">
+    <div className="min-h-screen flex  w-full bg-white">
 
      <aside className="w-[19%] text-white">
         <Sidebar />
       </aside>
-
 
       <main className="flex-1 w-[80%] text-white ">
         <Header />
         <WelcomeSection adminName={session?.user?.name || "Admin"} />
         <p className="text-black">{activeTab}</p>
         {/* <p className="text-black">Role {session?.user?.role}</p> */}
+      
         {activeTab === 3 && session?.user?.role === 2 && <AddProduct />}
+     
+        {activeTab === 4 && session?.user?.role === 2 && <AllProducts />}
+    
       </main>
 
 

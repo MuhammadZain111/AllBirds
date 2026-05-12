@@ -2,9 +2,13 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Settings, CircleHelp } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
   const dropdownRef = useRef();
+
+ const { data: session, status } = useSession();
+
 
   //  Close on outside click
   useEffect(() => {
@@ -44,9 +48,9 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
       {/* User Info */}
       <div>
         <h2 className="text-xl font-semibold text-slate-700">
-          Musharof Chowdhury
+        {session?.user?.name || "User Name"}
         </h2>
-        <p className="mt-1 text-sm text-slate-500">randomuser@pimjo.com</p>
+        <p className="mt-1 text-sm text-slate-500">{session?.user?.email || "Email"}</p>
       </div>
 
       {/* Menu Items */}

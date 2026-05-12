@@ -47,7 +47,7 @@ const employerMenuItems = [
       { id: 1, name: "Dashboard", icon: LayoutGrid },
       { id: 2, name: "AI Assistant", icon: Bot, badge: "NEW" },
       { id: 3, name: "Add Product", icon: ShoppingCart },
-      { id: 4, name: "Calendar", icon: Calendar },
+      { id: 4, name: "All Products", icon: Calendar },
       { id: 5, name: "User Profile", icon: UserCircle },
       { id: 6, name: "Task", icon: ClipboardList },
       { id: 7, name: "Forms", icon: FileText },

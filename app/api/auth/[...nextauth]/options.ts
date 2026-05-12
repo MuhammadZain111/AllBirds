@@ -60,7 +60,7 @@ const authOptions: NextAuthOptions = {
             role: user.role,
           };
         } catch (error) {
-          console.error("authorize error:", error); // ✅ log it
+          console.error("authorize error:", error); 
           return null;
         }
       },
@@ -84,14 +84,14 @@ const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log(
-        "JWT fired | user:",
-        !!user,
-        "| email:",
-        token.email,
-        "| lastFetched:",
-        token.lastFetched,
-      );
+      // console.log(
+      //   "JWT fired | user:",
+      //   !!user,
+      //   "| email:",
+      //   token.email,
+      //   "| lastFetched:",
+      //   token.lastFetched,
+      // );
 
       // First login — seed token from user
       if (user) {

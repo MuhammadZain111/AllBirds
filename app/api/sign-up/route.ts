@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     console.log("DB connected");
 
     const { email, username, password } = await req.json();
-    console.log("📩 Request data received:", { email, username });
+    console.log(" Request data received:", { email, username });
 
     if (!email || !password || !username) {
       console.log("Missing fields");

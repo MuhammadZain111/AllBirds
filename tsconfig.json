@@ -40,6 +40,6 @@
     "app/not-found.tsx",
     "app/components/ProfileDropdown.jsx",
     "app/components/ValidationItem.jsx"
-  ],
+, "app/AdminComponents/AddProduct.jsx", "app/AdminComponents/AddEmployee.jsx", "app/AdminComponents/AdminProfile.jsx", "app/AdminComponents/AllUsers.jsx", "app/AdminComponents/Header.jsx", "app/AdminComponents/OrdersTable.jsx"  ],
   "exclude": ["node_modules"]
 }
