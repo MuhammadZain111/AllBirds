@@ -15,9 +15,9 @@ export default function HeroSection() {
   const DURATION = 4000;
 
   const slides = [
-    { id: 1, img: "/images/hero.png.webp" },
-    { id: 2, img: "/images/hero.png.webp" },
-    { id: 3, img: "/images/hero.png.webp" },
+    { id: 1, img: "/public/images/hero.png.webp" },
+    { id: 2, img: "/public/images/hero.png.webp" },
+    { id: 3, img: "/public/images/hero.png.webp" },
   ];
 
   const [progress, setProgress] = useState(0);

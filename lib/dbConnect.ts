@@ -17,7 +17,7 @@ const cached =
     promise: null,
   });
 
- async function dbConnect() {
+async function dbConnect() {
   if (cached.conn) {
     return cached.conn;
   }
@@ -31,6 +31,5 @@ const cached =
   cached.conn = await cached.promise;
   return cached.conn;
 }
-
 
 export default dbConnect;
