@@ -1,6 +1,8 @@
 import User from "@/models/UserModel";
 import dbConnect from "@/lib/dbConnect";
 import nodemailer from "nodemailer";
+import { NextResponse,NextRequest } from "next/server";
+
 
 
 
@@ -82,7 +84,7 @@ export async function POST(req: NextRequest) {
     console.error("OTP ERROR:", error);
 
     return Response.json(
-      { message: "Server error", error: error.message },
+      { message: "Server error", error: error },
       { status: 500 },
     );
   }
