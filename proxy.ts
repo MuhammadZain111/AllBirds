@@ -57,9 +57,7 @@ export async function proxy(request: NextRequest) {
   // 🔐 SUPER ADMIN (ONLY role 1)
   if (role === 1) {
     if (!pathname.startsWith("/superadmin")) {
-      return NextResponse.redirect(
-        new URL("/superadmin", request.url)
-      );
+      return NextResponse.redirect(new URL("/superadmin", request.url));
     }
   }
 
@@ -69,9 +67,7 @@ export async function proxy(request: NextRequest) {
       !pathname.startsWith("/admindashboard") &&
       !pathname.startsWith("/profile")
     ) {
-      return NextResponse.redirect(
-        new URL("/admindashboard", request.url)
-      );
+      return NextResponse.redirect(new URL("/admindashboard", request.url));
     }
   }
 
@@ -88,7 +84,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

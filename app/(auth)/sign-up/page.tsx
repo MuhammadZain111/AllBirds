@@ -47,7 +47,7 @@ export default function SignUpPage() {
         body: JSON.stringify(form),
       });
       console.log("data Sent Sucessfully");
-      
+
       const data = await res.json();
 
       console.log(data);

@@ -62,7 +62,6 @@ type SideTabsProps = {
   onChange: (tab: string) => void;
 };
 
-
 export default function SideTabs({ activeTab, onChange }: SideTabsProps) {
   useEffect(() => {
     console.log(activeTab);

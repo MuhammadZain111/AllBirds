@@ -48,31 +48,28 @@ export default function UsersTable() {
   // =========================
   // FILTER + SEARCH + SORT
   // =========================
- const filteredUsers = useMemo(() => {
-  let data = [...users];
+  const filteredUsers = useMemo(() => {
+    let data = [...users];
 
-  data = data.filter((user) =>
-    (user?.name ?? "")
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
+    data = data.filter((user) =>
+      (user?.name ?? "").toLowerCase().includes(search.toLowerCase()),
+    );
 
-  if (roleFilter !== "All") {
-    data = data.filter((user) => user.role === roleFilter);
-  }
+    if (roleFilter !== "All") {
+      data = data.filter((user) => user.role === roleFilter);
+    }
 
-  data.sort((a, b) => {
-    const nameA = (a?.name ?? "").toLowerCase();
-    const nameB = (b?.name ?? "").toLowerCase();
+    data.sort((a, b) => {
+      const nameA = (a?.name ?? "").toLowerCase();
+      const nameB = (b?.name ?? "").toLowerCase();
 
-    return sortOrder === "asc"
-      ? nameA.localeCompare(nameB)
-      : nameB.localeCompare(nameA);
-  });
+      return sortOrder === "asc"
+        ? nameA.localeCompare(nameB)
+        : nameB.localeCompare(nameA);
+    });
 
-  return data;
-}, [users, search, roleFilter, sortOrder]);
-
+    return data;
+  }, [users, search, roleFilter, sortOrder]);
 
   const columns = [
     {
@@ -198,11 +195,7 @@ export default function UsersTable() {
           <MoreVert />
         </IconButton>
 
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={() => setAnchorEl(null)}
-        >
+        <Menu anchorEl={anchorEl} open={open} onClose={() => setAnchorEl(null)}>
           {/* SEARCH */}
           <Box sx={{ px: 2, py: 1, width: 250 }}>
             <TextField
@@ -246,7 +239,6 @@ export default function UsersTable() {
           </MenuItem>
         </Menu>
       </Box>
-
 
       {/* === Table ====*/}
       <Box sx={{ height: 600 }}>

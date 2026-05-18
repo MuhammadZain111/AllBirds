@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import Sidebar from "../../../AdminComponents/Sidebar";
@@ -13,8 +13,6 @@ import AddProduct from "../../../AdminComponents/AddProduct";
 import WelcomeSection from "../../../AdminComponents/WelcomeSection";
 
 import AllProducts from "../../../AdminComponents/AllProducts";
-
-
 
 function AdminDashboardClient() {
   const { data: session, status } = useSession();

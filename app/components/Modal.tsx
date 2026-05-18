@@ -1,8 +1,6 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 
-
-
 type EditProfileModalProps = {
   open: boolean;
   onClose: () => void;
@@ -13,10 +11,11 @@ type EditProfileModalProps = {
   };
 };
 
-
-
-
-export default function EditProfileModal({ open, onClose, user}:EditProfileModalProps) {
+export default function EditProfileModal({
+  open,
+  onClose,
+  user,
+}: EditProfileModalProps) {
   const [checked, setChecked] = useState(false);
 
   if (!open) return null;

@@ -10,12 +10,14 @@ const globalWithMongoose = global as typeof globalThis & {
   };
 };
 
-const cached = globalWithMongoose.mongoose || (globalWithMongoose.mongoose = {
-  conn: null,
-  promise: null,
-});
+const cached =
+  globalWithMongoose.mongoose ||
+  (globalWithMongoose.mongoose = {
+    conn: null,
+    promise: null,
+  });
 
-export async function dbConnect() {
+ async function dbConnect() {
   if (cached.conn) {
     return cached.conn;
   }
@@ -29,3 +31,6 @@ export async function dbConnect() {
   cached.conn = await cached.promise;
   return cached.conn;
 }
+
+
+export default dbConnect;

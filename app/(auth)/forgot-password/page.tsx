@@ -9,7 +9,7 @@ export default function ForgotPasswordPage() {
 
   const router = useRouter();
 
-  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {

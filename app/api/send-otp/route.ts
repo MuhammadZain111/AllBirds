@@ -1,10 +1,7 @@
 import User from "@/models/UserModel";
 import dbConnect from "@/lib/dbConnect";
 import nodemailer from "nodemailer";
-import { NextResponse,NextRequest } from "next/server";
-
-
-
+import { NextResponse, NextRequest } from "next/server";
 
 const rateLimit = new Map();
 
