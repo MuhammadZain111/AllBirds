@@ -4,12 +4,10 @@ import { Settings, CircleHelp } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
   const dropdownRef = useRef();
 
-      const { data: session, status } = useSession();
-     
+  const { data: session, status } = useSession();
 
   //  Close on outside click
   useEffect(() => {
@@ -26,8 +24,6 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
     };
   }, [setOpenDropdown]);
 
-
-
   //  Close on ESC key
   useEffect(() => {
     function handleEsc(e) {
@@ -43,9 +39,6 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
 
   if (!Opendropdown) return null;
 
-
-
-
   return (
     <div
       ref={dropdownRef}
@@ -54,10 +47,11 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
       {/* User Info */}
       <div>
         <h2 className="text-xl font-semibold text-slate-700">
-        {session?.user?.username || "User Name"}
+          {session?.user?.username || "User Name"}
         </h2>
         <p className="mt-1 text-sm text-slate-500">
-          {session?.user?.email || "User Name"}</p>
+          {session?.user?.email || "User Name"}
+        </p>
       </div>
 
       {/* Menu Items */}

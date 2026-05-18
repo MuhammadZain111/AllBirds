@@ -4,8 +4,6 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 
-
-
 import { User, Settings, CircleHelp, LogOut } from "lucide-react";
 
 export default function ProfileAvatar() {

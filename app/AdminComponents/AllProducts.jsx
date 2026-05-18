@@ -2,41 +2,35 @@ import React from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
-
 function AllProducts() {
+  const [products, setProducts] = useState([]);
 
-const [products, setProducts] = useState([]);
-
-
-const fetchProducts = async () => {
+  const fetchProducts = async () => {
     try {
       const res = await fetch("/api/product");
       const data = await res.json();
 
-
       // Handle HTTP errors
-    if (!res.ok) {
-      console.log("Server Error:", res.status);
-      setProducts([]);
-      return;
-    }
+      if (!res.ok) {
+        console.log("Server Error:", res.status);
+        setProducts([]);
+        return;
+      }
 
       if (data.success) {
         setProducts(data.products);
       } else {
         setProducts([]);
       }
-    } catch (err) { 
-     console.log("Error fetching products:", err);
+    } catch (err) {
+      console.log("Error fetching products:", err);
       setProducts([]);
-    }     
-  }   
+    }
+  };
 
-
-useEffect(() => {
-  fetchProducts();
-}, []);
-
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   // const products = [
   //   { id: 1, name: "iPhone 15", price: 1200, stock: 10, status: "Active" },
@@ -49,7 +43,9 @@ useEffect(() => {
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Product Management</h2>
-        <h3 className="text-black ">Total Products Coming are {products.length}</h3>
+        <h3 className="text-black ">
+          Total Products Coming are {products.length}
+        </h3>
 
         <button className="px-4 py-2 bg-black text-white rounded-xl hover:bg-gray-800 transition">
           + Add Product
@@ -79,7 +75,6 @@ useEffect(() => {
                 key={product.id}
                 className="border-b hover:bg-gray-50 transition"
               >
-                
                 <td className="p-4 text-gray-600">{product.id}</td>
 
                 <td className="p-4 font-medium text-gray-900">

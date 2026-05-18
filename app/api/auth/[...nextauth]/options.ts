@@ -60,7 +60,7 @@ const authOptions: NextAuthOptions = {
             role: user.role,
           };
         } catch (error) {
-          console.error("authorize error:", error); 
+          console.error("authorize error:", error);
           return null;
         }
       },

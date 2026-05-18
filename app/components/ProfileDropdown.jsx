@@ -7,8 +7,7 @@ import { useSession } from "next-auth/react";
 function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
   const dropdownRef = useRef();
 
- const { data: session, status } = useSession();
-
+  const { data: session, status } = useSession();
 
   //  Close on outside click
   useEffect(() => {
@@ -48,15 +47,19 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
       {/* User Info */}
       <div>
         <h2 className="text-xl font-semibold text-slate-700">
-        {session?.user?.name || "User Name"}
+          {session?.user?.username || "User Name"}
         </h2>
-        <p className="mt-1 text-sm text-slate-500">{session?.user?.email || "Email"}</p>
+        <p className="mt-1 text-sm text-slate-500">
+          {session?.user?.email || "Email"}
+        </p>
       </div>
 
       {/* Menu Items */}
       <div className="mt-8 space-y-6">
         <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
-          <span className="text-lg font-medium">Edit profile</span>
+          <Link href="/profile" className="text-lg font-medium">
+            Edit profile
+          </Link>
         </button>
 
         <Link

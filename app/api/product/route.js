@@ -3,16 +3,7 @@ import cloudinary from "@/lib/cloudinary";
 import dbConnect from "@/lib/dbConnect";
 import Product from "@/models/Product";
 
-
-
-const ALLOWED_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-];
-
-
+const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
 const UPLOAD_TIMEOUT_MS = 10000;
@@ -41,7 +32,7 @@ export async function POST(request) {
           success: false,
           message: "No valid file provided",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -52,7 +43,7 @@ export async function POST(request) {
           success: false,
           message: "Invalid file type",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -63,7 +54,7 @@ export async function POST(request) {
           success: false,
           message: "File too large",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -84,7 +75,7 @@ export async function POST(request) {
             (error, result) => {
               if (error) reject(error);
               else resolve(result);
-            }
+            },
           )
           .end(buffer);
       });
@@ -92,13 +83,10 @@ export async function POST(request) {
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => {
           reject(new Error("Upload timeout"));
-        }, UPLOAD_TIMEOUT_MS)
+        }, UPLOAD_TIMEOUT_MS),
       );
 
-      uploadResult = await Promise.race([
-        uploadPromise,
-        timeoutPromise,
-      ]);
+      uploadResult = await Promise.race([uploadPromise, timeoutPromise]);
     } catch (cloudError) {
       console.log(cloudError);
 
@@ -107,7 +95,7 @@ export async function POST(request) {
           success: false,
           message: "Cloudinary upload failed",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -126,7 +114,7 @@ export async function POST(request) {
         success: true,
         product,
       },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     console.log(error);
@@ -136,13 +124,10 @@ export async function POST(request) {
         success: false,
         message: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
-
   }
 }
-
-
 
 export async function GET() {
   try {
@@ -161,7 +146,7 @@ export async function GET() {
         success: false,
         message: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

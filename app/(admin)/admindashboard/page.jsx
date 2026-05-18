@@ -29,8 +29,7 @@ function Page() {
 
   return (
     <div className="min-h-screen flex  w-full bg-white">
-
-     <aside className="w-[19%] text-white">
+      <aside className="w-[19%] text-white">
         <Sidebar />
       </aside>
 
@@ -39,14 +38,11 @@ function Page() {
         <WelcomeSection adminName={session?.user?.name || "Admin"} />
         <p className="text-black">{activeTab}</p>
         {/* <p className="text-black">Role {session?.user?.role}</p> */}
-      
+
         {activeTab === 3 && session?.user?.role === 2 && <AddProduct />}
-     
+
         {activeTab === 4 && session?.user?.role === 2 && <AllProducts />}
-    
       </main>
-
-
     </div>
   );
 }

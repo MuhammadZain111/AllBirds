@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export async function proxy(request: NextRequest) {
@@ -8,45 +8,80 @@ export async function proxy(request: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const pathname = request.nextUrl.pathname;
+  const { pathname } = request.nextUrl;
+  const role = token?.role ?? null;
 
-  console.log("PATHNAME:", pathname);
-  // const path = req.nextUrl.pathname
-
-  // if (
-  //   token &&
-  //   (pathname.startsWith('/sign-in') ||
-  //     pathname.startsWith('/sign-out') ||
-  //     pathname.startsWith('/sign-up'))
-  // ) {
-  //   return NextResponse.redirect(new URL('/dashboard', request.url))
-  // }
-
-  // If NOT logged in → block dashboard
-
-  if (pathname.startsWith("/api/auth")) {
+  // =========================
+  // 1. NEXTAUTH / API BYPASS
+  // =========================
+  if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 
-  if (!token && (pathname === "/sign-in" || pathname === "/sign-up")) {
+  // =========================
+  // 2. AUTH ROUTES (sign-in/up)
+  // =========================
+  const authRoutes = ["/sign-in", "/sign-up"];
+
+  if (authRoutes.includes(pathname)) {
+    if (token) {
+      if (role === 1)
+        return NextResponse.redirect(new URL("/superadmin", request.url));
+
+      if (role === 2)
+        return NextResponse.redirect(new URL("/admindashboard", request.url));
+
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+
     return NextResponse.next();
   }
+
+  // =========================
+  // 3. NOT LOGGED IN USERS
+  // =========================
+  const publicRoutes = ["/"];
 
   if (!token) {
+    if (publicRoutes.includes(pathname)) {
+      return NextResponse.next();
+    }
+
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
-  if (token && (pathname === "/sign-in" || pathname === "/sign-up")) {
-    return NextResponse.redirect(new URL("/", request.url));
+  // =========================
+  // 4. ROLE-BASED ACCESS CONTROL (STRICT)
+  // =========================
+
+  // 🔐 SUPER ADMIN (ONLY role 1)
+  if (role === 1) {
+    if (!pathname.startsWith("/superadmin")) {
+      return NextResponse.redirect(
+        new URL("/superadmin", request.url)
+      );
+    }
   }
 
-  // 🔐 Super Admin only
-  if (pathname.startsWith("/superadmin") && token.role !== 1) {
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
+  // 🔐 ADMIN (ONLY role 2)
+  else if (role === 2) {
+    if (
+      !pathname.startsWith("/admindashboard") &&
+      !pathname.startsWith("/profile")
+    ) {
+      return NextResponse.redirect(
+        new URL("/admindashboard", request.url)
+      );
+    }
   }
 
-  if (pathname.startsWith("/admindashboard") && token.role !== 2) {
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
+  // 🔐 USER (role 3) — IMPORTANT FIX
+  else {
+    const blockedRoutes = ["/superadmin", "/admindashboard"];
+
+    if (blockedRoutes.some((route) => pathname.startsWith(route))) {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
   }
 
   return NextResponse.next();
@@ -54,12 +89,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/dashboard/:path*",
-    "/admin/:path*",
-    "/superadmin/:path*",
-    "/admindashboard/:path*",
-    "/profile/:path*",
-    "/sign-in/:path*",
-    "/sign-up/:path*",
+    "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };

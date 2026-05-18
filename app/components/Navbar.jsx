@@ -90,12 +90,10 @@ export default function Navbar() {
             <Link href="/sale">Sale</Link>
           </div>
 
-          {/* ===== RIGHT (Desktop Actions) ===== */}
+          {/* =   */}
           <div className="hidden md:flex items-center gap-6 text-black">
             <div className="relative inline-block">
-              <Link className="cursor-pointer " href="/">
-                My Account
-              </Link>
+              <Link className="cursor-pointer " href="/"></Link>
             </div>
 
             <Link href="/">Rerun</Link>
@@ -131,7 +129,6 @@ export default function Navbar() {
                         e.stopPropagation();
                         setDropdown((prev) => !prev);
                       }}
-                      // onClick={() => setDropdown((dropdown)=>!dropdown)}
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >
                       <Image
@@ -155,7 +152,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/*===== MOBILE MENU == */}
+      {/*=== MOBILE MENU = */}
       <div
         className={`fixed left-0 top-16 w-full h-[calc(100vh-4rem)] bg-[#f5f5f3] z-50
         transition-transform duration-300 ease-in-out overflow-hidden

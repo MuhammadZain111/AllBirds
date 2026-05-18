@@ -3,7 +3,7 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 import { FaChrome, FaFacebook } from "react-icons/fa";
 
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut,getSession} from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function Page() {
   const { data: session, status } = useSession();
+  
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -57,7 +58,10 @@ export default function Page() {
       if (res?.error) {
         setError("Invalid email or password");
         return;
-      }
+      }    
+      
+      const session = await getSession();
+
       const role = session?.user?.role;
 
       if (role === 1) {

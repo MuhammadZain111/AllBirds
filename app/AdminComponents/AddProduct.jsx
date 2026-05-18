@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 export default function AddProductPage() {
-
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -42,7 +41,6 @@ export default function AddProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     if (loading) return;
 
     setLoading(true);
@@ -50,9 +48,9 @@ export default function AddProductPage() {
     setError("");
     setSuccess("");
 
-    // Step 1: 
+    // Step 1:
     const validationError = validateForm();
-  
+
     if (validationError) {
       setError(validationError);
       return;
@@ -87,7 +85,6 @@ export default function AddProductPage() {
       // Success
       setSuccess("Product added successfully!");
 
-
       // Reset form
 
       setFormData({
@@ -101,8 +98,7 @@ export default function AddProductPage() {
     } catch (err) {
       console.log(err);
       setError("Server error. Please try again.");
-    }
-   finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -201,10 +197,10 @@ export default function AddProductPage() {
           {/* Submit */}
           <button
             type="submit"
-             disabled={loading}
+            disabled={loading}
             className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition cussor-pointer "
           >
-           {loading ? "Adding Product. ..." : "Sign In"}
+            {loading ? "Adding Product. ..." : "Sign In"}
           </button>
         </form>
       </div>
