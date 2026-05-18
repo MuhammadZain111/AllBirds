@@ -2,6 +2,8 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
 import { NextResponse } from "next/server";
 
+
+
 export async function GET(req: Request) {
   try {
     await dbConnect();

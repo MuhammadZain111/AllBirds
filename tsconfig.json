@@ -33,7 +33,7 @@
     "app/page.tsx",
     "app/layout.tsx",
     "tailwind.config.js",
-    "lib/dbConnect.js",
+    "lib/dbConnect.ts",
     "models/UserModel.ts",
     "app/api/get-user/route.js",
     "app/components/ProfileAvatar.jsx",
