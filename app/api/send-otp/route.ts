@@ -2,9 +2,11 @@ import User from "@/models/UserModel";
 import dbConnect from "@/lib/dbConnect";
 import nodemailer from "nodemailer";
 
+
+
 const rateLimit = new Map();
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
   try {
     await dbConnect();
 

@@ -57,7 +57,13 @@ const menuItems = [
   },
 ];
 
-export default function SideTabs({ activeTab, onChange }) {
+type SideTabsProps = {
+  activeTab: Number;
+  onChange: (tab: string) => void;
+};
+
+
+export default function SideTabs({ activeTab, onChange }: SideTabsProps) {
   useEffect(() => {
     console.log(activeTab);
   }, []);
@@ -72,7 +78,7 @@ export default function SideTabs({ activeTab, onChange }) {
           <button
             key={tab.id}
             type="button"
-            onClick={() => onChange(tab.id)}
+            onClick={() => onChange("")}
             className={`flex items-center gap-5 w-full w  px-6 py-2 cursor-pointer rounded-sm transition-all duration-300 hover:bg-[#E5B168] ${
               isActive ? "bg-[7592ff] text-[#2B160D]" : "text-black text-black"
             }`}

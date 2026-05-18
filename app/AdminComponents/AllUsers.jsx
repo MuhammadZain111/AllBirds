@@ -247,9 +247,8 @@ export default function UsersTable() {
         </Menu>
       </Box>
 
-      {/* =========================
-          TABLE
-      ========================= */}
+
+      {/* === Table ====*/}
       <Box sx={{ height: 600 }}>
         <DataGrid
           rows={filteredUsers}
