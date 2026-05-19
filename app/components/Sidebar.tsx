@@ -34,29 +34,19 @@ const employerMenuItems = [
     items: [
       { id: 1, name: "Dashboard", icon: LayoutGrid },
       { id: 2, name: "AI Assistant", icon: Bot, badge: "NEW" },
-      { id: 3, name: "Add Product", icon: ShoppingCart },
-      { id: 4, name: "All Products", icon: Calendar },
-      { id: 5, name: "User Profile", icon: UserCircle },
-      { id: 6, name: "Task", icon: ClipboardList },
-      { id: 7, name: "Forms", icon: FileText },
-      { id: 8, name: "Tables", icon: Table },
-      { id: 9, name: "Pages", icon: FileText },
-      { id: 10, name: "Layouts", icon: Layers, badge: "NEW" },
+      { id: 3, name: "Add Product", icon: ShoppingCart }
     ],
   },
   {
     title: "SUPPORT",
     items: [
       { id: 11, name: "Chat", icon: MessageCircle },
-      { id: 12, name: "Support Ticket", icon: Headphones, badge: "NEW" },
-      { id: 13, name: "Email", icon: Mail },
     ],
   },
   {
     title: "OTHERS",
     items: [
       { id: 14, name: "Charts", icon: PieChart },
-      { id: 15, name: "UI Elements", icon: Box },
     ],
   },
 ];
@@ -88,7 +78,7 @@ const supermenuItems = [
 ];
 
 export default function Sidebar() {
-    
+
   const router = useRouter();
   const searchParams = useSearchParams();
 

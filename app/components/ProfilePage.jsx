@@ -45,6 +45,7 @@ function ProfilePage() {
         {/* <WelcomeSection adminName={session?.user?.name || "Admin"} /> */}
 
         {activeTab === 1 && (<CompleteProfile /> )}
+        
 
         {/* console.log(session) */}
       </main>
