@@ -9,80 +9,83 @@ export async function proxy(request: NextRequest) {
   });
 
   const { pathname } = request.nextUrl;
-  const role = token?.role ?? null;
+  const role = token?.role as number | null ?? null;
 
-  // =========================
-  // 1. NEXTAUTH / API BYPASS
-  // =========================
+  // ==== API BYPASS === 
+
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
   }
 
+  // ====
+  // 2. ROUTE DEFINITION
+ 
+  const ROUTES = {
+    auth:       ["/sign-in", "/sign-up"],
+    public:     ["/", "/products", "/men", "/women"],
+    protected:  ["/profile", "/orders", "/cart"],
+    superadmin: "/superadmin",
+    admin:      "/admindashboard",
+  };
+
+  const isSuperAdminRoute = pathname.startsWith(ROUTES.superadmin);
+  const isAdminRoute      = pathname.startsWith(ROUTES.admin);
+  const isAuthRoute       = ROUTES.auth.includes(pathname);
+  const isPublicRoute     = ROUTES.public.includes(pathname);
+
   // =========================
-  // 2. AUTH ROUTES (sign-in/up)
+  // 3. SUPER ADMIN (role === 1)
+  // Can access: /superadmin/*, /sign-in, /sign-up
+  // Blocked from: public pages, admin dashboard, protected pages
   // =========================
-  const authRoutes = ["/sign-in", "/sign-up"];
+  if (token && role === 1) {
+    if (isAuthRoute) return NextResponse.next(); // ✅ allow sign-in/sign-up
 
-  if (authRoutes.includes(pathname)) {
-    if (token) {
-      if (role === 1)
-        return NextResponse.redirect(new URL("/superadmin", request.url));
-
-      if (role === 2)
-        return NextResponse.redirect(new URL("/admindashboard", request.url));
-
-      return NextResponse.redirect(new URL("/", request.url));
+    if (!isSuperAdminRoute) {
+      return NextResponse.redirect(new URL(ROUTES.superadmin, request.url));
     }
-
     return NextResponse.next();
   }
 
   // =========================
-  // 3. NOT LOGGED IN USERS
+  // 4. SUB-ADMIN (role === 2)
+  // Can access: /admindashboard/*, /sign-in, /sign-up
+  // Blocked from: public pages, superadmin, protected pages
   // =========================
-  const publicRoutes = ["/"];
+  if (token && role === 2) {
+    if (isAuthRoute) return NextResponse.next(); // ✅ allow sign-in/sign-up
 
+    if (!isAdminRoute) {
+      return NextResponse.redirect(new URL(ROUTES.admin, request.url));
+    }
+    return NextResponse.next();
+  }
+
+  // =========================
+  // 5. GUEST (no token)
+  // =========================
   if (!token) {
-    if (publicRoutes.includes(pathname)) {
+    if (isAuthRoute || isPublicRoute) {
       return NextResponse.next();
     }
-
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
   // =========================
-  // 4. ROLE-BASED ACCESS CONTROL (STRICT)
+  // 6. LOGGED-IN USER (role === 3)
   // =========================
-
-  // 🔐 SUPER ADMIN (ONLY role 1)
-  if (role === 1) {
-    if (!pathname.startsWith("/superadmin")) {
-      return NextResponse.redirect(new URL("/superadmin", request.url));
-    }
+  if (isAuthRoute) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // 🔐 ADMIN (ONLY role 2)
-  else if (role === 2) {
-    if (
-      !pathname.startsWith("/admindashboard") &&
-      !pathname.startsWith("/profile")
-    ) {
-      return NextResponse.redirect(new URL("/admindashboard", request.url));
-    }
-  }
-
-  // 🔐 USER (role 3) — IMPORTANT FIX
-  else {
-    const blockedRoutes = ["/superadmin", "/admindashboard"];
-
-    if (blockedRoutes.some((route) => pathname.startsWith(route))) {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+  if (isSuperAdminRoute || isAdminRoute) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|.*\\..*).*)"],
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|images|.*\\..*).*)"],
 };

@@ -88,6 +88,7 @@ const supermenuItems = [
 ];
 
 export default function Sidebar() {
+    
   const router = useRouter();
   const searchParams = useSearchParams();
 

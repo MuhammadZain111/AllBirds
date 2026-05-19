@@ -1,7 +1,5 @@
-import React from 'react'
+import  React,{useState} from 'react'
 import Modal from "./Modal";
-
-
 
 
 
@@ -14,6 +12,7 @@ const [openModal, setOpenModal] = useState(false);
 
   const [image, setImage] = useState(null);
 
+  
  
     const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -108,11 +107,11 @@ const [openModal, setOpenModal] = useState(false);
         </div>
 
         {/* Modal */}
-        <Modal
+        {/* <Modal
           user={user}
           open={openModal}
           onClose={() => setOpenModal(false)}
-        />
+        /> */}
       </div>         
   )
 }

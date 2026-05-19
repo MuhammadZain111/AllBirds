@@ -4,11 +4,13 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import Sidebar from "./Sidebar";
+import CompleteProfile from "./CompleteProfile"
 
 
 
 
-function Profile() {
+
+function ProfilePage() {
   const { data: session, status } = useSession();
   const searchParams = useSearchParams();
 
@@ -24,7 +26,6 @@ function Profile() {
   }
 
 
-  // UNAUTHENTICATED
   if (status === "unauthenticated") {
     return <p className="text-black">Access denied</p>;
   }
@@ -43,7 +44,7 @@ function Profile() {
 
         {/* <WelcomeSection adminName={session?.user?.name || "Admin"} /> */}
 
-        {/* {activeTab === 1 && (<CompleteProfile /> )} */}
+        {activeTab === 1 && (<CompleteProfile /> )}
 
         {/* console.log(session) */}
       </main>
@@ -51,4 +52,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfilePage;

@@ -140,7 +140,7 @@ export const authOptions: NextAuthOptions = {
         session.user._id = (token._id as string) ?? "";
         session.user.email = (token.email as string) ?? "";
         session.user.username = (token.username as string) ?? "";
-        session.user.role = (token.role as number) ?? 1;
+        session.user.role = (token.role as number) ?? 3;
         session.user.image = (token.image as string) || "/icons/user.png";
       }
 
