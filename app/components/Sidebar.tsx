@@ -27,27 +27,22 @@ import {
   PieChart,
 } from "lucide-react";
 
-
 const employerMenuItems = [
   {
     title: "MENU",
     items: [
       { id: 1, name: "Dashboard", icon: LayoutGrid },
       { id: 2, name: "AI Assistant", icon: Bot, badge: "NEW" },
-      { id: 3, name: "Add Product", icon: ShoppingCart }
+      { id: 3, name: "Add Product", icon: ShoppingCart },
     ],
   },
   {
     title: "SUPPORT",
-    items: [
-      { id: 11, name: "Chat", icon: MessageCircle },
-    ],
+    items: [{ id: 11, name: "Chat", icon: MessageCircle }],
   },
   {
     title: "OTHERS",
-    items: [
-      { id: 14, name: "Charts", icon: PieChart },
-    ],
+    items: [{ id: 14, name: "Charts", icon: PieChart }],
   },
 ];
 
@@ -65,20 +60,17 @@ const supermenuItems = [
         name: "My Products",
         icon: FileText,
       },
-     
+
       {
         id: 3,
         name: "Complete Profile",
         icon: Calendar,
       },
-
     ],
   },
-
 ];
 
 export default function Sidebar() {
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -164,9 +156,7 @@ export default function Sidebar() {
                     <button
                       key={i}
                       onClick={() => {
-                        router.push(
-                          `/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=${item.id}`,
-                        );
+                        router.push(`/profile?tab=${item.id}`);
                         setActive(item.id);
                       }}
                       className={`cursor-pointer group flex w-full items-center rounded-2xl transition-all duration-200
@@ -224,7 +214,6 @@ export default function Sidebar() {
           ))}
         </div>
       </aside>
-
     </div>
   );
 }

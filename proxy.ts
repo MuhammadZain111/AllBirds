@@ -9,9 +9,9 @@ export async function proxy(request: NextRequest) {
   });
 
   const { pathname } = request.nextUrl;
-  const role = token?.role as number | null ?? null;
+  const role = (token?.role as number | null) ?? null;
 
-  // ==== API BYPASS === 
+  // ==== API BYPASS ===
 
   if (pathname.startsWith("/api")) {
     return NextResponse.next();
@@ -19,19 +19,19 @@ export async function proxy(request: NextRequest) {
 
   // ====
   // 2. ROUTE DEFINITION
- 
+
   const ROUTES = {
-    auth:       ["/sign-in", "/sign-up"],
-    public:     ["/", "/products", "/men", "/women"],
-    protected:  ["/profile", "/orders", "/cart"],
+    auth: ["/sign-in", "/sign-up"],
+    public: ["/", "/products", "/men", "/women"],
+    protected: ["/profile", "/orders", "/cart"],
     superadmin: "/superadmin",
-    admin:      "/admindashboard",
+    admin: "/admindashboard",
   };
 
   const isSuperAdminRoute = pathname.startsWith(ROUTES.superadmin);
-  const isAdminRoute      = pathname.startsWith(ROUTES.admin);
-  const isAuthRoute       = ROUTES.auth.includes(pathname);
-  const isPublicRoute     = ROUTES.public.includes(pathname);
+  const isAdminRoute = pathname.startsWith(ROUTES.admin);
+  const isAuthRoute = ROUTES.auth.includes(pathname);
+  const isPublicRoute = ROUTES.public.includes(pathname);
 
   // =========================
   // 3. SUPER ADMIN (role === 1)
@@ -86,6 +86,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|images|.*\\..*).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images|.*\\..*).*)"],
 };
