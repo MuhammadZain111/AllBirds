@@ -26,7 +26,7 @@ function NewProductsSection() {
   ];
 
   return (
-    <div className="flex items-center justify-between        ">
+    <div className="flex flex-col items-center justify-between md:flex-row ">
       {products.slice(0, 3).map((product) => (
         <NewProductsCard key={product.id} product={product} />
       ))}

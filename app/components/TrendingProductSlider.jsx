@@ -22,7 +22,7 @@ export default function TopRightArrowSwiper() {
   ];
 
   return (
-    <div className="relative w-full h-[700px] mt-4">
+    <div className="w-full h-[700px] mt-4">
       <div className="  flex items-center justify-between ">
         <div className="">
           <button className="transition-border-color pointer-events-auto cursor-pointer border-b-2 border-transparent font-mono text-sm tracking-wider whitespace-nowrap uppercase duration-300 select-none hover:border-black! md:text-base font-medium text-black   ">

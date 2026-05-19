@@ -29,7 +29,7 @@ export default function ProfileAvatar() {
       <div className="mt-8 w-full max-w-xl rounded-[32px] border border-gray-200 bg-white shadow-sm p-8">
         <button className="w-10 h-10 rounded-full bg-[#352C4D] hover:bg-[#4B3B6B] flex items-center justify-center text-white transition">
           <Image
-            src={user?.profileImage || "/default-avatar.png"}
+            src={user?.profileImage || session.user.image ||"/default-avatar.png"}
             width={50}
             height={50}
             alt="Profile Image"

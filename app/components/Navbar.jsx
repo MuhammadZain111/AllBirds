@@ -132,7 +132,7 @@ export default function Navbar() {
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >
                       <Image
-                        src={user?.profileImage || "/default-avatar.png"}
+                        src={user?.profileImage || session.user.image || "/icons/user.png"}
                         width={50}
                         height={40}
                         alt="Profile Image"

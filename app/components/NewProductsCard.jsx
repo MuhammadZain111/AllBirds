@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const NewProductsCard = ({ product }) => {
   return (
-    <div className="w-[500px] h-[800px] rounded-xl overflow-hidden cursor-pointer group relative">
+    <div className="w-[350px] md:w-[500px] h-[800px] rounded-xl overflow-hidden cursor-pointer group relative mt-3 ">
       <Image
         src={product.image}
         alt={product.title}
