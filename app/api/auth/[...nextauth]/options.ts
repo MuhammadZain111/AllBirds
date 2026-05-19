@@ -127,6 +127,38 @@ const authOptions: NextAuthOptions = {
 
       return token;
     },
+
+
+    // This is the Code fro gooogle loi saving the User 
+
+    async signIn({ user, account }) {
+  try {
+    if (!user?.email) return false;
+
+    await dbConnect();
+
+    const existingUser = await UserModel.findOne({
+      email: user.email,
+    });
+
+    if (!existingUser) {
+      await UserModel.create({
+        email: user.email,
+        username: user.name || user.email.split("@")[0],
+        image: user.image,
+        role: "user",
+        provider: account?.provider,
+        isVerified: true,
+      });
+    }
+
+    return true;
+  } catch (err) {
+    console.error("OAuth signIn error:", err);
+    return true;
+  }
+},
+
     async session({ session, token }) {
       console.log(
         "SESSION fired | token._id:",
