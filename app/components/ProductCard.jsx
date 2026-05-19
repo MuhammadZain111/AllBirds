@@ -10,11 +10,12 @@ export const ProductCard = ({ image, title, bg, id, category }) => {
     >
       <div className="relative w-[400px] h-[100px]">
         <Image
-          src="/images/image _37.jpg"
+          src="/images/image_37.jpg"
           alt={title}
           width={400}
           height={100}
           className="object-contain z-0"
+          unoptimized
         />
       </div>
 

@@ -14,11 +14,13 @@ export default function HeroSection() {
 
   const DURATION = 4000;
 
+
   const slides = [
-    { id: 1, img: "/public/images/hero.png.webp" },
-    { id: 2, img: "/public/images/hero.png.webp" },
-    { id: 3, img: "/public/images/hero.png.webp" },
+    { id: 1, img: "/images/hero2.png" },
+    { id: 2, img: "/images/hero2.png" },
+    { id: 3, img: "/images/hero2.png" },
   ];
+
 
   const [progress, setProgress] = useState(0);
 
@@ -123,6 +125,7 @@ export default function HeroSection() {
                   fill
                   priority
                   className="object-cover"
+                  unoptimized
                 />
 
                 <div className="absolute inset-0 flex flex-col justify-end items-start md:items-end p-6 md:p-16">

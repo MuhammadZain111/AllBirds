@@ -76,7 +76,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* ===== CENTER (Desktop Links) ===== */}
+          {/* ===== CENTER (Desktop Links) === */}
           <div className="hidden md:flex gap-8 text-black font-medium">
             <button
               className="cursor-pointer"
