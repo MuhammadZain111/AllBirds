@@ -53,7 +53,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-2 mt-3 left-0 w-full md:w-[99vw] z-[60] bg-white shadow-md rounded-2xl ">
+      <nav className="fixed top-2 mt-3 left-0 w-full md:w-[97vw] z-[60] bg-white shadow-md rounded-2xl md:mx-6 mx-2">
         <div className="flex items-center justify-between h-16 px-4">
           <div className="flex items-center gap-4">
             {/* Mobile Hamburger */}
