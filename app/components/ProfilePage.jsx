@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useSession } from "next-auth/react";
-import Modal from "./Modal";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import Sidebar from "./Sidebar";
+
+
+
 
 function Profile() {
   const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
 
-  const [openModal, setOpenModal] = useState(false);
+  const activeTab = Number(searchParams.get("tab")) || 1;
 
-  const [preview, setPreview] = useState(null);
-
-  const [image, setImage] = useState(null);
-
+  // LOADING STATE
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center h-screen text-gray-600">
@@ -22,153 +23,31 @@ function Profile() {
     );
   }
 
-  console.log("session is", session, status);
 
-  if (status === "loading") {
-    return <p>Loading...</p>;
+  // UNAUTHENTICATED
+  if (status === "unauthenticated") {
+    return <p className="text-black">Access denied</p>;
   }
 
-  if (status === "authenticated") {
-    console.log(session);
-  } else {
-    return <p className="  text-black ">Access denied</p>;
-  }
-
-  const user = {
-    name: "Zain",
-    email: "zain@gmail.com",
-  };
-
-  //   if (!session) {
-  //     return (
-  //       <div className="flex items-center justify-center h-screen text-red-500 text-lg font-medium">
-  //         Access Denied — Please Login
-  //       </div>
-  //     );
-  //   }
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-
-    if (!image) return alert("Please select an image");
-
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("email", session.user.email);
-
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await res.json();
-    console.log(data);
-    console.log("Upload response:", data);
-    console.log("Uploaded image URL successfullly:");
-  };
+  // AUTHENTICATED
 
   return (
-    <>
-      <div className="flex w-full py-4 px-6 bg-white border-b items-center gap-6 text-black">
-        <Link href=""> Orders </Link>
-        <Link href=""> Profile </Link>
-      </div>
+    <div className="min-h-screen flex bg-white">
+      <aside className="w-64 text-white">
+        <Sidebar />
+      </aside>
 
-      <div className="min-h-screen bg-gray-50 flex justify-center p-6">
-        <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
-          <div className="flex items-center gap-4 border-b pb-6">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800">
-                Name: {session.user.username}
-              </h2>
-              <p className="text-gray-500 text-sm    ">
-                Email: {session.user.email}
-              </p>
-            </div>
-          </div>
+      <main className="flex flex-col flex-1 items-center justify-start pl-3">
+        {/* Header */}
+        {/* <Header /> */ }
 
-          <div className="flex items-center gap-4 border-b pb-6">
-            <img
-              src={preview || "https://i.pravatar.cc/100"}
-              alt="profile"
-              className="w-16 h-16 rounded-full object-cover border"
-            />
+        {/* <WelcomeSection adminName={session?.user?.name || "Admin"} /> */}
 
-            <div>
-              <h2 className="text-xl font-semibold text-gray-800">
-                {/* {session.user.name} */}
-              </h2>
-              <p className="text-gray-500 text-sm">
-                {/* {session.user.email} */}
-              </p>
-            </div>
+        {/* {activeTab === 1 && (<CompleteProfile /> )} */}
 
-            <button
-              onClick={() => setOpenModal(true)}
-              className="ml-auto px-4 py-2 rounded-lg bg-black text-white text-sm hover:bg-gray-800 transition"
-            >
-              Edit Profile
-            </button>
-          </div>
-
-          {/* Upload Section */}
-          <form onSubmit={handleUpload} className="mt-8 space-y-5">
-            <h3 className="text-lg font-semibold text-gray-700">
-              Update Profile Image
-            </h3>
-
-            {/* Preview Box */}
-            {preview && (
-              <div className="flex justify-center">
-                <img
-                  src={preview}
-                  alt="preview"
-                  className="w-28 h-28 rounded-full object-cover border-4 border-gray-200 shadow"
-                />
-              </div>
-            )}
-
-            {/* Upload Box */}
-            <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl p-6 cursor-pointer hover:border-gray-500 transition bg-gray-50">
-              <span className="text-gray-600 text-sm">
-                Click to select or change image
-              </span>
-
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="w-full py-3 rounded-xl bg-[#8B5CF6] text-white font-medium hover:bg-[#7C4DF2] transition cursor-pointer  "
-            >
-              Upload Image
-            </button>
-          </form>
-        </div>
-
-        {/* Modal */}
-        <Modal
-          user={user}
-          open={openModal}
-          onClose={() => setOpenModal(false)}
-        />
-      </div>
-    </>
+        {/* console.log(session) */}
+      </main>
+    </div>
   );
 }
 

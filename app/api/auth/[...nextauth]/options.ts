@@ -82,53 +82,71 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  callbacks: 
-  {
-  async jwt({ token, user, account }) {
-  // =========================
-  // 1. FIRST LOGIN
-  // =========================
-  if (user) {
-    token._id = user.id?.toString();
-    token.email = user.email;
-    token.lastFetched = Date.now();
+  callbacks: {
+    async jwt({ token, user, account }) {
+      // =========================
+      // 1. FIRST LOGIN
+      // =========================
+      if (user) {
+        token._id = user.id?.toString();
+        token.email = user.email;
+        token.lastFetched = Date.now();
 
-    // Google image (ONLY FIRST LOGIN)
-    if (account?.provider === "google") {
-      token.image = (user as any).image || null;
-    }
-  }
-
-  // =========================
-  // 2. DB REFRESH
-  // =========================
-  const shouldRefreshFromDB =
-    !token.lastFetched ||
-    Date.now() - Number(token.lastFetched) > 60 * 1000;
-
-  if (token.email && shouldRefreshFromDB) {
-    try {
-      await dbConnect();
-
-      const dbUser = await UserModel.findOne({ email: token.email });
-
-      if (dbUser) {
-        token._id = dbUser._id.toString();
-        token.email = dbUser.email;
-        token.username = dbUser.username;
-        token.role = dbUser.role;
-
-        token.image = dbUser.image || token.image || null;
+        // Google image (ONLY FIRST LOGIN)
+        if (account?.provider === "google") {
+          token.image = (user as any).image || null;
+        }
       }
-    } catch (err) {
-      console.error("JWT DB fetch error:", err);
-    } finally {
-      token.lastFetched = Date.now();
-    }
-  }
 
-  return token;
-},
+      // =========================
+      // 2. DB REFRESH
+      // =========================
+      const shouldRefreshFromDB =
+        !token.lastFetched ||
+        Date.now() - Number(token.lastFetched) > 60 * 1000;
+
+      if (token.email && shouldRefreshFromDB) {
+        try {
+          await dbConnect();
+
+          const dbUser = await UserModel.findOne({ email: token.email });
+
+          if (dbUser) {
+            token._id = dbUser._id.toString();
+            token.email = dbUser.email;
+            token.username = dbUser.username;
+            token.role = dbUser.role;
+
+            token.image = dbUser.image || token.image || null;
+          }
+        } catch (err) {
+          console.error("JWT DB fetch error:", err);
+        } finally {
+          token.lastFetched = Date.now();
+        }
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      console.log(
+        "SESSION fired | token._id:",
+        token._id,
+        "| token.email:",
+        token.email,
+      );
+
+      if (session.user) {
+        session.user._id = (token._id as string) ?? "";
+        session.user.email = (token.email as string) ?? "";
+        session.user.username = (token.username as string) ?? "";
+        session.user.role = (token.role as number) ?? 1;
+        session.user.image = (token.image as string) || "/icons/user.png";
+      }
+
+      return session;
+    },
+  },
   pages: {
     signIn: "/sign-in",
     error: "/auth/error",

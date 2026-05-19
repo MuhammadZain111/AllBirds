@@ -14,13 +14,11 @@ export default function HeroSection() {
 
   const DURATION = 4000;
 
-
   const slides = [
     { id: 1, img: "/images/hero2.png" },
     { id: 2, img: "/images/hero2.png" },
     { id: 3, img: "/images/hero2.png" },
   ];
-
 
   const [progress, setProgress] = useState(0);
 

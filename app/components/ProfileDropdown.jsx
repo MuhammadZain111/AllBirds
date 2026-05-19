@@ -47,7 +47,7 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
       {/* User Info */}
       <div>
         <h2 className="text-xl font-semibold text-slate-700">
-          {session?.user?.username || "User Name"}
+          {session?.user?.username || session?.user?.name || "User Name"}
         </h2>
         <p className="mt-1 text-sm text-slate-500">
           {session?.user?.email || "Email"}
