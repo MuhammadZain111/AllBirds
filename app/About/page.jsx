@@ -4,7 +4,7 @@ import Mission from "@/app/components/Mission";
 import AboutSlider from "@/app/components/AboutSlider";
 import Footer from "@/app/components/common/Footer";
 
-function page() {
+export default function page() {
   return (
     <div>
       <AboutHero />
@@ -14,5 +14,3 @@ function page() {
     </div>
   );
 }
-
-export default page;
