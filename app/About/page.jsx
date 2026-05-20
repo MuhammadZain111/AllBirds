@@ -4,8 +4,6 @@ import Mission from "@/app/components/Mission";
 import AboutSlider from "@/app/components/AboutSlider";
 import Footer from "@/app/components/common/Footer";
 
-
-
 function About() {
   return (
     <div>

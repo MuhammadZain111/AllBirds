@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import dbConnect  from "@/lib/dbConnect";        
-import UserModel from "@/models/UserModel";            
-import bcrypt from "bcryptjs";              
-
+import dbConnect from "@/lib/dbConnect";
+import UserModel from "@/models/UserModel";
+import bcrypt from "bcryptjs";
 
 export async function PUT(req) {
   try {
@@ -14,14 +13,17 @@ export async function PUT(req) {
     if (!email || !currentPassword || !newPassword) {
       return NextResponse.json(
         { success: false, message: "All fields are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (newPassword.length < 6) {
       return NextResponse.json(
-        { success: false, message: "New password must be at least 6 characters" },
-        { status: 400 }
+        {
+          success: false,
+          message: "New password must be at least 6 characters",
+        },
+        { status: 400 },
       );
     }
 
@@ -31,7 +33,7 @@ export async function PUT(req) {
     if (!user) {
       return NextResponse.json(
         { success: false, message: "User not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -39,8 +41,11 @@ export async function PUT(req) {
 
     if (!user.password) {
       return NextResponse.json(
-        { success: false, message: "Password update not available for OAuth accounts" },
-        { status: 400 }
+        {
+          success: false,
+          message: "Password update not available for OAuth accounts",
+        },
+        { status: 400 },
       );
     }
 
@@ -50,7 +55,7 @@ export async function PUT(req) {
     if (!isMatch) {
       return NextResponse.json(
         { success: false, message: "Current password is incorrect" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -61,18 +66,18 @@ export async function PUT(req) {
     await UserModel.findOneAndUpdate(
       { email },
       { password: hashedPassword },
-      { new: true }
+      { new: true },
     );
 
     return NextResponse.json(
       { success: true, message: "Password updated successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Update password error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

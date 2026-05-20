@@ -1,9 +1,6 @@
-
 import { NextResponse } from "next/server";
-import  dbConnect  from "@/lib/dbConnect";
+import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/UserModel";
-
-
 
 export async function PUT(req) {
   try {
@@ -14,27 +11,27 @@ export async function PUT(req) {
     if (!email || !name) {
       return NextResponse.json(
         { success: false, message: "Email and name are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (name.trim().length < 2) {
       return NextResponse.json(
         { success: false, message: "Name must be at least 2 characters" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     const updatedUser = await UserModel.findOneAndUpdate(
       { email },
-      { username: name.trim() }, 
-      { new: true }
+      { username: name.trim() },
+      { new: true },
     );
 
     if (!updatedUser) {
       return NextResponse.json(
         { success: false, message: "User not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -44,16 +41,16 @@ export async function PUT(req) {
         message: "Name updated successfully",
         user: {
           email: updatedUser.email,
-          username: updatedUser.username,  // Fields here should be Same as  in Db
+          username: updatedUser.username, // Fields here should be Same as  in Db
         },
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Update name error:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

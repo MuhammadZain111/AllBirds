@@ -8,9 +8,12 @@ function SideDrawer({ onClose, open }) {
       }`}
     >
       <div className="flex justify-between items-center p-4 border-b">
-        <h2 className="text-lg font-semibold">Cart (0)</h2>
+        <h2 className="text-lg font-semibold text-black ">Cart (0)</h2>
 
-        <button onClick={onClose} className="text-xl cursor-pointer">
+        <button
+          onClick={onClose}
+          className="text-xl cursor-pointer text-black "
+        >
           ✖
         </button>
       </div>

@@ -1,19 +1,10 @@
 "use client";
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import Image from "next/image";
-import { useState } from "react";
-import Accordion from "./components/Accordion";
-import ProductFeature from "./components/ProductFeature";
-import Item from "./components/Item";
-import ProductDetail from "./components/ProductDetail";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/common/Footer";
-import LifeStyle from "./components/LifeStyle";
-
+import "swiper/css";
+import "swiper/css/navigation";
+import ProductDetail from "./components/ProductDetail";
+import ProductFeature from "./components/ProductFeature";
 
 function ProductDetailPage({ product }) {
   return (

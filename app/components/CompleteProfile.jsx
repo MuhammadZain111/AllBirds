@@ -1,7 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Camera, ShieldCheck, LogOut, Trash2, Mail, Lock, Pencil, Check, X } from "lucide-react";
+import {
+  Camera,
+  ShieldCheck,
+  LogOut,
+  Trash2,
+  Mail,
+  Lock,
+  Pencil,
+  Check,
+  X,
+} from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
@@ -117,7 +127,11 @@ function CompleteProfile() {
     setPasswordError("");
     setPasswordSuccess("");
 
-    if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
+    if (
+      !passwordData.currentPassword ||
+      !passwordData.newPassword ||
+      !passwordData.confirmPassword
+    ) {
       setPasswordError("All fields are required");
       return;
     }
@@ -145,7 +159,11 @@ function CompleteProfile() {
       if (data.success) {
         setPasswordSuccess("Password updated successfully");
         setIsEditPassword(false);
-        setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+        setPasswordData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
       } else {
         setPasswordError(data.message || "Failed to update password");
       }
@@ -163,7 +181,9 @@ function CompleteProfile() {
         {/* Header */}
         <div className="border-b border-gray-200 px-6 py-5">
           <h1 className="text-2xl font-semibold text-gray-900">My Profile</h1>
-          <h1 className="text-black font-semibold">Welcome {session?.user?.username}</h1>
+          <h1 className="text-black font-semibold">
+            Welcome {session?.user?.username}
+          </h1>
         </div>
 
         {/* Content */}
@@ -179,7 +199,9 @@ function CompleteProfile() {
                     type="text"
                     value={formData.Name}
                     disabled={!isEditname}
-                    onChange={(e) => setFormData({ ...formData, Name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, Name: e.target.value })
+                    }
                     className={`w-full rounded-xl border px-4 py-3 outline-none text-black pr-16
                       ${isEditname ? "border-black focus:ring-2 focus:ring-black" : "bg-gray-100 border-gray-300"}`}
                   />
@@ -288,7 +310,9 @@ function CompleteProfile() {
           <div className="border-t border-gray-200 pt-8">
             <div className="flex items-center gap-3 mb-6">
               <ShieldCheck className="text-gray-700" />
-              <h2 className="text-2xl font-semibold text-gray-900">Account Security</h2>
+              <h2 className="text-2xl font-semibold text-gray-900">
+                Account Security
+              </h2>
             </div>
 
             <div className="space-y-6">
@@ -342,7 +366,10 @@ function CompleteProfile() {
                         placeholder="Current password"
                         value={passwordData.currentPassword}
                         onChange={(e) =>
-                          setPasswordData({ ...passwordData, currentPassword: e.target.value })
+                          setPasswordData({
+                            ...passwordData,
+                            currentPassword: e.target.value,
+                          })
                         }
                         className="w-full rounded-xl border border-gray-300 px-4 py-3 text-black outline-none focus:ring-2 focus:ring-black"
                       />
@@ -351,7 +378,10 @@ function CompleteProfile() {
                         placeholder="New password"
                         value={passwordData.newPassword}
                         onChange={(e) =>
-                          setPasswordData({ ...passwordData, newPassword: e.target.value })
+                          setPasswordData({
+                            ...passwordData,
+                            newPassword: e.target.value,
+                          })
                         }
                         className="w-full rounded-xl border border-gray-300 px-4 py-3 text-black outline-none focus:ring-2 focus:ring-black"
                       />
@@ -360,7 +390,10 @@ function CompleteProfile() {
                         placeholder="Confirm new password"
                         value={passwordData.confirmPassword}
                         onChange={(e) =>
-                          setPasswordData({ ...passwordData, confirmPassword: e.target.value })
+                          setPasswordData({
+                            ...passwordData,
+                            confirmPassword: e.target.value,
+                          })
                         }
                         className="w-full rounded-xl border border-gray-300 px-4 py-3 text-black outline-none focus:ring-2 focus:ring-black"
                       />
@@ -369,7 +402,9 @@ function CompleteProfile() {
                         <p className="text-sm text-red-500">{passwordError}</p>
                       )}
                       {passwordSuccess && (
-                        <p className="text-sm text-green-600">{passwordSuccess}</p>
+                        <p className="text-sm text-green-600">
+                          {passwordSuccess}
+                        </p>
                       )}
 
                       <div className="flex gap-3">
@@ -384,7 +419,11 @@ function CompleteProfile() {
                         <button
                           onClick={() => {
                             setIsEditPassword(false);
-                            setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: "" });
+                            setPasswordData({
+                              currentPassword: "",
+                              newPassword: "",
+                              confirmPassword: "",
+                            });
                             setPasswordError("");
                             setPasswordSuccess("");
                           }}
@@ -412,7 +451,9 @@ function CompleteProfile() {
 
           {/* Address Section */}
           <div className="border-t border-gray-200 pt-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Add Address</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Add Address
+            </h2>
 
             <div className="space-y-6">
               <div className="border rounded-2xl px-5 py-4">
@@ -456,8 +497,12 @@ function CompleteProfile() {
               {/* Logout */}
               <div className="flex items-center justify-between border rounded-2xl px-5 py-4">
                 <div>
-                  <h3 className="font-semibold text-gray-900">Log out all devices</h3>
-                  <p className="text-sm text-gray-500 mt-1">End all active sessions</p>
+                  <h3 className="font-semibold text-gray-900">
+                    Log out all devices
+                  </h3>
+                  <p className="text-sm text-gray-500 mt-1">
+                    End all active sessions
+                  </p>
                 </div>
                 <button
                   className="flex items-center gap-2 bg-white border  border-black px-4 py-2 rounded-xl transition text-black  hover:text-white hover:bg-black  cursor-pointer"

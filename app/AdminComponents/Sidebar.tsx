@@ -219,7 +219,7 @@ export default function Sidebar() {
             {/* Title Only in Open Mode */}
             {open && (
               <h1 className="text-3xl font-bold text-slate-900">
-                {session?.user?.role === 1 ? "SuperAdmin" : "Employer"}
+                {session?.user?.username}
               </h1>
             )}
           </div>
