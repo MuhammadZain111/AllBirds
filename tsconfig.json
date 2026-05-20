@@ -34,7 +34,7 @@
     "app/layout.tsx",
     "tailwind.config.js",
     "lib/dbConnect.ts",
-    "models/UserModel.js",
+    "models/UserModel.ts",
     "app/api/get-user/route.js",
     "app/components/ProfileAvatar.jsx",
     "app/not-found.tsx",

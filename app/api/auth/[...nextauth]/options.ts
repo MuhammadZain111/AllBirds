@@ -88,9 +88,13 @@ export const authOptions: NextAuthOptions = {
       // 1. FIRST LOGIN
       // =========================
       if (user) {
+
+  const dbUser = await UserModel.findOne({ email: user.email });
+
         token._id = user.id?.toString();
         token.email = user.email;
         token.lastFetched = Date.now();
+        token.role = dbUser.role;
 
         // Google image (ONLY FIRST LOGIN)
         if (account?.provider === "google") {
@@ -98,9 +102,8 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
-      // =========================
-      // 2. DB REFRESH
-      // =========================
+      // =======2.DB REFRESH
+
       const shouldRefreshFromDB =
         !token.lastFetched ||
         Date.now() - Number(token.lastFetched) > 60 * 1000;
@@ -115,7 +118,7 @@ export const authOptions: NextAuthOptions = {
             token._id = dbUser._id.toString();
             token.email = dbUser.email;
             token.username = dbUser.username;
-            token.role = dbUser.role;
+            token.role = dbUser.role ?? 3;
 
             token.image = dbUser.image || token.image || null;
           }
@@ -140,7 +143,7 @@ export const authOptions: NextAuthOptions = {
         session.user._id = (token._id as string) ?? "";
         session.user.email = (token.email as string) ?? "";
         session.user.username = (token.username as string) ?? "";
-        session.user.role = (token.role as number) ?? 3;
+        session.user.role = (token.role as number) ?? 0;
         session.user.image = (token.image as string) || "/icons/user.png";
       }
 

@@ -2,8 +2,7 @@ import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import UserModel from "../../models/UserModel.js";
 
-const MONGODB_URI =
-  "mongodb+srv://csmuhammadzain_db_user:kcRE0MtzRIPP4vgN@cluster0.ygv1gzz.mongodb.net/";
+const MONGODB_URI ="mongodb://localhost:27017/mybirds";
 
 async function seedAdmin() {
   mongoose.connect(MONGODB_URI, {
@@ -22,7 +21,7 @@ async function seedAdmin() {
       // Create Admin
       await UserModel.create({
         username: "Muhammad Zain",
-        email: "csmuhammadzain@gmail.com",
+        email: "zain@gmail.com",
         password: hashedPassword,
         role: 1,
       });
