@@ -71,12 +71,14 @@ export default function UsersTable() {
     return data;
   }, [users, search, roleFilter, sortOrder]);
 
+  
   const columns = [
     {
       field: "profile",
       headerName: "User",
       flex: 1.5,
       minWidth: 250,
+
       renderCell: (params) => (
         <Stack direction="row" spacing={2} alignItems="center" height="100%">
           <Avatar>{params.row.name?.[0]}</Avatar>
@@ -89,28 +91,65 @@ export default function UsersTable() {
             <Typography fontSize={12} color="text.secondary">
               {params.row.email}
             </Typography>
+
           </Box>
         </Stack>
       ),
     },
+ {  
+     field: "Name", 
+      headerName: "Name", 
+      flex: 1, 
+      minWidth: 150,
+      renderCell: (params) => (
+  <Typography
+    sx={{
+      borderRadius: "8px",
+      fontWeight: 500,
+    }}
+  >
+    {params.row.username}
+  </Typography>
+)
+    },
 
-    { field: "phone", headerName: "Phone", flex: 1, minWidth: 150 },
+    { 
+      field: "Phone No", 
+      headerName:"Phone No",
+      flex: 1, 
+      minWidth: 150,
+      renderCell: (params) => (
+      <p>
+      {params.row.Phone || '03001556660' }
+    </p>
 
+      ),
+    },
+
+  
     {
       field: "role",
       headerName: "Role",
       flex: 1,
       minWidth: 140,
-      renderCell: (params) => (
-        <Chip
-          label={params.value}
-          size="small"
-          sx={{
-            borderRadius: "8px",
-            fontWeight: 500,
-          }}
-        />
-      ),
+    renderCell: (params) => {
+ 
+   const role = params.value === 1;
+
+  return (
+    <Chip
+      label={role ? 1 : 2 }
+      size="small"
+      sx={{
+        borderRadius: "8px",
+        fontWeight: 500,
+        backgroundColor: role ? "#C8F7C5" : "#F8C8C8",
+        color: role ? "#1B5E20" : "#B71C1C",
+      }}
+    />
+  );
+}
+    
     },
 
     {
@@ -119,11 +158,11 @@ export default function UsersTable() {
       flex: 1,
       minWidth: 130,
       renderCell: (params) => {
-        const active = params.value === "Active";
+        const active = params.value === "Active" ;
 
         return (
           <Chip
-            label={params.value}
+            label={params.value || 'InActive' }
             size="small"
             sx={{
               borderRadius: "999px",

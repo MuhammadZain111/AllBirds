@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
-import { connectDB } from "@/lib/db";        
-import User from "@/models/User";            
+import dbConnect  from "@/lib/dbConnect";        
+import UserModel from "@/models/UserModel";            
 import bcrypt from "bcryptjs";              
+
 
 export async function PUT(req) {
   try {
-    await connectDB();
+    await dbConnect();
 
     const { email, currentPassword, newPassword } = await req.json();
 
@@ -25,7 +26,7 @@ export async function PUT(req) {
     }
 
     // Find user — select password explicitly (if you use select: false in schema)
-    const user = await User.findOne({ email }).select("+password");
+    const user = await UserModel.findOne({ email }).select("+password");
 
     if (!user) {
       return NextResponse.json(
@@ -34,7 +35,7 @@ export async function PUT(req) {
       );
     }
 
-    // Check if user signed up with OAuth (no password set)
+    // Check if user signed up With OAuth (no password set)
 
     if (!user.password) {
       return NextResponse.json(
@@ -57,7 +58,7 @@ export async function PUT(req) {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update in DB
-    await User.findOneAndUpdate(
+    await UserModel.findOneAndUpdate(
       { email },
       { password: hashedPassword },
       { new: true }
