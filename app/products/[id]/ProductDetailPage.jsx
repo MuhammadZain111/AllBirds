@@ -14,6 +14,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/common/Footer";
 import LifeStyle from "./components/LifeStyle";
 
+
 function ProductDetailPage({ product }) {
   return (
     <div className="min-h-screen bg-[#ede9e2] px-4 md:px-10 py-6">
