@@ -11,7 +11,7 @@ import ProductFeature from "./components/ProductFeature";
 import Item from "./components/Item";
 import ProductDetail from "./components/ProductDetail";
 import Navbar from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+import Footer from "@/app/components/common/Footer";
 import LifeStyle from "./components/LifeStyle";
 
 function ProductDetailPage({ product }) {
