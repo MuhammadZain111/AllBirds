@@ -88,13 +88,14 @@ export const authOptions: NextAuthOptions = {
       // 1. FIRST LOGIN
       // =========================
       if (user) {
-
-  const dbUser = await UserModel.findOne({ email: user.email });
+        const dbUser = await UserModel.findOne({ email: user.email });
 
         token._id = user.id?.toString();
         token.email = user.email;
         token.lastFetched = Date.now();
         token.role = dbUser.role;
+        token.username = user.username;
+        token.image = dbUser.image;
 
         // Google image (ONLY FIRST LOGIN)
         if (account?.provider === "google") {
@@ -119,7 +120,6 @@ export const authOptions: NextAuthOptions = {
             token.email = dbUser.email;
             token.username = dbUser.username;
             token.role = dbUser.role ?? 3;
-
             token.image = dbUser.image || token.image || null;
           }
         } catch (err) {

@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 import UserModel from "../../models/UserModel.js";
 
-const MONGODB_URI ="mongodb://localhost:27017/mybirds";
+const MONGODB_URI = "mongodb://localhost:27017/mybirds";
 
 async function seedAdmin() {
   mongoose.connect(MONGODB_URI, {

@@ -33,9 +33,6 @@ function ProfilePage() {
       </aside>
 
       <main className="flex flex-col flex-1 items-center justify-start pl-3">
-        
-        
-
         {/* <WelcomeSection adminName={session?.user?.name || "Admin"} /> */}
 
         {activeTab === 1 && <CompleteProfile />}

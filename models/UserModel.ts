@@ -89,7 +89,7 @@ const UserSchema = new mongoose.Schema(
       default: Date.now,
     },
 
-    profileImage: {
+    image: {
       type: String,
       default: "",
     },

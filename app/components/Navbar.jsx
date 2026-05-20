@@ -92,20 +92,19 @@ export default function Navbar() {
             <Link href="/sale">Sale</Link>
           </div>
 
-          {/* =   */}
           <div className="hidden md:flex items-center gap-6 text-black">
             <div className="relative inline-block">
               <Link className="cursor-pointer " href="/"></Link>
             </div>
 
-            <Link href="/">Rerun</Link>
-
-            <Image
-              src="/icons/search.svg"
-              width={24}
-              height={24}
-              alt="search"
-            />
+            <button>
+              <Image
+                src="/icons/search.svg"
+                width={24}
+                height={24}
+                alt="search"
+              />
+            </button>
 
             <button className="cursor-pointer" onClick={handleClick}>
               <Image
@@ -118,7 +117,10 @@ export default function Navbar() {
 
             <Link href="/contact">Help</Link>
 
-            <button onClick={() => setDrawer(true)}>
+            <button
+              className="text-black cursor-pointer "
+              onClick={() => setDrawer(true)}
+            >
               <Image src="/icons/cart.svg" width={24} height={24} alt="cart" />
             </button>
 
@@ -134,7 +136,7 @@ export default function Navbar() {
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >
                       <Image
-                        src={session?.user?.image || "/icons/user.png"}
+                        src={user?.image || "/icons/user.png"}
                         width={50}
                         height={40}
                         alt="Profile "

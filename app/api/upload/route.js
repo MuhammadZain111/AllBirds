@@ -97,7 +97,7 @@ export async function POST(req) {
     try {
       updatedUser = await User.findOneAndUpdate(
         { email: session.user.email },
-        { profileImage: newImageUrl },
+        { image: newImageUrl },
         { returnDocument: "after" }, // ← was `{ returnDocument: "after" }` — that's a MongoDB driver option, not Mongoose
       );
     } catch (dbError) {

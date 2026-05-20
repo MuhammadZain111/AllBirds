@@ -22,7 +22,7 @@ export async function proxy(request: NextRequest) {
 
   const ROUTES = {
     auth: ["/sign-in", "/sign-up"],
-    public: ["/", "/products", "/men", "/women","/profile" ],
+    public: ["/", "/products", "/men", "/women", "/profile"],
     protected: ["/orders", "/cart"],
     superadmin: "/superadmin",
     admin: "/admindashboard",
