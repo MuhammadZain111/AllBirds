@@ -1,8 +1,6 @@
 "use client";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/common/Footer";
-import "swiper/css";
-import "swiper/css/navigation";
 import ProductDetail from "./components/ProductDetail";
 import ProductFeature from "./components/ProductFeature";
 
