@@ -7,7 +7,6 @@ import StorySlider from "./components/StorySlider";
 import TrendyProductSlider from "./components/TrendingProductSlider";
 import VarietySlider from "./components/VarietySlider";
 import NewProductsSection from "./components/NewProductsSection";
-import AboutHero from "./components/AboutHero";
 import { useSession } from "next-auth/react";
 
 export default function Home() {

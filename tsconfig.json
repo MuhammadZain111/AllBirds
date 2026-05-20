@@ -46,6 +46,6 @@
     "app/AdminComponents/AllUsers.jsx",
     "app/AdminComponents/Header.jsx",
     "app/AdminComponents/OrdersTable.jsx"
-  ],
+, "app/products/[id]/ProductDetailPage.jsx"  ],
   "exclude": ["node_modules"]
 }
