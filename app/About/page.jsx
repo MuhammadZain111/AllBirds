@@ -4,15 +4,15 @@ import Mission from "@/app/components/Mission";
 import AboutSlider from "@/app/components/AboutSlider";
 import Footer from "@/app/components/common/Footer";
 
-function About() {
+function page() {
   return (
     <div>
       <AboutHero />
       <Mission />
       <AboutSlider />
-      <Footer></Footer>
+      <Footer />
     </div>
   );
 }
 
-export default About;
+export default page;
