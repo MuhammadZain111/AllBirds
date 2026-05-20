@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import Sidebar from "./Sidebar";
-import CompleteProfile from "./CompleteProfile";
+import CompleteProfile from "../CompleteProfile";
+import Sidebar from "../Sidebar";
 
 function ProfilePage() {
   const { data: session, status } = useSession();
@@ -34,8 +33,8 @@ function ProfilePage() {
       </aside>
 
       <main className="flex flex-col flex-1 items-center justify-start pl-3">
-        {/* Header */}
-        {/* <Header /> */}
+        
+        
 
         {/* <WelcomeSection adminName={session?.user?.name || "Admin"} /> */}
 

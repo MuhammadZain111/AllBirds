@@ -1,5 +1,5 @@
 "use client";
-import Footer from "./components/Footer";
+import Footer from "./components/common/Footer";
 import HeroSection from "./components/HeroSection";
 import Navbar from "./components/Navbar";
 import ProductSlider from "./components/ProductSlider";

@@ -57,7 +57,8 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
       {/* Menu Items */}
       <div className="mt-8 space-y-6">
         <button className="flex items-center gap-4 text-slate-700 hover:text-blue-600 transition">
-          <Link href="/profile" className="text-lg font-medium">
+         
+          <Link href={`/${session?.user?.role === 1 ? "superadmin" : "admindashboard"}/profile`} className="text-lg font-medium">
             Edit profile
           </Link>
         </button>
