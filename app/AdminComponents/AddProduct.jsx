@@ -10,6 +10,7 @@ export default function AddProductPage() {
     category: "",
     stock: "",
   });
+  
 
   const [image, setImage] = useState(null);
 

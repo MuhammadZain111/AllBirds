@@ -11,76 +11,46 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const role = (token?.role as number | null) ?? null;
 
-  // ==== API BYPASS ===
+  // 1. API bypass
+  if (pathname.startsWith("/api")) return NextResponse.next();
 
-  if (pathname.startsWith("/api")) {
-    return NextResponse.next();
-  }
+  // 2. Route definitions
+  const authRoutes     = ["/sign-in", "/sign-up"];
+  const publicExact    = ["/", "/profile"];
+  const publicPrefixes = ["/products", "/men", "/women", "/shoes", "/category", "/collections","/forgot-password","/reset-password", ];
+  const protectedPrefixes = ["/orders", "/cart"];
 
-  // ====
-  // 2. ROUTE DEFINITION
+  const isAuthRoute    = authRoutes.includes(pathname);
+  const isPublicRoute  =
+    publicExact.includes(pathname) ||
+    publicPrefixes.some((p) => pathname.startsWith(p));
+  const isProtected    = protectedPrefixes.some((p) => pathname.startsWith(p));
+  const isSuperAdmin   = pathname.startsWith("/superadmin");
+  const isAdmin        = pathname.startsWith("/admindashboard");
 
-  const ROUTES = {
-    auth: ["/sign-in", "/sign-up"],
-    public: ["/", "/products", "/men", "/women", "/profile"],
-    protected: ["/orders", "/cart"],
-    superadmin: "/superadmin",
-    admin: "/admindashboard",
-  };
-
-  const isSuperAdminRoute = pathname.startsWith(ROUTES.superadmin);
-  const isAdminRoute = pathname.startsWith(ROUTES.admin);
-  const isAuthRoute = ROUTES.auth.includes(pathname);
-  const isPublicRoute = ROUTES.public.includes(pathname);
-
-  // =========================
-  // 3. SUPER ADMIN (role === 1)
-  // Can access: /superadmin/*, /sign-in, /sign-up
-  // Blocked from: public pages, admin dashboard, protected pages
-  // =========================
+  // 3. Super admin (role 1)
   if (token && role === 1) {
-    if (isAuthRoute) return NextResponse.next(); // ✅ allow sign-in/sign-up
-
-    if (!isSuperAdminRoute) {
-      return NextResponse.redirect(new URL(ROUTES.superadmin, request.url));
-    }
+    if (isAuthRoute) return NextResponse.next();
+    if (!isSuperAdmin) return NextResponse.redirect(new URL("/superadmin", request.url));
     return NextResponse.next();
   }
 
-  // =========================
-  // 4. SUB-ADMIN (role === 2)
-  // Can access: /admindashboard/*, /sign-in, /sign-up
-  // Blocked from: public pages, superadmin, protected pages
-  // =========================
+  // 4. Sub-admin (role 2)
   if (token && role === 2) {
-    if (isAuthRoute) return NextResponse.next(); // ✅ allow sign-in/sign-up
-
-    if (!isAdminRoute) {
-      return NextResponse.redirect(new URL(ROUTES.admin, request.url));
-    }
+    if (isAuthRoute) return NextResponse.next();
+    if (!isAdmin) return NextResponse.redirect(new URL("/admindashboard", request.url));
     return NextResponse.next();
   }
 
-  // =========================
-  // 5. GUEST (no token)
-  // =========================
+  // 5. Guest (no token)
   if (!token) {
-    if (isAuthRoute || isPublicRoute) {
-      return NextResponse.next();
-    }
-    return NextResponse.redirect(new URL("/sign-in", request.url));
+    if (isAuthRoute || isPublicRoute) return NextResponse.next();
+    return NextResponse.redirect(new URL("/sign-in", request.url));  // only blocks protected
   }
 
-  // =========================
-  // 6. LOGGED-IN USER (role === 3)
-  // =========================
-  if (isAuthRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  if (isSuperAdminRoute || isAdminRoute) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // 6. Logged-in user (role 3)
+  if (isAuthRoute) return NextResponse.redirect(new URL("/", request.url));
+  if (isSuperAdmin || isAdmin) return NextResponse.redirect(new URL("/", request.url));
 
   return NextResponse.next();
 }

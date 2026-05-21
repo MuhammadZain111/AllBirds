@@ -86,6 +86,7 @@ function CompleteProfile() {
         body: data,
       });
       alert("Profile updated successfully");
+      await update();
     } catch (error) {
       console.log(error);
     } finally {

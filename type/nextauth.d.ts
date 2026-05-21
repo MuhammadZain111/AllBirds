@@ -17,7 +17,7 @@ declare module "next-auth" {
       isVerified?: boolean;
       isAcceptingMessages?: boolean;
       username?: string;
-      image?: string;
+      image?: string | null ;
     } & DefaultSession["user"];
   }
 }
@@ -30,7 +30,7 @@ declare module "next-auth/jwt" {
       isverified?: boolean;
       isAcceptingMessages?: boolean;
       username?: string;
-      image?: string;
+      image?: string |null;
     } & DefaultSession["user"];
   }
 }
