@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 
+//Title,Category, Color fields set kerni hain 
+
+
+
+
 const ProductSchema = new mongoose.Schema(
   {
     title: {

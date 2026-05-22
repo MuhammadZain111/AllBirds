@@ -3,13 +3,12 @@ import React from "react";
 function BottomDrawer({ onClose, open }) {
   return (
     <div
-      className={`fixed top-20 w-full  bg-white shadow-lg z-60 transform transition-transform duration-300  group ${open ? "translate-y-0" : "translate-y-full"}`}
+      className={`fixed top-20 w-full  bg-white shadow-lg z-60 transform transition-transform duration-300  text-black  group ${open ? "translate-y-0" : "translate-y-full"}`}
     >
       <button className="px-4 py-2">Shoes</button>
 
-      <div className="w-screen bg-white shadow-lg ">
-        <h3 className="text-black">Here is the Bottom NavBar </h3>
-
+      <div className="w-screen bg-white shadow-lg text-black ">
+  
         <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8 p-8">
           <button
             onClick={onClose}
