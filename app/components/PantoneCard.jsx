@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function PantoneCard({
-  id,
+  _id: id,
   image,
   title,
   subtitle,
@@ -23,14 +23,14 @@ export default function PantoneCard({
         {/* IMAGE */}
         <div className="flex justify-center items-center flex-1">
           <div className="relative w-full h-[200px] md:h-[240px]">
-            <Image src={image} alt={title} fill className="object-contain" />
+            <Image src={image[0]} alt={title} fill className="object-contain" />
           </div>
         </div>
 
         {/* CONTENT */}
         <div className="space-y-3">
           <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
-            {title} product id is fetched{id}
+            {title}
           </h2>
 
           <p className="text-black text-base md:text-lg">{subtitle}</p>
@@ -41,7 +41,7 @@ export default function PantoneCard({
             </div>
 
             <span className="text-lg md:text-xl font-semibold text-black">
-              {price}
+              ${price}
             </span>
           </div>
         </div>

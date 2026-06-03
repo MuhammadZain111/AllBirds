@@ -1,5 +1,3 @@
-
-
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import CompleteProfile from "../CompleteProfile";

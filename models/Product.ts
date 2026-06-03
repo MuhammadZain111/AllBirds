@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 
-//Title,Category, Color fields set kerni hain 
-
-
-
+//Title,Category, Color fields set kerni hain
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -12,10 +9,8 @@ const ProductSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
     slug: {
       type: String,
-      unique: true, // for SEO-friendly URLs
     },
 
     description: {
@@ -26,6 +21,9 @@ const ProductSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true,
+    },
+    colors:{
+      type: [String], 
     },
 
     discountPrice: {
@@ -46,12 +44,7 @@ const ProductSchema = new mongoose.Schema(
       default: 0,
     },
 
-    sku: {
-      type: String,
-      unique: true, // product identifier
-    },
-
-    images: {
+    image: {
       type: [String], // multiple images instead of one
       default: [],
     },
@@ -75,6 +68,7 @@ const ProductSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    
 
     tags: {
       type: [String], // for filtering/search

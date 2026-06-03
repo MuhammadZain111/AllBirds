@@ -8,7 +8,6 @@ function BottomDrawer({ onClose, open }) {
       <button className="px-4 py-2">Shoes</button>
 
       <div className="w-screen bg-white shadow-lg text-black ">
-  
         <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8 p-8">
           <button
             onClick={onClose}

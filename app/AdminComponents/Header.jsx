@@ -51,34 +51,34 @@ function Header() {
 
         {/* Profile Button */}
 
- {status === "loading"
-              ? null
-              : session && (
-                  <div className="relative">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDropdown((prev) => !prev);
-                      }}
-                      className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
-                    >
-                      <Image
-                        src={user?.image || "/icons/user.png"}
-                        width={50}
-                        height={40}
-                        alt="Profile "
-                        className="rounded-full object-cover"
-                      />
-                    </button>
+        {status === "loading"
+          ? null
+          : session && (
+              <div className="relative">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDropdown((prev) => !prev);
+                  }}
+                  className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
+                >
+                  <Image
+                    src={user?.image || "/icons/user.png"}
+                    width={50}
+                    height={40}
+                    alt="Profile "
+                    className="rounded-full object-cover"
+                  />
+                </button>
 
-                    {dropdown && (
-                      <ProfileDropdown
-                        Opendropdown={dropdown}
-                        setOpenDropdown={setDropdown}
-                      />
-                    )}
-                  </div>
+                {dropdown && (
+                  <ProfileDropdown
+                    Opendropdown={dropdown}
+                    setOpenDropdown={setDropdown}
+                  />
                 )}
+              </div>
+            )}
       </div>
     </div>
   );

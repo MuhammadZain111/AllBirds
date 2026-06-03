@@ -6,21 +6,23 @@ import Product from "@/models/Product";
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
-const UPLOAD_TIMEOUT_MS = 10000;
+const UPLOAD_TIMEOUT_MS = 50000;
 
 export async function POST(request) {
   try {
     await dbConnect();
 
-    // Get form data
+    // get form data
     const formData = await request.formData();
 
     // Text fields
     const title = formData.get("title");
+    const slug = title.toLowerCase().replace(/\s+/g, "-");
     const description = formData.get("description");
     const price = formData.get("price");
     const category = formData.get("category");
     const stock = formData.get("stock");
+    const colors = formData.get("colors") || "[]";
 
     // File
     const file = formData.get("file");
@@ -102,11 +104,13 @@ export async function POST(request) {
     // Create Product
     const product = await Product.create({
       title,
+      slug,
       description,
       price,
       category,
       stock,
       image: uploadResult.secure_url,
+      colors,
     });
 
     return NextResponse.json(
@@ -129,23 +133,86 @@ export async function POST(request) {
   }
 }
 
-export async function GET() {
+export async function GET(request) {
   try {
     await dbConnect();
 
-    const products = await Product.find();
+    const { searchParams } = new URL(request.url);
 
-    return NextResponse.json({
-      success: true,
-      message: "Products fetched successfully",
-      products,
-    });
-  } catch (error) {
+    const id = searchParams.get("id");
+    const page = parseInt(searchParams.get("page")) || 1;
+    const limit = parseInt(searchParams.get("limit")) || 10;
+    const category = searchParams.get("category") || null;
+
+    // ─── Single Product ───────────────
+
+    if (id) {
+      const product = await Product.findById(id);
+
+      if (!product) {
+        return NextResponse.json(
+          { success: false, message: "Product not found" },
+          { status: 404 },
+        );
+      }
+
+      return NextResponse.json({ success: true, product }, { status: 200 });
+    }
+
+    // ─── Validate Pagination Params ────────────
+
+    if (page < 1 || limit < 1) {
+      return NextResponse.json(
+        { success: false, message: "Page and limit must be greater than 0" },
+        { status: 400 },
+      );
+    }
+
+    if (limit > 100) {
+      return NextResponse.json(
+        { success: false, message: "Limit cannot exceed 100" },
+        { status: 400 },
+      );
+    }
+
+    // ─── Build Filter ─────────────────────────────────────────────
+    const filter = {};
+
+    if (category) {
+      filter.category = { $regex: category, $options: "i" }; // case-insensitive
+    }
+
+    // ─── Fetch Paginated Products ─────────────────────────────────
+    const skip = (page - 1) * limit;
+
+    const [products, totalProducts] = await Promise.all([
+      Product.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
+      Product.countDocuments(filter),
+    ]);
+
+    const totalPages = Math.ceil(totalProducts / limit);
+    const hasNextPage = page < totalPages;
+    const hasPrevPage = page > 1;
+
     return NextResponse.json(
       {
-        success: false,
-        message: error.message,
+        success: true,
+        products,
+        pagination: {
+          totalProducts,
+          totalPages,
+          currentPage: page,
+          limit,
+          hasNextPage,
+          hasPrevPage,
+        },
       },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error("GET /api/product error:", error);
+    return NextResponse.json(
+      { success: false, message: error.message },
       { status: 500 },
     );
   }

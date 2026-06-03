@@ -58,8 +58,7 @@ function SortIcon({ field, sortField, sortDir }) {
 }
 
 // ─── Main component
-export default function UsersTable() 
-{
+export default function UsersTable() {
   const [search, setSearch] = useState("");
 
   const [roleFilter, setRoleFilter] = useState("All");
@@ -103,45 +102,43 @@ export default function UsersTable()
     }
   };
 
-  // ── Delete 
+  // ── Delete
   // user ────
-  // 
-  
+  //
+
   const handleDelete = async (id) => {
-  try {
-    const res = await fetch(`/api/users/${id}`, {
-      method: "DELETE",
-    });
+    try {
+      const res = await fetch(`/api/users/${id}`, {
+        method: "DELETE",
+      });
 
-    
-    //  Check if response is JSON before parsing
-    const contentType = res.headers.get("content-type");
+      //  Check if response is JSON before parsing
+      const contentType = res.headers.get("content-type");
 
-    let data;
+      let data;
 
-    if (contentType && contentType.includes("application/json")) {
-      data = await res.json();
-    } else {
-      const text = await res.text(); // fallback for HTML errors
-      throw new Error(text || "Unexpected server response");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      } else {
+        const text = await res.text(); // fallback for HTML errors
+        throw new Error(text || "Unexpected server response");
+      }
+
+      if (!res.ok) {
+        throw new Error(data?.message || "Failed to delete user");
+      }
+
+      // Success UI Update
+      setUsers((prev) => prev.filter((item) => item._id !== id));
+
+      console.log("Deleted successfully:", data.message);
+    } catch (error) {
+      console.error("Delete error:", error.message);
+
+      // optional: show UI toast
+      // toast.error(error.message || "Something went wrong");
     }
-
-    if (!res.ok) {
-      throw new Error(data?.message || "Failed to delete user");
-    }
-
-    // Success UI Update
-    setUsers((prev) => prev.filter((item) => item._id !== id));
-
-    console.log("Deleted successfully:", data.message);
-  } 
-  catch (error) {
-    console.error("Delete error:", error.message);
-
-    // optional: show UI toast
-    // toast.error(error.message || "Something went wrong");
-  }
-};
+  };
 
   // ── Filter + Search + Sort ───────────────────────────────────────────────
   const filteredUsers = useMemo(() => {
@@ -308,7 +305,6 @@ export default function UsersTable()
                       <Chip
                         label={isRole1 ? 1 : 2}
                         variant={isRole1 ? "success" : "danger"}
-                        
                       />
                     </td>
 

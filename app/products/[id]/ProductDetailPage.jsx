@@ -6,7 +6,7 @@ import ProductFeature from "./components/ProductFeature";
 
 function ProductDetailPage({ product }) {
   return (
-    <div className="min-h-screen bg-[#ede9e2] px-4 md:px-10 py-6">
+    <div className="min-h-screen bg-[#ede9e2] md:py-8 ">
       <Navbar> </Navbar>
 
       <ProductDetail product={product}> </ProductDetail>

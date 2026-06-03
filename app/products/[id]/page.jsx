@@ -1,24 +1,39 @@
-import { products } from "@/app/data/products";
 import ProductDetailPage from "./ProductDetailPage";
 
 export default async function Page({ params }) {
   const { id } = await params;
-  console.log(id);
-  console.log("PARAMS:", params);
-  console.log("PARAMS:", params);
-  console.log("ID:", params.id);
 
   if (!id) {
-    return <h1>No ID found</h1>;
+    return <h1 className="text-red-500">No Product ID provided</h1>;
   }
 
-  const product = products.find((p) => String(p.id) === String(id));
+  let data;
 
-  console.log("PRODUCT:", product);
+  try {
+    const res = await fetch(`http://localhost:3000/api/product/${id}`, {
+      cache: "no-store",
+    });
 
-  if (!product) {
-    return <h1>Product not found</h1>;
+    // 2. Handle HTTP errors (404, 500, etc.)
+    if (!res.ok) {
+      throw new Error(`HTTP Error: ${res.status}`);
+    }
+
+    data = await res.json();
+  } catch (error) {
+    console.error("Fetch Error:", error.message);
+
+    return (
+      <h1 className="text-red-500">
+        Failed to load product. Please try again later.
+      </h1>
+    );
   }
 
-  return <ProductDetailPage product={product} />;
+  // 3. Handle API response errors
+  if (!data?.success || !data?.product) {
+    return <h1 className="text-red-500">Product not found</h1>;
+  }
+
+  return <ProductDetailPage product={data.product} />;
 }

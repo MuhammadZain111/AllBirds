@@ -8,10 +8,31 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PantoneCard from "./PantoneCard";
 import { products } from "@/app/data/products";
+import { useEffect, useState } from "react";
 
 export default function TopRightArrowSwiper() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async (page = 1, category = "") => {
+    const params = new URLSearchParams({ page, limit: 10 });
+    if (category) params.append("category", category);
+
+    const res = await fetch(`/api/product?${params}`);
+    const data = await res.json();
+
+    if (data.success) {
+      setProducts(data.products);
+      console.log(data.products); // products array
+      console.log(data.pagination); // pagination meta
+    }
+  };
 
   const slides = [
     "/images/shoes1.png",

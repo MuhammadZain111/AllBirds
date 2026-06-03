@@ -83,60 +83,59 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-  async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account, profile }) {
+      // 1. FIRST LOGIN
+      if (user) {
+        await dbConnect();
+        const dbUser = await UserModel.findOne({ email: user.email });
 
-  // 1. FIRST LOGIN
-  if (user) {
-    await dbConnect();
-    const dbUser = await UserModel.findOne({ email: user.email });
+        token._id = user.id?.toString();
+        token.email = user.email;
+        token.lastFetched = Date.now();
+        token.role = dbUser?.role;
+        token.username = (user as any).username;
+        token.image = dbUser?.image || null;
 
-    token._id = user.id?.toString();
-    token.email = user.email;
-    token.lastFetched = Date.now();
-    token.role = dbUser?.role;
-    token.username = (user as any).username;
-    token.image = dbUser?.image || null;
+        // Save Google profile picture on first login
+        if (account?.provider === "google") {
+          const googleImage = (profile as any)?.picture || null;
+          token.image = googleImage;
 
-    // Save Google profile picture on first login
-    if (account?.provider === "google") {
-      const googleImage = (profile as any)?.picture || null;
-      token.image = googleImage;
-
-      if (dbUser && !dbUser.image && googleImage) {
-        await UserModel.updateOne(
-          { email: user.email },
-          { image: googleImage }
-        );
+          if (dbUser && !dbUser.image && googleImage) {
+            await UserModel.updateOne(
+              { email: user.email },
+              { image: googleImage },
+            );
+          }
+        }
       }
-    }
-  }
 
-  // 2. DB REFRESH (runs on every JWT call after first login)
-  const shouldRefreshFromDB =
-    !token.lastFetched ||
-    Date.now() - Number(token.lastFetched) > 60 * 1000;
+      // 2. DB REFRESH (runs on every JWT call after first login)
+      const shouldRefreshFromDB =
+        !token.lastFetched ||
+        Date.now() - Number(token.lastFetched) > 60 * 1000;
 
-  if (token.email && shouldRefreshFromDB) {
-    try {
-      await dbConnect();
-      const dbUser = await UserModel.findOne({ email: token.email });
+      if (token.email && shouldRefreshFromDB) {
+        try {
+          await dbConnect();
+          const dbUser = await UserModel.findOne({ email: token.email });
 
-      if (dbUser) {
-        token._id = dbUser._id.toString();
-        token.email = dbUser.email;
-        token.username = dbUser.username;
-        token.role = dbUser.role ?? 3;
-        token.image = dbUser.image || token.image || null;
+          if (dbUser) {
+            token._id = dbUser._id.toString();
+            token.email = dbUser.email;
+            token.username = dbUser.username;
+            token.role = dbUser.role ?? 3;
+            token.image = dbUser.image || token.image || null;
+          }
+        } catch (err) {
+          console.error("JWT DB fetch error:", err);
+        } finally {
+          token.lastFetched = Date.now();
+        }
       }
-    } catch (err) {
-      console.error("JWT DB fetch error:", err);
-    } finally {
-      token.lastFetched = Date.now();
-    }
-  }
 
-  return token;
-},
+      return token;
+    },
 
     async session({ session, token }) {
       console.log(
@@ -146,7 +145,7 @@ export const authOptions: NextAuthOptions = {
         token.email,
       );
 
-        //  const dbUser = await UserModel.findById(token._id);
+      //  const dbUser = await UserModel.findById(token._id);
 
       if (session.user) {
         session.user._id = (token._id as string) ?? "";

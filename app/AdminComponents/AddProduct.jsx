@@ -9,14 +9,29 @@ export default function AddProductPage() {
     price: "",
     category: "",
     stock: "",
+    colors: "",
   });
-  
 
   const [image, setImage] = useState(null);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const [colors, setColors] = useState([]);
+
+const options = [
+  { name: "Black", code: "#000000" },
+  { name: "White", code: "#ff00ff" },
+  { name: "Red", code: "#ff0000" },
+  { name: "Blue", code: "#0000ff" }
+];
+
+
+const addColor = (color) => {
+  if (colors.includes(color)) return;
+
+  setColors([...colors, color]);
+};
 
   // Handle input changes
   const handleChange = (e) => {
@@ -35,6 +50,7 @@ export default function AddProductPage() {
     if (!formData.category.trim()) return "Category is required";
     if (formData.stock < 0) return "Stock cannot be negative";
     if (!image) return "Image is required";
+    if (colors.length === 0) return "At least one color is required";
 
     return null;
   };
@@ -54,6 +70,7 @@ export default function AddProductPage() {
 
     if (validationError) {
       setError(validationError);
+      setLoading(false);
       return;
     }
 
@@ -66,6 +83,7 @@ export default function AddProductPage() {
       data.append("category", formData.category);
       data.append("stock", formData.stock);
       data.append("file", image);
+      data.append("colors",formData.colors);
 
       const response = await fetch("/api/product", {
         method: "POST",
@@ -112,7 +130,6 @@ export default function AddProductPage() {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Error */}
           {error && (
             <div className="bg-red-100 text-red-600 p-3 rounded-md">
               {error}
@@ -181,6 +198,20 @@ export default function AddProductPage() {
             className="w-full border text-black p-3 rounded-lg"
           />
 
+        <div className="flex gap-3">
+  {options.map((c) => (
+    <div
+      key={c.code}
+      title={c.name}
+      onClick={() => addColor(c.code)}
+      className="w-8 h-8 rounded-full border cursor-pointer"
+      style={{ backgroundColor: c.code }}
+    />
+  ))}
+</div>
+
+    <button className="text-black border-2 border-black cursor-pointer" onClick={addColor}>Add Color</button>
+
           {/* Image */}
           <div className="w-full border p-4 rounded-lg bg-gray-50">
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -199,7 +230,7 @@ export default function AddProductPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition cussor-pointer "
+            className="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 rounded-lg transition cursor-pointer "
           >
             {loading ? "Adding Product. ..." : "Sign In"}
           </button>

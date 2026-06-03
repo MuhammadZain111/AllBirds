@@ -18,11 +18,11 @@ export default function Navbar() {
 
   console.log(session);
 
-console.log(session?.user?.image);
+  console.log(session?.user?.image);
 
   const userdata = session?.user;
 
-   console.log("imag url is",userdata?.image);
+  console.log("imag url is", userdata?.image);
 
   const [drawer, setDrawer] = useState(false);
 
@@ -142,7 +142,7 @@ console.log(session?.user?.image);
                       className="w-10 h-10 rounded-full bg-[#352C4D] flex items-center justify-center text-white transition overflow-hidden cursor-pointer"
                     >
                       <Image
-                        src={ userdata.image || "/icons/user.png"}
+                        src={userdata.image || "/icons/user.png"}
                         width={50}
                         height={40}
                         alt="Profile"

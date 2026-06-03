@@ -18,9 +18,9 @@ function ProductDetail({ product }) {
   const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
   return (
-    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <div className="w-full">
+    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-8 mt-16 border-2 border-black rounded-xl">
+      <div className="grid md:grid-cols-3 gap-10 items-start pt-8 mt-10 ">
+        <div className="w-full col-span-2 ">
           <Swiper modules={[Navigation]} navigation className="rounded-xl">
             {images.map((img, index) => (
               <SwiperSlide key={index}>
@@ -41,10 +41,10 @@ function ProductDetail({ product }) {
             {images.map((img, i) => (
               <div
                 key={i}
-                className="relative w-20 h-16 border rounded-md overflow-hidden cursor-pointer"
+                className="relative w-24 h-16 border rounded-md overflow-hidden cursor-pointer"
               >
                 <Image
-                  src={product.image}
+                  src={product.image[0]}
                   alt="thumb"
                   fill
                   className="object-cover"
@@ -54,7 +54,7 @@ function ProductDetail({ product }) {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-md sticky top-6 text-black w-full ">
+        <div className="col-span-1 bg-white p-6 rounded-xl shadow-md sticky top-6 text-black w-full ">
           <h1 className="text-2xl font-semibold">{product.title}</h1>
 
           <p className="text-sm text-gray-500 mt-1 text-black ">
@@ -98,7 +98,7 @@ function ProductDetail({ product }) {
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`border rounded-md py-2 text-sm transition 
+                  className={`border rounded-md py-2 curosor-pointer  text-sm transition 
                     ${
                       selectedSize === size
                         ? "bg-black text-white"
@@ -111,9 +111,15 @@ function ProductDetail({ product }) {
             </div>
           </div>
 
-          {/* BUTTON */}
-          <button className="w-full mt-6 bg-gray-300 text-gray-600 py-3 rounded-full cursor-not-allowed">
-            SELECT A SIZE
+          <button
+            disabled={!selectedSize}
+            className={`w-full mt-6 py-3 rounded-full ${
+              selectedSize
+                ? "bg-black text-white cursor-pointer"
+                : "bg-gray-300 text-gray-600 cursor-not-allowed"
+            }`}
+          >
+            {selectedSize ? "ADD TO CART" : "SELECT A SIZE"}
           </button>
 
           <p className="text-xs text-center text-gray-500 mt-4">
