@@ -15,6 +15,16 @@ export async function POST(request) {
     // get form data
     const formData = await request.formData();
 
+    console.log("Received form data:", {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      price: formData.get("price"),
+      category: formData.get("category"),
+      stock: formData.get("stock"),
+      colors: typeof formData.getAll("colors"),
+      file: formData.get("file"),
+    });
+
     // Text fields
     const title = formData.get("title");
     const slug = title.toLowerCase().replace(/\s+/g, "-");
@@ -22,7 +32,18 @@ export async function POST(request) {
     const price = formData.get("price");
     const category = formData.get("category");
     const stock = formData.get("stock");
-    const colors = formData.get("colors") || "[]";
+    const colors = formData.getAll("colors") || "[]";
+
+
+ console.log("Parsed form fields:", {
+      title,
+      slug,
+      description,
+      price,
+      category,
+      stock,
+      colors,
+    });
 
     // File
     const file = formData.get("file");
@@ -132,6 +153,11 @@ export async function POST(request) {
     );
   }
 }
+
+
+
+
+
 
 export async function GET(request) {
   try {

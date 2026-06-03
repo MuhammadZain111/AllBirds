@@ -17,13 +17,16 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-
+    size:{
+      type:[String],
+  
+      },
     price: {
       type: Number,
       required: true,
     },
-    colors:{
-      type: [String], 
+    colors: {
+      type: [String],
     },
 
     discountPrice: {
@@ -68,7 +71,6 @@ const ProductSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    
 
     tags: {
       type: [String], // for filtering/search
@@ -89,6 +91,7 @@ const ProductSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    strict: false, 
   },
 );
 

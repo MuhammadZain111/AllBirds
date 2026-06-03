@@ -3,35 +3,32 @@
 import { useState } from "react";
 
 export default function AddProductPage() {
+ 
+ 
+ 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: "",
     category: "",
     stock: "",
-    colors: "",
+    colors: [],
   });
+
+
 
   const [image, setImage] = useState(null);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const [colors, setColors] = useState([]);
 
-const options = [
-  { name: "Black", code: "#000000" },
-  { name: "White", code: "#ff00ff" },
-  { name: "Red", code: "#ff0000" },
-  { name: "Blue", code: "#0000ff" }
-];
-
-
-const addColor = (color) => {
-  if (colors.includes(color)) return;
-
-  setColors([...colors, color]);
-};
+  const options = [
+    { name: "Black", code: "#000000" },
+    { name: "White", code: "#ff00ff" },
+    { name: "Red", code: "#ff0000" },
+    { name: "Blue", code: "#0000ff" },
+  ];
 
   // Handle input changes
   const handleChange = (e) => {
@@ -50,7 +47,7 @@ const addColor = (color) => {
     if (!formData.category.trim()) return "Category is required";
     if (formData.stock < 0) return "Stock cannot be negative";
     if (!image) return "Image is required";
-    if (colors.length === 0) return "At least one color is required";
+    if (formData.colors.length === 0) return "At least one color is required";
 
     return null;
   };
@@ -83,12 +80,25 @@ const addColor = (color) => {
       data.append("category", formData.category);
       data.append("stock", formData.stock);
       data.append("file", image);
-      data.append("colors",formData.colors);
+  
+      // data.append("colors", formData.colors);
+     
+      formData.colors.forEach((color) => {  data.append("colors", color);
+});
+
+
+     
+
+
+      console.log("FORM DATA:", formData.colors.typeof);
+
+
+
 
       const response = await fetch("/api/product", {
         method: "POST",
         body: data,
-      });
+      }); 
 
       const result = await response.json();
 
@@ -112,6 +122,7 @@ const addColor = (color) => {
         price: "",
         category: "",
         stock: "",
+        colors: [],
       });
       setImage(null);
     } catch (err) {
@@ -174,6 +185,7 @@ const addColor = (color) => {
               className="w-full text-black border p-3 rounded-lg"
             />
 
+
             <input
               type="number"
               name="stock"
@@ -188,6 +200,7 @@ const addColor = (color) => {
             />
           </div>
 
+
           {/* Category */}
           <input
             type="text"
@@ -198,19 +211,29 @@ const addColor = (color) => {
             className="w-full border text-black p-3 rounded-lg"
           />
 
-        <div className="flex gap-3">
-  {options.map((c) => (
-    <div
-      key={c.code}
-      title={c.name}
-      onClick={() => addColor(c.code)}
-      className="w-8 h-8 rounded-full border cursor-pointer"
-      style={{ backgroundColor: c.code }}
-    />
-  ))}
-</div>
-
-    <button className="text-black border-2 border-black cursor-pointer" onClick={addColor}>Add Color</button>
+          {options.map((color) => (
+            <label key={color.code} className=" text-black  mx-2 ">
+              <input
+                type="checkbox"
+                className="text-black ml-1"
+                value={color.code}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFormData({
+                      ...formData,
+                      colors: [...formData.colors, color.code],
+                    });
+                  } else {
+                    setFormData({
+                      ...formData,
+                      colors: formData.colors.filter((c) => c !== color.code),
+                    });
+                  }
+                }}
+              />
+              {color.name}
+            </label>
+          ))}
 
           {/* Image */}
           <div className="w-full border p-4 rounded-lg bg-gray-50">

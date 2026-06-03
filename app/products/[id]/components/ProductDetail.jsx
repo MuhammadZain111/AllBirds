@@ -17,6 +17,14 @@ function ProductDetail({ product }) {
 
   const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
+  // const colorsArray = product.colors.split(",");
+
+  const colorsArray = Array.isArray(product.colors)
+    ? product.colors
+    : (product.colors || "").split(",");
+
+  console.log("Colors Array:", colorsArray); // Debugging line to check the colors array
+
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-8 mt-16 border-2 border-black rounded-xl">
       <div className="grid md:grid-cols-3 gap-10 items-start pt-8 mt-10 ">
@@ -26,7 +34,7 @@ function ProductDetail({ product }) {
               <SwiperSlide key={index}>
                 <div className="relative w-full h-[400px] md:h-[500px]">
                   <Image
-                    src={img}
+                    src={product.image[0]}
                     alt="product"
                     fill
                     className="object-contain"
@@ -77,15 +85,17 @@ function ProductDetail({ product }) {
               COLOR: <span className="text-gray-500">Cultured Blue</span>
             </p>
 
+            {/* const colorsArray = colorsString.split(","); */}
+
             <div className="flex gap-2 mt-3 flex-wrap">
-              {Array(12)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border cursor-pointer bg-gray-300"
-                  />
-                ))}
+              {colorsArray.map((color, index) => (
+                <div
+                  key={index}
+                  className="w-8 h-8 rounded-full border cursor-pointer"
+                  style={{ backgroundColor: color }}
+                  title={index}
+                />
+              ))}
             </div>
           </div>
 

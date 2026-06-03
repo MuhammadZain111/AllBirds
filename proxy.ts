@@ -19,6 +19,7 @@ export async function proxy(request: NextRequest) {
   const publicExact = ["/", "/profile"];
   const publicPrefixes = [
     "/product",
+    "/products",
     "/men",
     "/women",
     "/shoes",
