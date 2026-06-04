@@ -9,6 +9,8 @@ import { useState } from "react";
 import Accordion from "./Accordion";
 import ProductFeature from "./ProductFeature";
 import Item from "./Item";
+import { useCart } from '@/app/Context/CartContext';
+
 
 function ProductDetail({ product }) {
   const [selectedSize, setSelectedSize] = useState(null);
@@ -17,14 +19,14 @@ function ProductDetail({ product }) {
 
   const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
-  // const colorsArray = product.colors.split(",");
+   const { addItem } = useCart()
 
   const colorsArray = Array.isArray(product.colors)
     ? product.colors
     : (product.colors || "").split(",");
 
-  console.log("Colors Array:", colorsArray); // Debugging line to check the colors array
 
+    
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-8 mt-16 border-2 border-black rounded-xl">
       <div className="grid md:grid-cols-3 gap-10 items-start pt-8 mt-10 ">
@@ -121,9 +123,12 @@ function ProductDetail({ product }) {
             </div>
           </div>
 
+
+
           <button
-            disabled={!selectedSize}
-            className={`w-full mt-6 py-3 rounded-full ${
+             onClick={() => addItem(product)}
+             disabled={!selectedSize}
+             className={`w-full mt-6 py-3 rounded-full ${
               selectedSize
                 ? "bg-black text-white cursor-pointer"
                 : "bg-gray-300 text-gray-600 cursor-not-allowed"

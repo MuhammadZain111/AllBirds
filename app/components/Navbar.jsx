@@ -10,8 +10,11 @@ import { signOut } from "next-auth/react";
 import ProfileDropdown from "./ProfileDropdown";
 
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
+import { useCart } from "../Context/CartContext";
 
 export default function Navbar() {
+  const { totalItems } = useCart();
+
   const [open, setOpen] = useState(false);
 
   const { data: session, status } = useSession();
@@ -124,10 +127,16 @@ export default function Navbar() {
             <Link href="/contact">Help</Link>
 
             <button
-              className="text-black cursor-pointer "
+              className="text-black cursor-pointer relative"
               onClick={() => setDrawer(true)}
             >
               <Image src="/icons/cart.svg" width={24} height={24} alt="cart" />
+
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-black text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {totalItems}
+                </span>
+              )}
             </button>
 
             {status === "loading"

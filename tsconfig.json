@@ -48,6 +48,6 @@
     "app/AdminComponents/OrdersTable.jsx",
     "app/products/[id]/ProductDetailPage.jsx",
     "app/components/Sidebar.jsx"
-  ],
+, "app/products/[id]/components/ProductDetail.jsx"  ],
   "exclude": ["node_modules"]
 }
