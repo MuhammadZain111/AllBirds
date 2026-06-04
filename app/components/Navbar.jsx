@@ -8,11 +8,17 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import ProfileDropdown from "./ProfileDropdown";
-
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
 import { useCart } from "../Context/CartContext";
 
+
+
+
+
 export default function Navbar() {
+
+  
+
   const { totalItems } = useCart();
 
   const [open, setOpen] = useState(false);

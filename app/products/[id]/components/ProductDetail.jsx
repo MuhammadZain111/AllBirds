@@ -26,9 +26,9 @@ function ProductDetail({ product }) {
     : (product.colors || "").split(",");
 
 
-    
+
   return (
-    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-8 mt-16 border-2 border-black rounded-xl">
+    <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-8 mt-16 border-2 rounded-xl">
       <div className="grid md:grid-cols-3 gap-10 items-start pt-8 mt-10 ">
         <div className="w-full col-span-2 ">
           <Swiper modules={[Navigation]} navigation className="rounded-xl">
