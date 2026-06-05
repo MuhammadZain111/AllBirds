@@ -1,4 +1,8 @@
 import ProductDetailPage from "./ProductDetailPage";
+import { API_URL } from "@/config";
+
+
+
 
 export default async function Page({ params }) {
   const { id } = await params;
@@ -8,6 +12,10 @@ export default async function Page({ params }) {
   }
 
   let data;
+
+
+${session?.user?.role === 1 ? "superadmin" : "admindashboard"}?tab=$
+
 
   try {
     const res = await fetch(`http://localhost:3000/api/product/${id}`, {

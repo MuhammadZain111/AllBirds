@@ -51,80 +51,18 @@ function SideDrawer({ onClose, open }) {
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4">
-            {/* Product Card */}
-            <div className="border border-gray-200 rounded-2xl p-4">
-              <div className="flex gap-4">
-                {/* Product Image */}
-                <img
-                  src="/shoe.png"
-                  alt="shoe"
-                  className="w-24 h-24 rounded-xl bg-gray-100 object-contain p-2 flex-shrink-0"
-                />
 
-                {/* Product Details */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex justify-between gap-2">
-                    <div className="min-w-0">
-                      <h3 className="font-semibold text-sm truncate text-black">
-                        Women's Tree Glider
-                      </h3>
 
-                      <p className="text-xs mt-1 text-black  ">
-                        Burlwood (Burlwood Sole)
-                      </p>
 
-                      <p className="text-xs text-black mt-1">Size: 5.5</p>
-                    </div>
+   <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4">
 
-                    <p className="font-bold text-sm whitespace-nowrap text-black   ">
-                      $140
-                    </p>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between mt-4">
-                    <button className="text-xs text-black cursor-pointer hover:text-red-600 underline">
-                      Remove
-                    </button>
-
-                    <div className="flex items-center border rounded-full overflow-hidden">
-                      <button  onClick={() => updateQuantity(item.id, item.quantity - 1) } className="px-3 text-black py-1 hover:bg-gray-100 transition cursor-pointer   ">
-                        -
-                      </button>
-
-                      <span className="px-3 text-sm font-medium text-black">
-                        {totalItems}
-                      </span>
-
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="text-black px-3 py-1 hover:bg-gray-100 transition cursor-pointer   ">
-                        +
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Retu
-    
-    
-    rns Protection */}
-            <div className="mt-4 bg-stone-100 rounded-2xl p-5">
-              <h3 className="font-semibold text-sm text-black    ">
-                Returns Protection
-              </h3>
-
-              <p className="text-sm text-black mt-2">
-                Buy returns protection to qualify for free returns. Does not
-                apply to Final Sale items.
-              </p>
-
-              <button className="mt-4 w-full bg-black text-white py-3 rounded-full font-medium hover:opacity-90 transition">
-                Add • $3
-              </button>
-            </div>
+       
           </div>
+
+ 
+
+
+         
 
           {/* Footer */}
           <div className="border-t bg-white p-5">

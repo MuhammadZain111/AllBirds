@@ -19,7 +19,7 @@ export default function ProductsPage() {
   }, []);
 
   const fetchProducts = async (page = 1, category = "") => {
-    const params = new URLSearchParams({ page, limit: 50 });
+    const params = new URLSearchParams({ page, limit: 30 });
     if (category) params.append("category", category);
 
     const res = await fetch(`/api/product?${params}`);
