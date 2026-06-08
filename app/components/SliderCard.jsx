@@ -1,5 +1,7 @@
 import react from "react";
 
+
+
 const SliderCard = ({ image, title, buttons, bg }) => {
   return (
     <div

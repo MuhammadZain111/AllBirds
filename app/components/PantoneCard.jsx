@@ -11,7 +11,9 @@ export default function PantoneCard({
   color,
 }) {
   return (
-    <Link href={`/products/${id}`} className="block">
+
+<Link href={{ pathname: `/products/${id}`,query: { from: "category" }
+}}  className="block">
       <div className="w-full max-w-md mx-auto rounded-3xl bg-[#f5f3ef] p-6 flex flex-col justify-between h-[500px]">
         {/* COLOR TAG */}
         <div>

@@ -1,5 +1,5 @@
 export interface CartItem {
-  id: string
+  _id: string
   name: string
   price: number
   quantity: number
@@ -9,8 +9,8 @@ export interface CartItem {
 export interface CartContextType {
   items: CartItem[]
   addItem: (item: Omit<CartItem, 'quantity'>) => void
-  removeItem: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
+  removeItem: (_id: string) => void
+  updateQuantity: (_id: string, quantity: number) => void
   clearCart: () => void
   totalItems: number
   totalPrice: number

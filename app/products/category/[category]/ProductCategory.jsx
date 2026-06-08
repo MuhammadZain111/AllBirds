@@ -33,7 +33,7 @@ export default function ProductCategory({ product }) {
           {product.map((product, index) => (
             <div key={index}>
               <Link
-                href={`/product/category/${product.category}/${product.id}`}
+                href={`/product/${product.category}/${product.id}`}
                 className="block"
               >
                 <div className="w-full max-w-md mx-auto rounded-3xl bg-[#f5f3ef] p-6 flex flex-col justify-between h-[500px]">

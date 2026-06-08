@@ -1,14 +1,20 @@
 import React from "react";
 
+import Image from "next/image";
+
 import { useCart } from "../Context/CartContext";
 
 function SideDrawer({ onClose, open }) {
  
   // const { totalItems } = useCart();
 
-  const { items, totalItems, totalPrice } = useCart()
+  const { items, totalItems, totalPrice,updateQuantity, removeItem} = useCart()
 
-  return (
+//problem kyaa hai hamare pass. aik toh humnai sotck managemnt dekhn ahai kai kaise work kerta hai....
+
+
+
+return (
     <div
       className={`fixed top-0 right-0 h-full w-96 bg-white shadow-lg z-60 transform transition-transform duration-300 ${
         open ? "translate-x-0" : "translate-x-full"
@@ -53,29 +59,112 @@ function SideDrawer({ onClose, open }) {
           {/* Scrollable Content */}
 
 
+<div className="flex-1 overflow-x-hidden px-4 pb-3">
 
-   <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 pb-4">
+  {items?.map((item) => (
+    <div key={item._id} className="border border-gray-200 rounded-2xl p-4 mb-4">
+      <div className="flex gap-4">
 
-       
-          </div>
+        {/* Product Image */}
+        <Image
+          src={item.image?.[0]}
+          alt={item.name}
+          width={96}
+          height={96}
+          className="w-24 h-24 rounded-xl bg-gray-100 object-contain p-2 flex-shrink-0"
+        />
 
- 
+        {/* Product Details */}
+        <div className="flex-1 min-w-0">
 
+          <div className="flex justify-between gap-2">
 
-         
+            <div className="min-w-0">
+              <h3 className="font-semibold text-sm truncate text-black">
+                {item.name} 
+              </h3>
 
-          {/* Footer */}
-          <div className="border-t bg-white p-5">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-gray-600 text-sm">Subtotal</span>
+              <p className="text-xs mt-1 text-black">
+                Burlwood (Burlwood Sole)
+              </p>
 
-              <span className="font-bold text-lg">$140</span>
+              <p className="text-xs text-black mt-1">
+                Size: {item.size}
+              </p>
             </div>
 
-            <button className="w-full bg-black text-white py-3.5 rounded-full font-semibold hover:opacity-90 transition">
-              Checkout
-            </button>
+            <p className="font-bold text-sm whitespace-nowrap text-black">
+              ${item.price*totalItems}
+            </p>
           </div>
+
+          {/* Actions */}
+          <div className="flex items-center justify-between mt-4">
+
+            <button className="text-xs text-black hover:text-red-600 underline cursor-pointer"
+             onClick={() => removeItem(item._id)}
+            >
+              Remove
+            </button>
+
+            <div className="flex items-center border rounded-full overflow-hidden">
+
+              <button
+                onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                className="px-3 py-1 hover:bg-gray-100 transition text-black cursor-pointer  "
+              >
+                -
+              </button>
+
+              <span className="px-3 text-sm font-medium text-black">
+                {item.quantity}
+              </span>
+
+              <button  onClick={() => updateQuantity(item._id, item.quantity + 1)
+      }
+      className="px-3 py-1 hover:bg-gray-100 transition text-black cursor-pointer"
+    >
+      +
+    </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  {/* Returns Protection */}
+  <div className="mt- bg-stone-100 rounded-2xl p-5">
+
+    <h3 className="font-semibold text-sm text-black">
+      Returns Protection
+    </h3>
+
+    <p className="text-sm text-black mt-2">
+      Buy returns protection to qualify for free returns. Does not apply to Final Sale items.
+    </p>
+
+    <button className="mt-4 w-full bg-black text-white py-3 rounded-full font-medium hover:opacity-90 transition">
+      Add • $3
+    </button>
+
+  </div>
+</div>
+
+          {/* Footer */}
+          <div className="border-t bg-white p-5 mb-8 pb-8 ">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-gray-600 text-sm text-black ">Subtotal</span>
+
+              <span className="font-bold text-lg text-black">${totalPrice}</span>
+            </div>
+
+            <Link href="/products/checkout"   className="w-full bg-black text-white py-3.5 rounded-full font-semibold hover:opacity-90 transition">
+              Checkout
+            </Link>
+          </div>
+
         </div>
       )}
 
@@ -108,3 +197,4 @@ function SideDrawer({ onClose, open }) {
 }
 
 export default SideDrawer;
+

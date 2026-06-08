@@ -5,34 +5,15 @@ import FilterPanel from "@/app/components/FilterPanel";
 import PantoneCard from "@/app/components/PantoneCard";
 import Navbar from "@/app/components/Navbar";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
+// Here we will fetch the products from the database and display them in grid layout. Each product will be a link to its detail page.
 
 
-
-//here we will fetch the products from the database and display them in a grid layout. Each product will be a link to its detail page.
-
-export default function ProductsPage() {
-
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async (page = 1, category = "") => {
-    const params = new URLSearchParams({ page, limit: 30 });
-    if (category) params.append("category", category);
-
-    const res = await fetch(`/api/product?${params}`);
-    const data = await res.json();
-
-    if (data.success) {
-      setProducts(data.products);
-      console.log(data.products); // products array
-      console.log(data.pagination); // pagination meta
-    }
-  };
-
-
+export default function ProductsPage({ products }) 
+{
+  // const searchParams = useSearchParams();
+  // const from = searchParams.get("from");
 
   return (
     <div className="w-full mx-2 p-2">

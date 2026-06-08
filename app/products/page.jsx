@@ -1,13 +1,36 @@
 import ProductsPage from "../components/ProductsPage";
+import { API_URL } from "@/config";
 
-//here we will fetch the products from the database and display them in a grid layout. Each product will be a link to its detail page.
+export default async function Page({ searchParams }) {
 
-export default function Page() {
+  const { category, page = 1 } =await searchParams || {};
 
+  const params = new URLSearchParams();
+
+
+   console.log(params);
+
+  params.append("page", page);
+  params.append("limit", 30);
+
+  // 👇 only add category if it exists
+  if (category) {
+    params.append("category", category);
+  }
+
+  const res = await fetch(
+    `${API_URL}/product?${params.toString()}`,
+    {
+      cache: "no-store",
+    }
+  );
+
+  const data = await res.json();
 
   return (
-    <div className="w-full mx-auto p-6">
-      <ProductsPage />
-    </div>
+    <ProductsPage
+      products={data.products}
+      pagination={data.pagination}
+    />
   );
 }
