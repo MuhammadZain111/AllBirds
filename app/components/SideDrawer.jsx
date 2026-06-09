@@ -1,8 +1,8 @@
 import React from "react";
-
 import Image from "next/image";
-
 import { useCart } from "../Context/CartContext";
+import Link from  "next/link"
+
 
 function SideDrawer({ onClose, open }) {
  
@@ -160,7 +160,7 @@ return (
               <span className="font-bold text-lg text-black">${totalPrice}</span>
             </div>
 
-            <Link href="/products/checkout"   className="w-full bg-black text-white py-3.5 rounded-full font-semibold hover:opacity-90 transition">
+            <Link href="/products/checkout"   className="w-full w-40 bg-black text-white py-3.5 rounded-full font-semibold hover:opacity-90 transition">
               Checkout
             </Link>
           </div>

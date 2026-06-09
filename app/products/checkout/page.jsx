@@ -1,11 +1,13 @@
 import React from 'react'
-import checkout from "/components/Checkout"
+import CheckOut from "../../components/CheckOut"
 
 
 function page() {
+
   return (
     <div>
-      <Checkout/>
+   
+      <CheckOut/>
     </div>
   )
 }
