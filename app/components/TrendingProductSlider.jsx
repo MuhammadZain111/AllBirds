@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PantoneCard from "./PantoneCard";
-import { products } from "@/app/data/products";
 import { useEffect, useState } from "react";
 
 export default function TopRightArrowSwiper() {
@@ -29,7 +28,7 @@ export default function TopRightArrowSwiper() {
 
     if (data.success) {
       setProducts(data.products);
-      console.log(data.products); // products array
+      console.log(data.products); // products Array
       console.log(data.pagination); // pagination meta
     }
   };

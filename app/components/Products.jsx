@@ -18,6 +18,7 @@ export default function ProductPage() {
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
       {/* GRID */}
       <div className="grid md:grid-cols-2 gap-10 items-start">
+        
         {/* LEFT SIDE (SLIDER) */}
         <div className="w-full">
           <Swiper modules={[Navigation]} navigation className="rounded-xl">

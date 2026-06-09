@@ -1,4 +1,5 @@
 "use client";
+
 import "../globals.css";
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
@@ -8,6 +9,8 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import styles from "./hero.module.css";
+import Link from "next/link";
+
 
 export default function HeroSection() {
   const swiperRef = useRef(null);
@@ -132,12 +135,15 @@ export default function HeroSection() {
                   </h1>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <button className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer    ">
+
+                    <Link  href="/products"  className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer    ">
                       Shop Men
-                    </button>
-                    <button className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer">
+                    </Link>
+
+                    <Link href="/products"  className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer">
                       Shop Women
-                    </button>
+                    </Link>
+
                   </div>
                 </div>
               </div>
@@ -151,6 +157,7 @@ export default function HeroSection() {
         >
           {isPlaying ? "Pause" : "Play"}
         </button>
+
       </div>
     </div>
   );

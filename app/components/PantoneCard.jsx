@@ -9,6 +9,7 @@ export default function PantoneCard({
   subtitle,
   price,
   color,
+  stock
 }) {
   return (
 
@@ -29,11 +30,23 @@ export default function PantoneCard({
           </div>
         </div>
 
+
         {/* CONTENT */}
         <div className="space-y-3">
-          <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
+          
+          <div classNna="text-black   ">
+          
+           <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
             {title}
           </h2>
+
+          {stock === 0 ? ( <span className="text-green "   >Out of Stock</span> ) : stock <= 5 ? (
+             <span className="text-black    " >Only a few left</span> ) : (
+             <span className="text-black " > In Stock</span> )}
+    
+          </div>
+
+         
 
           <p className="text-black text-base md:text-lg">{subtitle}</p>
 
@@ -41,11 +54,17 @@ export default function PantoneCard({
             <div className="w-10 h-10 rounded-full border-2 border-black flex items-center justify-center">
               <div className="w-6 h-6 rounded-full bg-[#7a8fa3]"></div>
             </div>
-
-            <span className="text-lg md:text-xl font-semibold text-black">
+        
+           <span className="text-lg md:text-xl font-semibold text-black">
               ${price}
             </span>
-          </div>
+
+       </div>
+
+
+
+
+
         </div>
       </div>
     </Link>

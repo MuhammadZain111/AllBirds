@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 
+
+
 function AboutHero() {
   return (
     <div className="w-full h-[800px] rounded-2xl overflow-hidden cursor-pointer group relative">

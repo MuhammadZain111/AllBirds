@@ -9,7 +9,7 @@ function ProfileDropdown({ Opendropdown, setOpenDropdown }) {
 
   const { data: session, status } = useSession();
 
-  //  Close on outside click
+  //  Close on outside Click
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
