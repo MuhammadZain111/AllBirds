@@ -34,7 +34,7 @@ export default function PantoneCard({
         {/* CONTENT */}
         <div className="space-y-3">
           
-          <div classNna="text-black   ">
+          <div className="text-black   ">
           
            <h2 className="text-lg text-black t md:text-xl font-semibold tracking-wide">
             {title}

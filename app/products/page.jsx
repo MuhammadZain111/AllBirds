@@ -13,7 +13,7 @@ export default async function Page({ searchParams }) {
   params.append("page", page);
   params.append("limit", 30);
 
-  // 👇 only add category if it exists
+  //  only add category if it exists
   if (category) {
     params.append("category", category);
   }
@@ -26,6 +26,9 @@ export default async function Page({ searchParams }) {
   );
 
   const data = await res.json();
+
+    console.log("data fetched is"+data);
+
 
   return (
     <ProductsPage

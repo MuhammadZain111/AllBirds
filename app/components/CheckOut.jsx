@@ -1,15 +1,168 @@
-import React from 'react'
+"use client";
+import React,{useState} from 'react'
+import { useCart } from "../Context/CartContext";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useState} from 'react'   
+
+
+
 
 function CheckOut() {
 
-  const { items, totalItems, totalPrice,updateQuantity, removeItem} = useCart()
+const { items, totalItems, totalPrice,updateQuantity, removeItem} = useCart();
 
+  const router = useRouter();
+
+//here is the fuction to check the Validatio and make the api Call.
+
+ const { data: session, status } = useSession();
+
+  const [user, setUser] = useState(null);
+
+
+  const [formData, setFormData] = useState({
+    Name: "",
+  });
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("/api/get-user");
+      const data = await res.json();
+
+      if (data.success) {
+        setUser(data.user);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+
+
+  useEffect(() => {
+    if (session?.user?.username) {
+      setFormData({ Name: session.user.username });
+    }
+  }, [session]);
+
+
+
+
+
+  const handleCheckout = async () => {
+  try {
+    // 1. Check login
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      router.push("/sign-in");
+      return;
+    }
+
+    // 2. Validate form
+    const isValid = checkValidation();
+
+    if (!isValid) return;
+
+    // 3. Proceed to order
+    await handlePlaceOrder();
+
+  } catch (error) {
+    console.error("Checkout Error:", error);
+    alert("Something went wrong during checkout. Please try again.");
+  }
+};
+
+
+const  checkValidation = async () => {
+
+const isAddressValid =
+    address?.name &&
+    address?.city &&
+    address?.phone;
+
+  const isCartValid = products?.length > 0;
+  const isAmountValid = totalAmount > 0;
+
+  if (!isAddressValid || !isCartValid || !isAmountValid) {
+    alert("Please fill all required fields correctly");
+    return;
+  }
+}
   
+
+
+
+const handlePlaceOrder = async () => {
+
+  try {
+  const orderResponse = await fetch("/api/orders", {
+    method: "POST",
+     headers: {
+        "Content-Type": "application/json"
+      },
+    body: JSON.stringify({
+      products,
+      address,
+      totalAmount
+    })
+  });
+
+
+     if (!orderResponse.ok) {
+      throw new Error("Failed to create order");
+    }
+  
+  const order = await orderResponse.json();
+
+  // Now call payment API
+
+  const paymentResponse = await fetch("/api/payment", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+      },
+    body: JSON.stringify({
+      orderId: order._id,
+      amount: order.totalAmount
+    })
+  });
+
+  if (!paymentResponse.ok) {
+      throw new Error("Payment API failed");
+    }
+
+  const payment = await paymentResponse.json();
+
+
+if (!payment?.paymentUrl) {
+      throw new Error("Invalid payment URL");
+    }
+    window.location.href = payment.paymentUrl;
+  }
+  catch (error) {
+    console.error("Order Error:", error);
+    alert("Order failed. Please try again.");
+  }
+
+};
+
+
+
+
+
+
+
+
   return (
     <div>
       <div class="min-h-screen bg-gray-50">
          <div class="mx-auto max-w-7xl px-4 py-8 lg:px-8">
            <div class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_420px]">
+
+<form   >
 
 
       <div class="space-y-8">
@@ -197,7 +350,8 @@ function CheckOut() {
             </div>
 
             <button
-              class="mt-6 w-full rounded-lg bg-black py-4 font-medium text-white hover:bg-gray-900"
+              class="mt-6 w-full rounded-lg bg-black py-4 font-medium text-white hover:bg-gray-900 cursor-pointer "
+              onClick={handleCheckout}
             >
               Complete Order
             </button>
@@ -205,6 +359,7 @@ function CheckOut() {
         </div>
       </aside>
 
+</form>
     </div>
   </div>
 </div>

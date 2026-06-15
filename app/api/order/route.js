@@ -1,43 +1,79 @@
 
-
-
+import { NextResponse } from "next/server";
+import Order from "@/models/Order";
+import connectDB from "@/lib/db";
 
 export async function POST(request) {
   try {
-    const { orderId, paymentMethod } = req.body;
+    await connectDB();
 
-    const order = await Order.findById(orderId);
-    if (!order) return res.status(404).json({ message: "Order not found" });
+    let body;
 
-    // Fake payment success (replace with Stripe/Razorpay later)
-    const paymentSuccess = true;
-
-    if (!paymentSuccess) {
-      order.paymentStatus = "FAILED";
-      await order.save();
-      return res.status(400).json({ message: "Payment failed" });
-    }
-
-    // Payment success
-    order.paymentStatus = "PAID";
-    order.status = "CONFIRMED";
-
-    await order.save();
-
-    //  Reduce stock here
-    for (const item of order.items) {
-      await Product.updateOne(
-        { _id: item.productId, "sizes.size": item.size },
-        { $inc: { "sizes.$.stock": -item.quantity } }
+    // 1. Safe JSON parsing
+    try {
+      body = await request.json();
+    } catch (err) {
+      return NextResponse.json(
+        { message: "Invalid JSON body" },
+        { status: 400 }
       );
     }
 
-    res.json({ message: "Payment successful", order });
+    const { userId, items, totalAmount } = body;
+
+    // 2. Validation (important)
+    if (!userId) {
+      return NextResponse.json(
+        { message: "userId is required" },
+        { status: 400 }
+      );
+    }
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+      return NextResponse.json(
+        { message: "Items are required" },
+        { status: 400 }
+      );
+    }
+
+    if (!totalAmount || totalAmount <= 0) {
+      return NextResponse.json(
+        { message: "Invalid total amount" },
+        { status: 400 }
+      );
+    }
+
+    // 3. Create order
+    const order = await Order.create({
+      user: userId,
+      items,
+      totalAmount,
+      status: "PENDING",
+      paymentStatus: "UNPAID",
+    });
+
+    // 4. Success response
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Order created successfully",
+        order,
+      },
+      { status: 201 }
+    );
 
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("ORDER_CREATION_ERROR:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Internal Server Error",
+        error: process.env.NODE_ENV === "development"
+          ? error.message
+          : undefined,
+      },
+      { status: 500 }
+    );
   }
-}; 
-
-
-
+}
