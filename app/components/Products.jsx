@@ -12,13 +12,13 @@ const images = ["/shoe1.png", "/shoe2.png", "/shoe3.png", "/shoe4.png"];
 const sizes = [8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 14];
 
 export default function ProductPage() {
-  con;st[(selectedSize, setSelectedSize)] = useState(null);
+  con;
+  st[(selectedSize, setSelectedSize)] = useState(null);
 
   return (
     <div className="min-h-screen bg-[#f5f3ef] px-4 md:px-10 py-6">
       {/* GRID */}
       <div className="grid md:grid-cols-2 gap-10 items-start">
-        
         {/* LEFT SIDE (SLIDER) */}
         <div className="w-full">
           <Swiper modules={[Navigation]} navigation className="rounded-xl">

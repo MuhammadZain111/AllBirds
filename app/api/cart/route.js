@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
-import connectDB from '@/lib/mongodb';
-import Cart from '@/models/Cart';
+import { NextResponse } from "next/server";
+import dbConnect from "@/lib/dbConnect";
+import Cart from "@/models/Cart";
 
 
 
@@ -9,37 +9,51 @@ export async function POST(request) {
   try {
     await connectDB();
     const body = await request.json();
+
     const { userId, userEmail, userName, items } = body;
 
     if (!userId || !userEmail || !items?.length) {
       return NextResponse.json(
-        { error: 'userId, userEmail, and items are required' },
+        { error: "userId, userEmail, and items are required" },
         { status: 400 }
       );
     }
 
-    // Upsert cart for this user
     const cart = await Cart.findOneAndUpdate(
-      { userId, status: 'active' },
+      { userId, status: "active" },
       {
         userId,
         userEmail,
-        userName: userName || 'Customer',
+        userName: userName || "Customer",
         items,
+
+        // IMPORTANT: activity tracking
+        lastActivityAt: new Date(),
         updatedAt: new Date(),
-        // Reset reminder flag so the 24-hour window restarts on cart update
+
+        // reset email flags when user comes back
         reminderSent: false,
         reminderSentAt: null,
+        abandonedEmailSent: false
       },
       { upsert: true, new: true }
     );
 
-    return NextResponse.json({ success: true, cartId: cart._id });
+    return NextResponse.json({
+      success: true,
+      cartId: cart._id
+    });
+
   } catch (error) {
-    console.error('[POST /api/cart]', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("[POST /api/cart]", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
+
+
 
 // PATCH /api/cart  — mark cart as converted (purchased)
 export async function PATCH(request) {
@@ -48,13 +62,20 @@ export async function PATCH(request) {
     const { userId } = await request.json();
 
     await Cart.findOneAndUpdate(
-      { userId, status: 'active' },
-      { status: 'converted' }
+      { userId, status: "active" },
+      {
+        status: "converted",
+        updatedAt: new Date()
+      }
     );
 
     return NextResponse.json({ success: true });
+
   } catch (error) {
-    console.error('[PATCH /api/cart]', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("[PATCH /api/cart]", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

@@ -10,7 +10,7 @@ module.exports = {
         light: "#F9FAFB", // background
         dark: "#020617", // deep dark
       },
-       backgroundImage: {
+      backgroundImage: {
         hero: "url('/images/bg.jpg')",
         pattern: "url('/images/pattern.png')",
       },
@@ -18,4 +18,3 @@ module.exports = {
   },
   plugins: [],
 };
-  

@@ -11,7 +11,6 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import styles from "./hero.module.css";
 import Link from "next/link";
 
-
 export default function HeroSection() {
   const swiperRef = useRef(null);
 
@@ -135,15 +134,19 @@ export default function HeroSection() {
                   </h1>
 
                   <div className="grid grid-cols-2 gap-3">
-
-                    <Link  href="/products"  className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer    ">
+                    <Link
+                      href="/products"
+                      className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer    "
+                    >
                       Shop Men
                     </Link>
 
-                    <Link href="/products"  className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer">
+                    <Link
+                      href="/products"
+                      className="bg-white text-black px-5 py-2 hover:bg-black rounded-md hover:text-white cursor-pointer"
+                    >
                       Shop Women
                     </Link>
-
                   </div>
                 </div>
               </div>
@@ -157,7 +160,6 @@ export default function HeroSection() {
         >
           {isPlaying ? "Pause" : "Play"}
         </button>
-
       </div>
     </div>
   );

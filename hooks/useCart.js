@@ -1,59 +1,31 @@
-'use client';
+"use client";
 
-// hooks/useCart.js
-// Drop-in hook — call addToCart() whenever the user adds an item.
-// It persists the cart to MongoDB automatically, resetting the 24-hour window.
+import { useEffect } from "react";
+import { useCart } from "@/Context/CartContext";
+import { useDebounce } from "./useDebounce";
 
-import { useCallback } from 'react';
+export function useCartSync(userId, userEmail) {
+  const items = useCart((state) => state.items);
 
-/**
- * useCart(user)
- * @param {{ id: string, email: string, name?: string }} user  — current logged-in user
- */
-export function useCart(user) {
-  /**
-   * addToCart(items)
-   * @param {Array<{ productId, name, price, quantity, image? }>} items
-   */
-  const addToCart = useCallback(
-    async (items) => {
-      if (!user?.id || !user?.email) {
-        console.warn('[useCart] No authenticated user — skipping cart sync');
-        return;
-      }
+  // 👇 THIS is the key fix
+  const debouncedItems = useDebounce(items, 3000);
 
-      try {
-        const res = await fetch('/api/cart', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userId: user.id,
-            userEmail: user.email,
-            userName: user.name || 'Customer',
-            items,
-          }),
-        });
+  useEffect(() => {
+    if (!userId) return;
 
-        if (!res.ok) throw new Error(await res.text());
-        const data = await res.json();
-        console.log('[useCart] Cart saved, id:', data.cartId);
-        return data.cartId;
-      } catch (err) {
-        console.error('[useCart] Failed to sync cart:', err);
-      }
-    },
-    [user]
-  );
+    if (debouncedItems.length === 0) return;
 
-  /** Call this after a successful checkout to stop the reminder. */
-  const markPurchased = useCallback(async () => {
-    if (!user?.id) return;
-    await fetch('/api/cart', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: user.id }),
+    console.log("🔥 API CALLING WITH DEBOUNCED ITEMS");
+
+    fetch("/api/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        userEmail,
+        items: debouncedItems,
+      }),
     });
-  }, [user]);
 
-  return { addToCart, markPurchased };
+  }, [debouncedItems, userId, userEmail]);
 }

@@ -1,7 +1,5 @@
 "use client";
 
-
-
 import {
   createContext,
   useContext,
@@ -10,8 +8,6 @@ import {
   ReactNode,
 } from "react";
 import { CartItem, CartContextType } from "@/type/cart";
-
-
 
 // ── Actions ─
 

@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-
-
 const ProductSchema = new mongoose.Schema(
   {
     title: {
@@ -17,10 +15,9 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    size:{
-      type:[String],
-  
-      },
+    size: {
+      type: [String],
+    },
     price: {
       type: Number,
       required: true,
@@ -91,7 +88,7 @@ const ProductSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    strict: false, 
+    strict: false,
   },
 );
 

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
 import ValidationItem from "../../components/ValidationItem";
- 
+
 export default function SignUpPage() {
   const { data: session, status } = useSession();
   const router = useRouter();

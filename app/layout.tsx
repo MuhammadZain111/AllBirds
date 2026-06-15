@@ -33,12 +33,9 @@ export default function RootLayout({
         style={{ backgroundColor: "#ede9e2" }}
         className="min-h-full flex flex-col"
       >
-        <AuthProvider> 
-          <CartProvider>
-            {children}
-          </CartProvider>
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
         </AuthProvider>
-        
       </body>
     </html>
   );

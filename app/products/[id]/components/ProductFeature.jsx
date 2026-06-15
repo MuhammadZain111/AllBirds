@@ -7,7 +7,6 @@ export default function ProductFeature() {
           one-piece upper provides a sock-like fit...
         </p>
 
-
         <div>
           <p className="text-xs tracking-widest text-gray-500 mb-2">BEST FOR</p>
           <div className="flex flex-wrap gap-2">

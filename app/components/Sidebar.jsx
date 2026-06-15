@@ -8,8 +8,6 @@ import { useSession } from "next-auth/react";
 
 import { useCart } from "../Context/CartContext";
 
-
-
 import {
   Menu,
   X,
@@ -75,11 +73,7 @@ const supermenuItems = [
 ];
 
 export default function Sidebar() {
-
-
-
- const { totalItems } = useCart();
-
+  const { totalItems } = useCart();
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -94,13 +88,6 @@ export default function Sidebar() {
   const menuItems =
     session?.user?.role === 1 ? supermenuItems : employerMenuItems;
 
-
-
-
-
-
-
-    
   return (
     <div className="flex">
       {/* Hamburger Button */}

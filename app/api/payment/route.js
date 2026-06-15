@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
 
-
-
-
 export async function POST(req) {
   try {
     const { orderId } = await req.json();

@@ -11,14 +11,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import { Moon, Bell, User, Settings, CircleHelp, LogOut } from "lucide-react";
 import { useCart } from "../Context/CartContext";
 
-
-
-
-
 export default function Navbar() {
-
-  
-
   const { totalItems } = useCart();
 
   const [open, setOpen] = useState(false);

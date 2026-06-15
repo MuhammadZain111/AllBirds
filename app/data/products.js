@@ -33,10 +33,6 @@ export const products = [
   },
 ];
 
-
-
-
-
 export const productsCategory = [
   {
     id: "1",

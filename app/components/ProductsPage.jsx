@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import Header from "@/app/components/common/Header";
 import FilterPanel from "@/app/components/FilterPanel";
@@ -9,18 +9,15 @@ import { useSearchParams } from "next/navigation";
 
 // Here we will fetch the products from the database and display them in grid layout. Each product will be a link to its detail page.
 
-
-export default function ProductsPage({ products }) 
-{
+export default function ProductsPage({ products }) {
   // const searchParams = useSearchParams();
   // const from = searchParams.get("from");
 
   return (
     <div className="w-full mx-2 p-2">
-
       <Navbar />
       <Header />
-      <FilterPanel />      
+      <FilterPanel />
       <h1 className="text-3xl font-bold mb-6 text-black">Products</h1>
 
       <div
@@ -32,12 +29,9 @@ export default function ProductsPage({ products })
           gap-2
         "
       >
-
-         {products.map((item, index) => (
-         <PantoneCard key={index} {...item} />
-      
+        {products.map((item, index) => (
+          <PantoneCard key={index} {...item} />
         ))}
-
       </div>
     </div>
   );

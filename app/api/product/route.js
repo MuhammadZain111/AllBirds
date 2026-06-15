@@ -34,8 +34,7 @@ export async function POST(request) {
     const stock = formData.get("stock");
     const colors = formData.getAll("colors") || "[]";
 
-
- console.log("Parsed form fields:", {
+    console.log("Parsed form fields:", {
       title,
       slug,
       description,
@@ -153,11 +152,6 @@ export async function POST(request) {
     );
   }
 }
-
-
-
-
-
 
 export async function GET(request) {
   try {

@@ -3,9 +3,6 @@
 import { useState } from "react";
 
 export default function AddProductPage() {
- 
- 
- 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -14,8 +11,6 @@ export default function AddProductPage() {
     stock: "",
     colors: [],
   });
-
-
 
   const [image, setImage] = useState(null);
 
@@ -80,25 +75,19 @@ export default function AddProductPage() {
       data.append("category", formData.category);
       data.append("stock", formData.stock);
       data.append("file", image);
-  
+
       // data.append("colors", formData.colors);
-     
-      formData.colors.forEach((color) => {  data.append("colors", color);
-});
 
-
-     
-
+      formData.colors.forEach((color) => {
+        data.append("colors", color);
+      });
 
       console.log("FORM DATA:", formData.colors.typeof);
-
-
-
 
       const response = await fetch("/api/product", {
         method: "POST",
         body: data,
-      }); 
+      });
 
       const result = await response.json();
 
@@ -185,7 +174,6 @@ export default function AddProductPage() {
               className="w-full text-black border p-3 rounded-lg"
             />
 
-
             <input
               type="number"
               name="stock"
@@ -199,7 +187,6 @@ export default function AddProductPage() {
               className="w-full text-black border p-3 rounded-lg"
             />
           </div>
-
 
           {/* Category */}
           <input

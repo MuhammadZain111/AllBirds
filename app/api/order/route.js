@@ -1,4 +1,3 @@
-
 import { NextResponse } from "next/server";
 import Order from "@/models/Order";
 import connectDB from "@/lib/db";
@@ -15,7 +14,7 @@ export async function POST(request) {
     } catch (err) {
       return NextResponse.json(
         { message: "Invalid JSON body" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -25,21 +24,21 @@ export async function POST(request) {
     if (!userId) {
       return NextResponse.json(
         { message: "userId is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!items || !Array.isArray(items) || items.length === 0) {
       return NextResponse.json(
         { message: "Items are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!totalAmount || totalAmount <= 0) {
       return NextResponse.json(
         { message: "Invalid total amount" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -59,9 +58,8 @@ export async function POST(request) {
         message: "Order created successfully",
         order,
       },
-      { status: 201 }
+      { status: 201 },
     );
-
   } catch (error) {
     console.error("ORDER_CREATION_ERROR:", error);
 
@@ -69,11 +67,10 @@ export async function POST(request) {
       {
         success: false,
         message: "Internal Server Error",
-        error: process.env.NODE_ENV === "development"
-          ? error.message
-          : undefined,
+        error:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

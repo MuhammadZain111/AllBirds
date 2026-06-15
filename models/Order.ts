@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
@@ -9,8 +8,8 @@ const orderSchema = new mongoose.Schema({
       productId: String,
       size: Number,
       quantity: Number,
-      price: Number
-    }
+      price: Number,
+    },
   ],
 
   totalAmount: Number,
@@ -18,12 +17,12 @@ const orderSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["PENDING", "CONFIRMED", "CANCELLED"],
-    default: "PENDING"
+    default: "PENDING",
   },
 
   paymentStatus: {
     type: String,
     enum: ["UNPAID", "PAID", "FAILED"],
-    default: "UNPAID"
-  }
+    default: "UNPAID",
+  },
 });
