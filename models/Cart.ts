@@ -28,6 +28,8 @@ const CartSchema = new mongoose.Schema(
     type: Boolean,
     default: false
   },
+   
+  updatedAt:  Date,
 
   reminderSentAt: Date,
 
@@ -36,6 +38,7 @@ const CartSchema = new mongoose.Schema(
     default: false
   }
 }
+,{timestamps: true}
 )
 
 const Cart =

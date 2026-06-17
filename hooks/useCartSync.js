@@ -13,7 +13,8 @@ export function useCartSync() {
 
   // Call useCart correctly — depends on how your context exposes items.
   // If CartContext uses a plain React context (not Zustand), use this:
-  
+    console.log(" Debouncing Starts ");
+
   const { items } = useCart();
   // If it IS Zustand, keep your original: const items = useCart((state) => state.items);
 
@@ -46,7 +47,7 @@ export function useCartSync() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log("✅ Cart synced:", data))
+      .then((data) => console.log(" Cart synced:", data))
       .catch((err) => console.error(" Cart sync failed:", err));
 
   }, [debouncedItems, userId, userEmail, status]);

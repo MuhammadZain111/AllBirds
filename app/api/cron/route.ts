@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
-import dbConnect from "@/lib/dbConnect";
+import dbConnect from "../../../lib/dbConnect";
 import Cart from "@/models/Cart";
-import { sendAbandonedCartEmail } from "@/lib/mailer";
+import { sendAbandonedCartEmail } from "../../../lib/mailer";
 
 // How long before a cart is considered abandoned
-const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
+// const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
 
-const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
+// const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+
 
 const  ABANDONED_AFTER_MS =24 * 60;
-
-
 
 
 export async function GET(request) {
