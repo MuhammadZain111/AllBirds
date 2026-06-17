@@ -9,7 +9,6 @@ import { sendAbandonedCartEmail } from "../../../lib/mailer";
 // const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 
-
 const  ABANDONED_AFTER_MS =24 * 60;
 
 
