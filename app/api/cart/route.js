@@ -7,8 +7,11 @@ import Cart from "@/models/Cart";
 // POST /api/cart  — add or update a cart
 export async function POST(request) {
   try {
-    await connectDB();
+    
+    await dbConnect();
     const body = await request.json();
+
+    console.log("Here the api  call to add to Cart is Triggered ");
 
     const { userId, userEmail, userName, items } = body;
 
