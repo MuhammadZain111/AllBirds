@@ -11,12 +11,13 @@ export function useCartSync() {
   const userId = session?.user?._id;
   const userEmail = session?.user?.email;
 
-  // ✅ Call useCart correctly — depends on how your context exposes items.
+  // Call useCart correctly — depends on how your context exposes items.
   // If CartContext uses a plain React context (not Zustand), use this:
+  
   const { items } = useCart();
   // If it IS Zustand, keep your original: const items = useCart((state) => state.items);
 
-  const debouncedItems = useDebounce(items, 5000);
+  const debouncedItems = useDebounce(items, 1000);
 
   // Track previous debounced items to avoid re-sending unchanged carts
   const prevItemsRef = useRef(null);
@@ -46,7 +47,7 @@ export function useCartSync() {
     })
       .then((res) => res.json())
       .then((data) => console.log("✅ Cart synced:", data))
-      .catch((err) => console.error("❌ Cart sync failed:", err));
+      .catch((err) => console.error(" Cart sync failed:", err));
 
   }, [debouncedItems, userId, userEmail, status]);
 }
