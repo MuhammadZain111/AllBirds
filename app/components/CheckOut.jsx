@@ -1,17 +1,14 @@
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../Context/CartContext";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
 
 function CheckOut() {
   const { items, totalItems, totalPrice, updateQuantity, removeItem } =
     useCart();
 
   const router = useRouter();
-
-
 
   //here is the fuction to check the Validatio and make the api Call.
 
@@ -35,8 +32,6 @@ function CheckOut() {
 
     fetchUser();
   }, []);
-
-
 
   useEffect(() => {
     if (session?.user?.username) {

@@ -8,12 +8,9 @@ import { sendAbandonedCartEmail } from "../../../lib/mailer";
 
 // const ABANDONED_AFTER_MS = 24 * 60 * 60 * 1000; // 24 hours
 
-
-const  ABANDONED_AFTER_MS =24 * 60;
-
+const ABANDONED_AFTER_MS = 24 * 60;
 
 export async function GET(request) {
-
   // ── 1. Security: only Vercel Cron (or your own calls) can trigger this ──
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -27,56 +24,65 @@ export async function GET(request) {
 
     // ── 2. Find all carts that qualify ──
     const abandonedCarts = await Cart.find({
-      status: "active",          // not yet purchased or abandoned
-      reminderSent: false,       // haven't emailed yet
+      status: "active", // not yet purchased or abandoned
+      reminderSent: false, // haven't emailed yet
       updatedAt: { $lte: cutoff },
     });
 
     if (!abandonedCarts.length) {
-      return NextResponse.json({ message: "No abandoned carts found", processed: 0 });
+      return NextResponse.json({
+        message: "No abandoned carts found",
+        processed: 0,
+      });
     }
 
     let successCount = 0;
-    let failCount    = 0;
-    const errors     = [];
+    let failCount = 0;
+    const errors = [];
 
     // ── 3. Email each cart owner ──
     for (const cart of abandonedCarts) {
       try {
         await sendAbandonedCartEmail({
-          to:       cart.userEmail,
+          to: cart.userEmail,
           userName: cart.userName,
-          items:    cart.items,
+          items: cart.items,
         });
 
         // ── 4. Mark as done only after email succeeds ──
         await Cart.findByIdAndUpdate(cart._id, {
-          status:        "abandoned",
-          reminderSent:    true,
-          reminderSentAt:  new Date(),
+          status: "abandoned",
+          reminderSent: true,
+          reminderSentAt: new Date(),
         });
 
         successCount++;
-        console.log(`[AbandonedCart] ✓ Emailed ${cart.userEmail} — cart ${cart._id}`);
-
+        console.log(
+          `[AbandonedCart] ✓ Emailed ${cart.userEmail} — cart ${cart._id}`,
+        );
       } catch (err) {
         // One failure shouldn't stop the rest
         failCount++;
         errors.push({ cartId: cart._id, error: err.message });
-        console.error(`[AbandonedCart] ✗ Failed for ${cart.userEmail}:`, err.message);
+        console.error(
+          `[AbandonedCart] ✗ Failed for ${cart.userEmail}:`,
+          err.message,
+        );
       }
     }
 
     return NextResponse.json({
-      message:   "Cron job completed",
+      message: "Cron job completed",
       processed: abandonedCarts.length,
-      success:   successCount,
-      failed:    failCount,
+      success: successCount,
+      failed: failCount,
       ...(errors.length ? { errors } : {}),
     });
-
   } catch (error) {
     console.error("[AbandonedCart Cron] Fatal:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

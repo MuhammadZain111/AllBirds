@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./Context/AuthProvider";
 import { CartProvider } from "./Context/CartContext";
-import CartSyncWatcher from "./components/CartSyncWatcher"
-
+import CartSyncWatcher from "./components/CartSyncWatcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,9 +36,9 @@ export default function RootLayout({
       >
         <AuthProvider>
           <CartProvider>
-            <CartSyncWatcher /> 
+            <CartSyncWatcher />
             {children}
-            </CartProvider>
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

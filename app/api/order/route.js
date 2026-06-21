@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import Order from "@/models/Order";
 import dbConnect from "@/lib/dbConnect";
 
-
 export async function POST(request) {
   try {
-
     await dbConnect();
 
     let body;

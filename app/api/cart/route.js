@@ -2,12 +2,9 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
 import Cart from "@/models/Cart";
 
-
-
 // POST /api/cart  — add or update a cart
 export async function POST(request) {
   try {
-    
     await dbConnect();
     const body = await request.json();
 
@@ -18,7 +15,7 @@ export async function POST(request) {
     if (!userId || !userEmail || !items?.length) {
       return NextResponse.json(
         { error: "userId, userEmail, and items are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -37,26 +34,23 @@ export async function POST(request) {
         // reset email flags when user comes back
         reminderSent: false,
         reminderSentAt: null,
-        abandonedEmailSent: false
+        abandonedEmailSent: false,
       },
-      { upsert: true, new: true }
+      { upsert: true, new: true },
     );
 
     return NextResponse.json({
       success: true,
-      cartId: cart._id
+      cartId: cart._id,
     });
-
   } catch (error) {
     console.error("[POST /api/cart]", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-
-
 
 // PATCH /api/cart  — mark cart as converted (purchased)
 export async function PATCH(request) {
@@ -68,17 +62,16 @@ export async function PATCH(request) {
       { userId, status: "active" },
       {
         status: "converted",
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     );
 
     return NextResponse.json({ success: true });
-
   } catch (error) {
     console.error("[PATCH /api/cart]", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

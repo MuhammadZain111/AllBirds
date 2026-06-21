@@ -48,7 +48,8 @@
     "app/AdminComponents/OrdersTable.jsx",
     "app/products/[id]/ProductDetailPage.jsx",
     "app/components/Sidebar.jsx",
-    "app/products/[id]/components/ProductDetail.jsx"
-, "app/api/cron/route.js"  ],
+    "app/products/[id]/components/ProductDetail.jsx",
+    "app/api/cron/route.js"
+  ],
   "exclude": ["node_modules"]
 }

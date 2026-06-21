@@ -10,8 +10,8 @@ export function useDebounce(value, delay) {
     }, delay);
 
     return () => clearTimeout(handler);
-  // ✅ Must compare value by reference — arrays/objects from context
-  // re-render each time, so debounce resets correctly
+    // ✅ Must compare value by reference — arrays/objects from context
+    // re-render each time, so debounce resets correctly
   }, [value, delay]);
 
   return debounced;
